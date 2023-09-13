@@ -75,10 +75,14 @@ input.ip{
     margin-top: 10px;
     margin-left: 9vw;
 }
+.bt{
+    display: flex;
+    justify-content: space-around;
+    margin-left: 3vw;
+}
 
 button{
-    margin: 1vh 2vw 1vh 5vw;
-    width: 120px;
+    width: 100px;
     height: 40px;
     border: 1px solid rgb(13, 8, 52);
     border-radius: 20px;
