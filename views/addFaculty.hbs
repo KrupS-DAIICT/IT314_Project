@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FacultyHub</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <header>
+        <h1>FacultyHub</h1>
+        <nav>
+            <a href="#">Home</a>
+            <a href="#">University</a>
+            <a href="#">About Us</a>
+            <a href="#">Login/Sign up</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="container">
+            <form action="" class="search-bar">
+                <button type="search">
+                    <img src="images/pngwing.com.png">
+                </button>
+                <input type="text" placeholder="Search with university name and faculty name or area of intelligence"
+                    name="q">
+                <button type="filter">
+                    <img src="images/filter.png">
+                </button>
+            </form>
+
+        </div>
+        <h2>Add Faculty</h2>
+        <section id="Add_Faculty">
+            <form action="/" method="POST">
+                <label for="name">Faculty Name*</label><br>
+                <input class="ip" type="text" name="facultyName"><br>
+
+                <label for="Institute">Institute</label><br>
+                <input class="ip" type="text" name="institute"><br>
+
+                <label for="email">Email-Address*</label><br>
+                <input class="ip" type="email" name="email"><br>
+
+                <label for="Number">Contact No*</label><br>
+                <input class="ip" type="tel" name="contactNo" pattern="[0-9]{10}"><br>
+
+                <label for="Education">Education*</label><br>
+                <input class="ip" type="text" name="education"><br>
+
+                <label for="Institude of Education">Institude of Education*</label><br>
+                <input class="ip" type="text" name="institudeOfEducation"><br>
+
+                {{!-- <label for="Address">Address*</label><br>
+                <input class="Address" type="text" name="address"><br> --}}
+
+                <label for="Specialization">Field of specialization</label><br>
+                <input class="ip" type="text" name="fieldOfSpecialization"><br>
+
+                <label for="Courses">Courses Taught*</label><br>
+                <input class="ip" type="text" name="coursesTaught"><br>
+
+                <label for="Website">Website</label><br>
+                <input class="ip" type="text" name="website"><br>
+
+                <label for="Publications">Publications</label><br>
+                <input class="ip" type="text" name="publications"><br>
+
+                <label for="Biography">Biography*</label><br>
+                <input class="Biography" type="text" name="biography"><br>
+
+                {{!-- <label for="Photo">Profile Picture*</label>
+                <input class="photo" type="file" required><br> --}}
+
+                <button type="Reset" value="Reset">Reset</button>
+                <button type="Done" value="Done">Done</button>
+
+
+            </form>
+
+        </section>
+    </main>
+
+    <footer>
+        <div class="left">
+            <h2>Important Links</h2>
+            <a href="#">Home</a>
+            <a href="#">University</a>
+            <a href="#">About Us</a>
+            <a href="#">Login/Sign up</a>
+        </div>
+        <div class="right">
+            <h2>About the platform</h2>
+            <p>This platform provides information of professional achievement and contact of faculties of multiple
+                universities to help knowledge seekers and professionals to connect.</p>
+        </div>
+    </footer>
+</body>
+
+</html>
