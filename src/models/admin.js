@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const validator = require('validator');
 const jwt = require('jsonwebtoken');
+const { generateAndStoreOTP } = require('../functions/otpFunctions');
 
 const adminSchema = new mongoose.Schema({
     name: {
@@ -32,6 +33,14 @@ const adminSchema = new mongoose.Schema({
         unique: true,
         minlength: 10, maxlength: 10,
     },
+    verified: {
+        type: Boolean,
+        default: false
+    },
+    lock: {
+        type: Boolean,
+        default: false
+    },
     tokens: [{
         token: {
             type: String,
@@ -44,10 +53,10 @@ const adminSchema = new mongoose.Schema({
 adminSchema.methods.generateAuthToken = async function (req, res) {
     try {
         const admin = this;
-        const token = jwt.sign({ _id: admin._id.toString()}, process.env.SECRET_KEY);
+        const token = jwt.sign({ _id: admin._id.toString() }, process.env.SECRET_KEY);
         admin.tokens = admin.tokens.concat({ token: token });
         await this.save();
-        
+
         return token;
     } catch (e) {
         res.status(400).send(e);

@@ -1,55 +1,74 @@
-const express = require('express'); // require express
-const path = require('path'); // require path
-const Admin = require("../models/admin"); // require faculty.js
-const router = express.Router(); // require router
-// const cookieParser = require('cookie-parser'); // require cookie-parser
-
-app = express();
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-// app.use(cookieParser());
+const express = require('express');
+const path = require('path');
+const Admin = require("../models/admin");
+const router = express.Router();
+const validator = require("validator");
+const generateOTP = require("../functions/generateOTP");
+const sendEmail = require("../functions/sendEmail");
+const { userDelete } = require("../functions/userFunctions");
+const { generateAndStoreOTP, verifyOTP } = require("../functions/otpFunctions");
 
 router.get("/signup", async (req, res) => {
     const filePath = path.join(__dirname, "../../views", "signup");
     res.render(filePath);
 });
 
-// create a new faculty into the database
-router.post("/signup", async (req, res) => {
-    try {
-        const name = req.body.adminName;
-        const email = req.body.email;
-        const password = req.body.Password;
-        const cPassword = req.body.cPassword;
-        const phone = req.body.mobile_no;
-        const university = req.body.university;
+async function registerUser(data, res) {
+    const { adminName, email, Password, cPassword, mobile_no, university } = data;
 
-        if (password == cPassword) {
-            const addAdmin = new Admin({
-                name: name,
-                email: email,
-                password: password,
-                phone: phone,
-                university: university
-            });
-
-            const token = await addAdmin.generateAuthToken();
-            
-            res.cookie("signup", token, {
-                expires: new Date(Date.now() + 30000),
-                httpOnly: true
-            });
-
-            const adminAdded = await addAdmin.save();
-            const redirectPath = path.join(__dirname, "../../views", "signin");
-            res.status(201).render(redirectPath);
-        }else {
-            res.send(`<script>alert("Password and confirm password are not matching."); window.history.back()</script>`);
-        }
-
-    } catch (e) {
-        res.status(400).send(e);
+    if (Password !== cPassword) {
+        return res.send({ error: "Password and Confirm Password do not match" });
     }
+
+    if (!validator.isEmail(email)) {
+        return res.send({ error: "Not a valid Email" });
+    }
+
+    const userExists = await Admin.findOne({ email });
+
+    if (userExists) {
+        if (userExists.verified === 1) {
+            return res.send({ error: "Email is already registered" });
+        } else {
+            return res.send({ error: "Your previous verification is still pending" });
+        }
+    }
+
+    const OTP = generateAndStoreOTP(email);
+    // console.log(OTP);
+
+    try {
+        const tempAdmin = new Admin({
+            name: adminName,
+            email,
+            password: Password,
+            OTP,
+            phone: mobile_no,
+            university,
+        });
+
+        // Save the user
+        await tempAdmin.save();
+
+        // Send OTP to the user
+        await sendEmail(email, OTP);
+
+        // Delete user if time runs out
+        setTimeout(userDelete, 30000, email);
+
+        // Redirect to the OTP verification page
+        res.render("verifyotp");
+
+    } catch (error) {
+        console.log(`tempAdmin.save() error: ${error})`);
+        res.status(500).send({ error: "Server error" });
+    }
+}
+
+// create a new faculty into the database
+router.post("/signup/verifyotp", async (req, res) => {
+    const data = req.body;
+    await registerUser(data, res);
 });
 
 module.exports = router; // export router

@@ -35,7 +35,7 @@
         </div>
         <h2>Add Faculty</h2>
         <section id="Add_Faculty">
-            <form action="/" method="POST">
+            <form enctype="multipart/form-data" method="POST">
                 <label for="name">Faculty Name*</label><br>
                 <input class="ip" type="text" name="facultyName"><br>
 
@@ -71,6 +71,9 @@
 
                 <label for="Biography">Biography*</label><br>
                 <input class="Biography" type="text" name="biography"><br>
+
+                <label for="Excle">Excel</label><br>
+                <input class="Excel" type="file" name="excelFile"><br>
 
                 {{!-- <label for="Photo">Profile Picture*</label>
                 <input class="photo" type="file" required><br> --}}

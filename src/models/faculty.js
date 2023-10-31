@@ -41,13 +41,17 @@ const facultySchema = new mongoose.Schema({
     },
     publications: String,
     biography: String,
-    universityID: {
-        type: Number,
-        required: true
-    },
-    CollegeID: {
-        type: Number,
-        required: true
+    // universityID: {
+    //     type: Number,
+    //     required: true
+    // },
+    // CollegeID: {
+    //     type: Number,
+    //     required: true
+    // }
+    verified: {
+        type: Boolean,
+        default: false
     }
 })
 
