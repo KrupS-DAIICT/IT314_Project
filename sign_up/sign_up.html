@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FacultyHub</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <header>
+    <h1>FacultyHub</h1>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#">University</a>
+      <a href="#">About Us</a>
+      <a href="#" >Login/Sign up</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Admin Sign up</h2>
+    <section id="sign_up">
+      <form action="/signup" method="post">
+        <label for="name">Full Name</label><br>
+        <input class="ip" type="text" name="Company Name" required><br>
+        <label for="email">Email</label><br>
+        <input class="ip" type="email" name="email" required><br>
+        <label for="password">Password</label><br>
+        <input class="ip" type="password" name="Password" required><br>
+        <label for="cPassword">Conform Password</label><br>
+        <input class="ip" type="password" name="cPassword" required><br>
+        <label for="mobile_no">Mobile no</label><br>
+        <input class="ip" type="tel" name="mobile_no" pattern="[0-9]{10}" required><br>
+        <label for="university">CUniversity</label><br>
+        <input class="ip" type="text" name="university" required><br>
+        <div class="bt">
+          <button type="submit" value="Submit" id="green">Submit</button>
+          <button type="reset" value="reset" id="red">Reset</button><br>
+        </div>
+        <p class="p">
+          Already have an account? <a href="#">sign in.</a>
+        </p>
+      </form>
+      <img src="sign_up.png" alt="sign_up">
+    </section>
+  </main>
+
+  <footer>
+    <div class="left">
+      <h2>Important Links</h2>
+      <a href="#">Home</a>
+      <a href="#">University</a>
+      <a href="#">About Us</a>
+      <a href="#">Login/Sign up</a>
+    </div>
+    <div class="right">
+      <h2>About the platform</h2>
+      <p>This platform provides information of professional achievement and contact of faculties of multiple
+        universities to help knowledge seekers and professionals to connect.</p>
+    </div>
+  </footer>
+</body>
+
+</html>
