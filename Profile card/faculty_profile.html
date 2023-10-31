@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FacultyHub</title>
+    <link rel="stylesheet" href="faculty_profileStyle.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+   <!--  <script defer src="active.js"></script> -->
+</head>
+
+<body>
+    <header>
+        <h1>FacultyHub</h1>
+        <nav>
+            <a href="#">Home</a>
+            <a href="#">University</a>
+            <a href="#">About Us</a>
+            <a href="#">Login/Sign up</a>
+        </nav>
+    </header>
+
+    <main>
+<form class="example" action="/action_page.php">
+  <input type="text" placeholder="Search.." name="search2">
+  <button type="submit"><i class="fa fa-search"></i></button>
+          </form>
+
+        <h1>Faculty Details of DAIICT</h1>
+
+        <div class="wrapper">
+            <div class="user-card">
+                <div class="user-card-img">
+                  <img src="imgonline-com-ua-resize-NDdjcp0XPQn82b.jpg" alt="">
+                </div>
+                <div class="user-card-info">
+                  <h2>Faculty Name </h2>
+                  <p><span>Institute</span></p> 
+                  <p><span>Email-address</span> </p>
+                  <p><span>Contact No*</span></p>
+                  <p><span>Address*</span></p>
+                  <p><span>Website</span></p>
+                </div>
+            </div>   
+        </div> 
+
+    <div class="container">
+        <div class="tab_box">
+            <button  class="tab_btn">Details</button>
+            <button  class="tab_btn">Publication</button>
+            <button  class="tab_btn">Biography</button>
+            
+        </div>
+        <div class="content_box">
+            <div class="content">
+                <h2>Details</h2>
+                <p>Education</p>
+                <p>Institute of Education*</p>
+                <p>Designation(POR)*
+                </p>
+                <p>Field of specialalization</p>
+                <p>Courses Taught*</p>
+            </div>
+            <div class="content">
+                <h2>Publication</h2>
+                <p>Title 1</p>
+                <p>Title 2</p>
+                <p>Title 3</p>
+                <p>Title 4</p>
+                <p>Title 5</p>
+            </div>
+            <div class="content">
+                <h2>Biography</h2>
+                <p>Basic Information</p>
+                    <p>Early life</p>
+                    <p>Education</p>
+                    <p>Career</p>
+                    <p>Achievements</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const tabs=document.querySelectorAll('.tab_btn');
+        const all_content= document.querySelectorAll('.content');
+
+        tabs.forEach((tab, index)=>{
+            tab.addEventListener('click', (e)=>{
+                tabs.forEach(tab=>{tab.classList.remove('active')});
+                tab.classList.add('active');
+
+            all_content.forEach(content=>{content.classList.remove('active')})
+            all_content[index].classList.add('active');
+
+            })
+        })
+    </script>
+        
+
+    </main>
+
+    <footer>
+        <div class="left">
+            <h2>Important Links</h2>
+            <a href="#">Home</a>
+            <a href="#">University</a>
+            <a href="#">About Us</a>
+            <a href="#">Login/Sign up</a>
+        </div>
+        <div class="right">
+            <h2>About the platform</h2>
+            <p>This platform provides information of professional achievement and contact of faculties of multiple
+                universities to help knowledge seekers and professionals to connect.</p>
+        </div>
+    </footer>
+    <script src="colleges.js"></script>
+</body>
+
+</html>
