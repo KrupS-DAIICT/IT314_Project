@@ -1,0 +1,141 @@
+*{
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+}
+
+/* header part*/
+header{
+    font-family: sans-serif;
+    display: flex;
+    justify-content: space-between;
+    background-color: black;
+    color: white;
+    align-items: center;
+    height: 8vh;
+    padding-left: 7vw;
+    padding-right: 5vw;
+    border: 2px solid rgb(0, 0, 0);
+    border-bottom-left-radius: 35px;
+    border-bottom-right-radius: 35px;
+}
+header a{
+    color: white;
+    font-size: 20px;
+    margin: 10px;
+}
+
+/* footer part*/
+footer{
+    display: flex;
+    margin-top: 2vw;
+    padding-top: 1vw;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #588414;
+    color: white;
+}
+.left a {
+        display: block;
+        padding: 1vh 4vw 2vh 2vw;
+        text-decoration: none;
+        text-decoration: underline;
+        color: #ffffff; /* Link color */
+        font-size: 20px;
+      }
+.right {
+    position:static;
+    text-align: left;
+    width: 28vw;
+    font-size: 20px;
+}
+
+.right h2{
+    position: static;
+    text-align: left;
+}
+
+/* main part */
+section{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+main h1{
+    text-align: center;
+    font-size: 5vh;
+    padding: 3vh;
+    font-family: sans-serif;
+}
+
+.main_content{
+    display: flex;
+    
+}
+form{
+    font-family: sans-serif;
+    width: 59vh;
+    height: 4vh;
+    font-size: 3vh;
+    padding-top: 3vh;
+    padding-bottom: 2vh;
+    align-items: center;
+    justify-content: center;
+}
+.input{
+    padding: 3.5vh;
+}
+.b{
+    border: 1.5px solid black;
+    border-radius: 5px;
+    width: 25vw;
+    font-size:2.5vh;
+    height: 4vh;
+    padding: 0 10px 0 10px ;
+}
+.pb{
+    height: 5vw;
+}
+input{
+    float: right;
+}
+button{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 10vw;
+    height: 6vh;
+    border: 1px solid rgb(0, 0, 0);
+    border-radius: 1vw;
+    background-color: black;
+    color: white;
+    font-size: 3vh;
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+.main_button{
+    display: flex;
+    position: relative;
+    margin-top: 2vh;
+    display: flex;
+    justify-content: center;
+    gap:10vh ;
+}
+ /* #bt{
+    display: inline-block;
+    align-items: center;
+    justify-content: space-around;
+    padding-left: 40vh;
+    
+}
+#bt1{
+    display: inline-flex;
+    justify-content: center;
+    padding-left: 40vh; 
+} */ 
+button:hover {
+    background-color: #4CAF50;
+    color: white;
+
+  }
