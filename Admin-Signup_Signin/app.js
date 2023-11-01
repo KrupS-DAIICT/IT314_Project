@@ -9,7 +9,6 @@ const hbs = require("hbs");
 
 var app = express();
 
-
 app.set("view engine", "hbs");
 app.set("views", "./views");
 
@@ -20,7 +19,6 @@ const { path } = require("express/lib/application.js");
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cookieparser());
-
 app.use(express.static(pathm.join(__dirname,"/public")));
 
 // app.get("/", (req, res) => {
@@ -31,9 +29,9 @@ app.use(express.static(pathm.join(__dirname,"/public")));
 
 app.get('*',checkuser);
 
-app.get("/home",requireauth,(req,res)=>{
-    res.end(`<h1>Hello ${res.locals.user.email}.   This is home page</h1>`);
-
+app.get("/home",(req,res)=>{
+    //res.end(`<h1>Hello ${res.locals.user.email}.   This is home page</h1>`);
+    res.render("home");
 })
 
 app.get('/signup',(req,res)=>{
@@ -43,17 +41,34 @@ app.get('/signup',(req,res)=>{
 
 app.get('/login',(req,res)=>{
     
-    res.render('signin.hbs');
+    res.render('sign_in1.hbs');
     
 })
 
-app.post('/api',controlers.signup_post)
-app.post('/sub',controlers.signup_post_otp);
+app.get('/reset-pass', controlers.forgotpasswordlink);
+
+
+app.get('/admin_profile/:id',requireauth,controlers.admin_profile);
+
+
+app.post('/signup_post',controlers.signup_post)
+app.post('/singup_otp',controlers.signup_post_otp);
 app.post('/login', controlers.login_post);
 app.post('/logout',(req,res)=>{
     res.cookie("accesstoken",'',{maxAge:1})
     res.redirect("/login");
 })
 
+app.get("/resetlink",async (req,res) =>{
+    res.render("reset_email.hbs");
+})
+app.post('/reset',controlers.forgotpassword);
+
+
+app.post('/admin_profile_update/:id',controlers.admin_profile_update);
+
 app.get('/unlock-account',controlers.unlock_account)
+
+app.post("/reset-pass/:id",controlers.reset_pass_post);
 app.listen(process.env.PORT);
+
