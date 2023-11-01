@@ -31,7 +31,7 @@
         <input class="ip" type="text" name="Company_Name" required><br>
         <label for="email">Email</label><br>
         <input class="ip" type="email" name="email" required><br>
-        <label for="password">Password</label><br>
+        <label for="password" pattern="(?=.*\d)(?=.*[\W_]).{7,}">Password</label><br>
         <input class="ip" type="password" name="Password" id="pass" minlength="8" required><br>
         <label for="cPassword">Conform Password</label><br>
         <input class="ip" type="password" name="cPassword" id="cpass" required><br>

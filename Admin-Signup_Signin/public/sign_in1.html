@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FacultyHub</title>
+  <link rel="stylesheet" href="./css/style_signin.css">
+</head>
+
+<body>
+  <header>
+    <h1>FacultyHub</h1>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#">University</a>
+      <a href="#">About Us</a>
+      <a href="#">Login/Sign up</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Sign in</h2>
+    <section id="sign_up">
+      <form action="/login" method="POST" >
+        <div class="radio">
+          <p><input class="rb" type="radio" name="role" value="admin"> Admin</p>
+          <p><input class="rb" type="radio" name="role" value="faculty"> Faculty</p>
+        </div>
+        <label for="email">Email</label><br>
+        <input class="ip" type="email" name="username" placeholder="Enter your username" required><br>
+        <label for="password">Password</label><br>
+        <input class="ip" type="password" name="password" placeholder="Enter your password" required><br>
+        <div class="bt">
+          <button type="submit" value="Submit">Submit</button>
+          <button type="reset" value="reset" class="red">Reset</button><br>
+        </div>
+        <p class="p"> 
+          creat account? <a href="/signup">sign up</a>
+        </p>
+      </form>
+      <img src="./images/sign_in.png" alt="sign_up">
+    </section>
+  </main>
+
+  <footer>
+    <div class="left">
+      <h2>Important Links</h2>
+      <a href="#">Home</a>
+      <a href="#">University</a>
+      <a href="#">About Us</a>
+      <a href="#">Login/Sign up</a>
+    </div>
+    <div class="right">
+      <h2>About the platform</h2>
+      <p>This platform provides information of professional achievement and contact of faculties of multiple
+        universities to help knowledge seekers and professionals to connect.</p>
+    </div>
+  </footer>
+</body>
+
+</html>

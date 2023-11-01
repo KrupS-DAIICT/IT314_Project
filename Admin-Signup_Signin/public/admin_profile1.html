@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/admin_style1.css">
+  <title>admin_profile</title>
+</head>
+
+<body>
+
+  <body>
+    <header>
+      <h1>FacultyHub</h1>
+      <nav>
+        <a href="#">Home</a>
+        <a href="#">University</a>
+        <a href="#">About Us</a>
+        <a href="#">Login/Sign up</a>
+      </nav>
+      <script>
+        // function showSubmitButton() {
+        //   document.getElementById("submitBtn").style.display = "block";
+        //   document.getElementById("editBtn").style.display = "none";
+        //   var elementsWithClassB = document.querySelectorAll(".b");
+        //     elementsWithClassB.forEach(function(element) {
+        //         element.style.border = "1px solid black";
+        //         element.style.borderRadius = "5px";
+        //     });
+        // }
+
+        // function hideSubmitButton() {
+        //   document.getElementById("editBtn").style.display = "block";
+        //   document.getElementById("submitBtn").style.display = "none";
+        //   var elementsWithClassB = document.querySelectorAll(".b");
+        //   elementsWithClassB.forEach(function(element) {
+        //     element.style.borderRadius = "";
+        //     element.style.border = "";
+        //   });
+        // }
+
+
+
+        
+        document.addEventListener("DOMContentLoaded", () => {
+            const editButton = document.getElementById("editBtn");
+            const profileDetails = document.querySelector(".profile-details");
+            const editForm = document.querySelector(".edit-form");
+            
+            editButton.addEventListener("click", () => {
+                // Hide the profile details
+                editButton.style.display = "none";
+                profileDetails.style.display = "none";
+                // Show the edit form
+                editForm.style.display = "block";
+            });
+        });
+    
+      </script>
+    </header>
+
+
+    <main>
+      <h1>Admin Profile</h1>
+      <section class="profile-details">
+        
+        <div class="mleft">
+          <img src="images/da_logo.png" alt="sign_up">
+        </div>
+        <div class="mright">
+          <form action="/admin_profile" method="get">
+            <div class="input">
+              <label>Name : </label>
+              <p class="b"> Name</p>
+            </div>
+            <div class="input">
+              <label>Email-Address : </label>
+              <p class="b"> abc@gmail.com</p>
+            </div>
+            <div class="input">
+              <label>Password : </label>
+              <p class="b">123455678</p>
+            </div>
+            <div class="input">
+              <label>Mobile no : </label>
+              <p class="b">5556666478</p>
+            </div>
+            <div class="input">
+              <label>University : </label>
+              <p class="b">DAIICT</p>
+            </div>
+          </form>
+        </div>
+      
+    </section>
+
+
+    <section class="edit-form" style="display: none">
+     
+        <div class="mleft">
+          <img src="images/da_logo.png" alt="sign_up">
+        </div>
+        <div class="mright">
+          <form action="/admin_profile" method="get">
+            <div class="input">
+              <label>Name : </label>
+              <input class="b"></input>
+            </div>
+            <div class="input">
+              <label>Email-Address : </label>
+              <input class="b"></input>
+            </div>
+            <div class="input">
+              <label>Password : </label>
+              <input class="b"></input>
+            </div>
+            <div class="input">
+              <label>Mobile no : </label>
+              <input class="b"></input>
+            </div>
+            <div class="input">
+              <label>University : </label>
+              <input class="b"></input>
+            </div>
+            <button id="submitBtn"  >Submit</button>
+          </form>
+        </div>
+     
+    </section>
+      
+      <div id="bt">
+        <button id="editBtn" >Edit</button>
+        
+      </div>
+    </main>
+    <footer>
+      <div class="left">
+        <h2>Important Links</h2>
+        <a href="#">Home</a>
+        <a href="#">University</a>
+        <a href="#">About Us</a>
+        <a href="#">Login/Sign up</a>
+      </div>
+      <div class="right">
+        <h2>About the platform</h2>
+        <p>This platform provides information of professional achievement and contact of faculties of multiple
+          universities to help knowledge seekers and professionals to connect.</p>
+      </div>
+    </footer>
+  </body>
+
+</html>
