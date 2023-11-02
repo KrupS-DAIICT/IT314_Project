@@ -1,1 +1,141 @@
-A
+*{
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    font-family: sans-serif;
+}
+
+/* header part*/
+header{
+    display: flex;
+    justify-content: space-between;
+    background-color: black;
+    color: white;
+    align-items: center;
+    height: 4vw;
+    padding-left: 6vw;
+    padding-right: 5vw;
+    border: 2px solid rgb(0, 0, 0);
+    border-bottom-left-radius: 35px;
+    border-bottom-right-radius: 35px;
+}
+header a{
+    color: white;
+    font-size: 1.6vw;
+    padding: 10px;
+}
+header h1{
+    text-align: center;
+    font-size: 2.5vw;
+    padding: 3vh;
+}
+label{
+    padding-top: 20px;
+}
+
+
+
+/* footer part*/
+footer{
+    display: flex;
+    margin-top: 2vw;
+    padding-top: 1vw;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #588414;
+    color: white;
+}
+.left a {
+        display: block;
+        padding: 1vh 4vw 2vh 2vw;
+        text-decoration: none;
+        text-decoration: underline;
+        color: #ffffff; /* Link color */
+        font-size: 20px;
+      }
+.right {
+    position:static;
+    text-align: left;
+    width: 28vw;
+    font-size: 20px;
+}
+
+.right h2{
+    position: static;
+    text-align: left;
+}
+
+
+/* main part */
+
+section img{
+    position: sticky;
+    width: 18vw;
+    height: 18vw;
+    margin:0 10vw 0 10vw ;
+    border: 2px solid black;
+    border-radius: 40px;
+    position: -webkit-sticky;
+    position: sticky;
+    top:20px;
+    cursor: pointer;
+    box-shadow: 8px 8px 4px rgb(87, 105, 107);
+}
+
+section{
+    display: flex;
+}
+main h1{
+    text-align: center;
+    font-size: 5vh;
+    padding: 3vh;
+}
+.main_content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+form{
+    width: 50vw;
+    font-size: 1.4vw;
+}
+.input{
+    padding: 3vh;
+}
+.b{
+    border-radius: 5px;
+    width: 25vw;
+    font-size:1.4vw;
+    padding: 5px 10px;
+    margin-right: 5vw;
+}
+.pb{
+    height: 5vw;
+}
+p{
+    float: right;
+}
+button{
+    width: 7vw;
+    height: 6vh;
+    border: 1px solid rgb(0, 0, 0);
+    border-radius: 3vw;
+    background-color: black;
+    color: white;
+    font-size: 3vh;
+    cursor: pointer;
+  transition-duration: 0.4s;
+  box-shadow: 0 2px 4px rgb(87, 105, 107);
+}
+#bt{
+    display: flex;
+    justify-content: center;
+}
+button:hover {
+    background-color: #4CAF50;
+    color: rgb(5, 1, 1);
+  }
+button:active{
+    box-shadow: 0 0 2px darkslategray;
+    transform: translateY(2px);
+}
