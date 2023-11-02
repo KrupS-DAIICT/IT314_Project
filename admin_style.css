@@ -1,0 +1,144 @@
+*{
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    font-family: sans-serif;
+}
+/*Header Part*/
+
+.navbar{
+    background-color: black;
+    color: white;
+    border: 2px solid rgb(0, 0, 0);
+    border-bottom-left-radius: 35px;
+    border-bottom-right-radius: 35px;
+    box-shadow: 0 3px 4px rgb(87, 105, 107);
+}
+
+.navbar-toggler {
+    color: white;
+}
+#navbarSupportedContent a{
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+    margin-right: 5px;
+    padding: 0.4vw 0.6vw;
+    border: 2px solid transparent;
+    
+    border-radius: 2vw;
+  transition-duration: 1s;
+  box-shadow: 0 0px 2px rgb(0, 0, 0);
+}
+#navbarSupportedContent a:hover{
+    color: #000000;
+    background-color: rgb(252, 251, 251);
+    border: 2px solid rgb(248, 230, 230);
+    box-shadow: 0 2px 4px rgb(255, 255, 255);
+
+}
+#navbarSupportedContent a:active{
+    box-shadow: 0 0 2px darkslategray;
+    transform: translateY(2px);
+}
+
+/*Main Part*/
+
+button:active{
+/*    box-shadow: 0 0 2px darkslategray;*/
+    transform: translateY(2px);
+}
+#main{
+    display: flex;
+    margin-bottom: 100px;
+}
+#img1{
+    float: right;
+    border: 2px solid black;
+    border-radius: 40px;
+    top:20px;
+    cursor: pointer;
+    box-shadow: 8px 8px 4px rgb(87, 105, 107);
+}
+
+h1{
+    text-align: center;
+    padding-top: 10px;
+}
+
+/*Footer Part*/
+
+footer{
+    display: flex;
+    margin-top: 1vw;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #588414;
+    color: white;
+}
+.left a{
+        display: block;
+        margin-left: 5%;
+        padding: 1vh 4vw 2vh 2vw;
+        text-decoration: none;
+        text-decoration: underline;
+        color: #ffffff; /* Link color */
+        font-size: 20px;
+      }
+.right {
+    position:static;
+    text-align: left;
+    width: 28vw;
+    font-size: 20px;
+}
+
+.right h2{
+    position: static;
+    text-align: left;
+}
+
+.footer_title{
+    margin-left: 5%;
+}
+
+@media only screen and (max-width: 800px) {
+  footer{
+    flex-direction: column;
+  }
+  .left {
+    width: 100%;
+    margin: 0px;
+    padding: 2vw;
+  }
+  .footer_title{
+    margin-left: 0px;
+  }
+  .left a {
+    margin-left: 0px;
+    padding: 0px;
+  }
+  .right {
+    width: 100%;
+    padding: 2vw;
+  }
+  
+}
+@media only screen and (max-width: 992px){
+#main{
+    flex-direction:column;
+}
+#main1{
+    width: 50%;
+}
+#img1{
+    float: right;
+    border: 2px solid black;
+    border-radius: 40px;
+    top:20px;
+    cursor: pointer;
+    box-shadow: 8px 8px 4px rgb(87, 105, 107);
+}
+#main2{
+    width: 100%;
+}
+}
