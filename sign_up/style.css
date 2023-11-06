@@ -1,0 +1,147 @@
+*{
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    font-family: sans-serif;
+}
+header{
+    display: flex;
+    justify-content: space-between;
+    background-color: black;
+    color: white;
+    align-items: center;
+    height: 8vh;
+    padding-left: 7vw;
+    padding-right: 5vw;
+    border: 2px solid rgb(0, 0, 0);
+    border-bottom-left-radius: 35px;
+    border-bottom-right-radius: 35px;
+  box-shadow: 0 3px 4px rgb(87, 105, 107);
+}
+header a{
+    color: white;
+    font-size: 20px;
+    margin-right: 5px;
+    padding: 0.4vw 0.6vw;
+    border: 3px solid transparent;
+    
+    border-radius: 2vw;
+  transition-duration: 1s;
+  box-shadow: 0 0px 2px rgb(254, 255, 255);
+}
+header a:hover{
+    color: #000000;
+    background-color: rgb(252, 251, 251);
+    border: 3px solid rgb(0, 0, 0);
+    box-shadow: 0 2px 4px rgb(255, 255, 255);
+
+}
+header a:active{
+    box-shadow: 0 0 2px darkslategray;
+    transform: translateY(2px);
+}
+
+h2{
+    text-align: center;
+    font-size: 30px;
+    margin: 3vh;
+}
+#sign_up{
+    display: flex;
+    justify-content: space-around;
+    background-color: rgb(13, 8, 52);
+    color: white;
+    margin: 1vh 8vw 1vh 8vw;
+    border: 1px solid rgb(13, 8, 52);
+    border-radius: 20px;
+}
+section{
+    padding: 2vw 2vw 0vw 2vw;
+}
+img{
+    height: 68vh;
+    width: 40vw;
+    border-radius: 20px;
+}
+
+form{
+    width: 35vw;
+}
+label{
+    font-size: 3.2vh;
+    margin: 0.5vh;
+}
+input.ip{
+    margin: 1.5vh;
+    width: 30vw;
+    height: 3.2vh;
+    border-radius: 4px ;
+    border:2px solid rgb(247, 247, 247);
+    border-radius: 20px;
+    padding-left: 0.8vw;
+    font-size: 20px;
+}
+.p{
+    font-size: 15px;
+    margin-top: 10px;
+    text-align: center;
+    padding-bottom: 1vw;
+}
+.bt{
+    display: flex;
+    justify-content: space-around;
+    margin-left: 3vw;
+}
+.p a{
+    color:yellow;
+}
+
+button{
+    width: 6vw;
+    height: 2.5vw;
+    border: 1px solid rgb(13, 8, 52);
+    border-radius: 2vw;
+    cursor: pointer;
+    transition-duration: 0.4s;
+    box-shadow: 0 2px 4px rgb(87, 105, 107);
+}
+#green:hover{
+    background-color: green;
+    font-weight: bold;
+}
+#red:hover{
+    background-color: red;
+    font-weight: bold;
+}
+button:active{
+    box-shadow: 0 0 2px darkslategray;
+    transform: translateY(2px);
+}
+
+footer{
+    display: flex;
+    margin-top: 5vw;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #588414;
+    color: white;
+}
+.left a {
+        display: block;
+        padding: 1vh 4vw 2vh 2vw;
+        text-decoration: none;
+        text-decoration: underline;
+        color: #ffffff; /* Link color */
+        font-size: 20px;
+      }
+.right {
+    position:static;
+    text-align: left;
+    width: 28vw;
+    font-size: 20px;
+}
+
+.right h2{
+    position: static;
+    text-align: left;
+}

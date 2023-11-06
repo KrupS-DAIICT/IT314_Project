@@ -1,0 +1,83 @@
+ <!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FacultyHub</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <header>
+    <h1>FacultyHub</h1>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#">University</a>
+      <a href="#">About Us</a>
+      <a href="#">Login/Sign up</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Admin Sign up</h2>
+    <section id="sign_up">
+     <form id="signupForm" action="/signup" method="post">
+        <!-- Full Name -->
+        <label for="name">Full Name</label><br>
+        <input class="ip" type="text" name="fullName" required><br>
+        <br>
+        <!-- Email -->
+        <label for="email">Email</label><br>
+        <input class="ip" type="email" name="email" id="email" required><br>
+        <span id="emailError" style="color: red; font-size: smaller;"></span><br>
+
+        <!-- Password -->
+        <label for="password">Password</label><br>
+        <input class="ip" type="password" name="password" id="password" required><br>
+        <span id="passwordError" style="color: red; font-size: smaller"></span><br>
+
+        <!-- Confirm Password -->
+        <label for="cPassword">Confirm Password</label><br>
+        <input class="ip" type="password" name="cPassword" id="cPassword" required><br>
+        <span id="cPasswordError" style="color: red; font-size: smaller"></span><br>
+
+        <!-- Mobile Number -->
+        <label for="mobile_no">Mobile no</label><br>
+        <input class="ip" type="tel" name="mobile_no" id="mobile_no"" required><br>
+        <span id="mobileError" style="color: red; font-size: smaller"></span><br>
+
+        <!-- University -->
+        <label for="university">University</label><br>
+        <input class="ip" type="text" name="university" required><br>
+        
+        <div class="bt">
+          <button type="submit" value="Submit" id="green">Submit</button>
+          <button type="reset" value="reset" id="red">Reset</button><br>
+        </div>
+        <p class="p">
+          Already have an account? <a href="#">sign in.</a>
+        </p>
+      </form>
+      <img src="sign_up.png" alt="sign_up">
+    </section>
+  </main>
+
+  <footer>
+    <div class="left">
+      <h2>Important Links</h2>
+      <a href="#">Home</a>
+      <a href="#">University</a>
+      <a href="#">About Us</a>
+      <a href="#">Login/Sign up</a>
+    </div>
+    <div class="right">
+      <h2>About the platform</h2>
+      <p>This platform provides information on professional achievement and contact details of faculties from multiple
+        universities to help knowledge seekers and professionals connect.</p>
+    </div>
+  </footer>
+  <script src="sign_up.js"></script>
+</body>
+
+</html> 
