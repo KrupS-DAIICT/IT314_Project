@@ -49,7 +49,16 @@ app.get('/reset-pass', controlers.forgotpasswordlink);
 
 
 app.get('/admin_profile/:id',requireauth,controlers.admin_profile);
+app.get('/otp',(req,res)=>{
+    res.render('otp');
+})
 
+app.get('/s',(req,res)=>{
+
+    res.render('search_faculty');
+})
+
+app.get('/search',controlers.search_faculty);
 
 app.post('/signup_post',controlers.signup_post)
 app.post('/singup_otp',controlers.signup_post_otp);
@@ -62,6 +71,7 @@ app.post('/logout',(req,res)=>{
 app.get("/resetlink",async (req,res) =>{
     res.render("reset_email.hbs");
 })
+
 app.post('/reset',controlers.forgotpassword);
 
 
@@ -70,5 +80,19 @@ app.post('/admin_profile_update/:id',controlers.admin_profile_update);
 app.get('/unlock-account',controlers.unlock_account)
 
 app.post("/reset-pass/:id",controlers.reset_pass_post);
+
+
+hbs.registerHelper('pageGreaterThan1', function (page) {
+    return page > 1;
+  });
+  
+  // Helper function to check if there's a next page
+  hbs.registerHelper('pageLessThanTotalPages', function (page, totalPages) {
+    return page < totalPages;
+  });
+
 app.listen(process.env.PORT);
+
+
+
 
