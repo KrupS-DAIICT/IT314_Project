@@ -33,7 +33,7 @@ const checkuser = (req,res,next) =>{
                 next();
             }
             else{
-              const user=await Sign_up.findOne({ email: decodedToken.id}).exec();
+              const user=await Sign_up.findOne({ email: decodedToken.email}).exec();
               res.locals.user=user
               next();
             }

@@ -1,11 +1,13 @@
 const validator = require("validator");
+const Math=require("math");
 const bcrypt = require('bcrypt');
 const sendmail = require("../mails/sendemail");
 const sendmail_accountlock = require("../mails/sendmaillock");
 const sendmail_passwordreset = require("../mails/passwordresetlink");
+const profileupdatesendmail = require("../mails/profileupdatemail");
 const generateOTP = require("../mails/otp.js")
 const mongoose = require("mongoose");
-const { Sign_up, Signup_otp, Signin_count, Adminaccountlock ,Admin_forgotpass_link} = require("../schema/reg.js");
+const { Sign_up, Signup_otp, Signin_count, Adminaccountlock, Admin_forgotpass_link } = require("../schema/reg.js");
 require("../db/connection.js");
 const jwt = require("jsonwebtoken");
 const cookieparser = require("cookie-parser");
@@ -15,7 +17,7 @@ const { userdelete, checkuser, requireauth, adminlockupdate, } = require("./midd
 
 const limit = 10 * 24 * 60 * 60;
 const creattoken = (result) => {
-    return jwt.sign({ _id:  result._id,  email:result.email, }, 'secreat', {
+    return jwt.sign({ _id: result._id, email: result.email, }, 'secreat', {
         expiresIn: limit
     })
 }
@@ -51,7 +53,7 @@ module.exports.signup_post = async (req, res) => {
                 } catch (err) {
                     console.log(err);
                 }
-                await sendmail(req.body.email,otp);
+                //await sendmail(req.body.email, otp);
 
                 setTimeout(userdelete, 300000, req.body.email);
 
@@ -71,7 +73,8 @@ module.exports.signup_post = async (req, res) => {
                     console.log(err);
 
                 }
-                res.render("otp.hbs");
+                //res.render("otp.hbs");
+                res.redirect('/otp')
             }
         }
         else {
@@ -126,7 +129,7 @@ module.exports.signup_post_otp = async (req, res) => {
     }
     else {
         console.log("invalid dtails");
-        res.send(`<script>alert("Invalid Details"); wwindow.history.back();</script>`);
+        res.send(`<script>alert("Invalid Details"); window.history.back();</script>`);
     }
 }
 
@@ -183,7 +186,7 @@ module.exports.login_post = async (req, res) => {
                             }
                             const resetLink = `http://localhost:7000/unlock-account?email=${req.body.username}?&hash=${otp}`
 
-                            await sendmail_accountlock(req.body.username,resetLink);
+                            await sendmail_accountlock(req.body.username, resetLink);
                             console.log("sendmialllll");
                         }
                         else {
@@ -301,8 +304,8 @@ module.exports.forgotpassword = async (req, res) => {
                 // return res.status(200).json({
                 //     resetLink
                 // })
-                
-                await sendmail_passwordreset(req.body.email,resetLink);
+
+                await sendmail_passwordreset(req.body.email, resetLink);
                 //remember to send a mail to the user
                 res.send(`<script>alert("link is share in your email"); window.history.back();</script>`);
             } else {
@@ -339,13 +342,13 @@ module.exports.forgotpasswordlink = async (req, res) => {
 
             //check if user object is not empty
             if (user) {
-                const data={
-                    email :req.query.email.slice(0, -1),
-                  
+                const data = {
+                    email: req.query.email.slice(0, -1),
+
                 }
-                res.render("reset_pass.hbs",{data})
+                res.render("reset_pass.hbs", { data })
                 //now check if hash is valid
-                
+
             } else {
                 return res.status(400).json({
                     message: "You have provided an invalid reset link"
@@ -366,96 +369,101 @@ module.exports.forgotpasswordlink = async (req, res) => {
 }
 
 
-module.exports.reset_pass_post =async (req, res) => {
-
+module.exports.reset_pass_post = async (req, res) => {
 
     const user = await Admin_forgotpass_link.findOne({ email: req.params.id });
-    if(user)
-    {
-    const password = req.body.pass;
-    const cpassword = req.body.conpass;
+    if (user) {
+        const password = req.body.pass;
+        const cpassword = req.body.conpass;
 
-    if (password == cpassword) {
+        if (password == cpassword) {
 
-        try{
+            try {
 
-            console.log(req.params.id);
-        await Sign_up.updateOne({ email: req.params.id }, { password: await bcrypt.hash(password, saltRounds) });
-        await Admin_forgotpass_link.deleteOne({ email: req.params.id });
+                console.log(req.params.id);
+                await Sign_up.updateOne({ email: req.params.id }, { password: await bcrypt.hash(password, saltRounds) });
+                await Admin_forgotpass_link.deleteOne({ email: req.params.id });
 
-        res.send(`<script>alert("updated");</script>`);
+                res.send(`<script>alert("updated");</script>`);
+            }
+            catch (err) {
+                console.log(err)
+                return res.status(500).json({
+                    message: "Internal server error"
+                })
+            }
+            //res1.send(`<script>window.open('', '_self', ''); window.close();</script>`);
+
         }
-        catch(err){
-            console.log(err)
-        return res.status(500).json({
-            message: "Internal server error"
-        })
-        }
-        //res1.send(`<script>window.open('', '_self', ''); window.close();</script>`);
+        else {
+            res.send(`<script>alert("Passwords Do Not Match"); window.history.back();</script>`);
 
+        }
     }
     else {
-        res.send(`<script>alert("Passwords Do Not Match"); window.history.back();</script>`);
-
+        return res.status(400).json({
+            message: "You have provided an invalid reset link"
+        })
     }
-}
-else{
-    return res.status(400).json({
-        message: "You have provided an invalid reset link"
-})
-}
 }
 
 
 module.exports.admin_profile = async (req, res) => {
     const profileId = req.params.id;
-    const token= req.cookies.accesstoken;
-    const data =jwt.verify(token,'secreat');
-    if(profileId==data._id)
-    {
-    // Find the profile by ID in the database
-    try{
-        const profile = await Sign_up.findOne({_id:profileId});
-        if(profile && profile.email)
-        {
-            res.render('adminprofile.hbs', {profile });
-        }
-        else{
-            res.status(400).json({
-                message : "Not found"})
+    const token = req.cookies.accesstoken;
+    const data = jwt.verify(token, 'secreat');
+    if (profileId == data._id) {
+        // Find the profile by ID in the database
+        try {
+            const profile = await Sign_up.findOne({ _id: profileId });
+            if (profile && profile.email) {
+                res.render('adminprofile2.hbs', { profile });
+            }
+            else {
+                res.status(400).json({
+                    message: "Not found"
+                })
             }
         }
-        catch(err){
+        catch (err) {
             console.log(err)
             return res.status(500).json({
                 message: "Internal server error"
             })
+        }
     }
-}
-else{
-    return res.json({
-        message: "You can not check other admin details"
-    })
-}
+    else {
+        return res.json({
+            message: "You can not check other admin details"
+        })
+    }
 }
 
 
 module.exports.admin_profile_update = async (req, res) => {
     const profileId = req.params.id;
+    const token = req.cookies.accesstoken;
+    const data = jwt.verify(token, 'secreat');
+    // if(data.email!=req.body.email)
+    // {
+    //     res.cookie("accesstoken",'',{maxAge:1})
+    // }
     try {
 
         const result = await Sign_up.updateOne({ _id: profileId },
             {
                 name: req.body.name,
                 email: req.body.email,
-                password: await bcrypt.hash(req.body.password, saltRounds),
+                //password: await bcrypt.hash(req.body.password, saltRounds),
                 mobile_no: req.body.mobile_no,
                 university: req.body.university
             });
 
         console.log(result);
+        //profileupdatesendmail(data.email,result.name);
         res.redirect("/home")
-        // res.send("<h1>Data recive successfully");
+        res.send("<h1>Data recive successfully");
+
     } catch (err) {
         console.log(err)
         return res.status(500).json({
@@ -463,3 +471,52 @@ module.exports.admin_profile_update = async (req, res) => {
         })
     }
 }
+
+
+module.exports.search_faculty = async (req, res) => {
+    const currentUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
+    const course = req.query.course;
+    const search_query =req.query.search2;
+    const university =req.query.university;
+    // Pagination parameters
+    // const perPage = 6; // Number of results per page
+    // const page = parseInt(req.query.page) || 1; // Current page, default to 1
+  
+    // Build the query based on the filters with $regex
+    const query = {};
+    // if (location) {
+    //   query.location = { $regex: location, $options: 'i' };
+    // }
+    // if (course) {
+    //   query.course = { $regex: course, $options: 'i' };
+    // }
+    
+    if (university) {
+        query.university =  { $regex: university, $options: 'i' };
+    }
+    if (course) {
+        query.course =  { $regex: course, $options: 'i' };
+    }
+
+    if(search_query){
+        query.name= { $regex: search_query, $options: 'i' };;
+    }
+    console.log(query);
+    // Calculate the skip value for pagination
+    //  const skip = (page - 1) * perPage;
+  
+    // Search the database with pagination and render the results in the search template
+    const data = await Sign_up.find(query)
+    // .skip(skip)
+      if(data){
+        // console.log(data.length);
+        // res.json(data);
+        // const totalPages = Math.ceil(data.length/ perPage);
+        // console.log(totalPages);
+        // ,page: page, totalPages: totalPages,currentUrl:currentUrl
+       res.render('search_faculty', { data });
+      }
+  };
+  
+
+
