@@ -31,8 +31,11 @@ const Sign_up_Schema= new mongoose.Schema({
     lock :{
         type:Number,
         default:0
-    }
-    
+    },
+    image: {
+        data: Buffer,
+        contentType: String
+      }
 })
 
 
