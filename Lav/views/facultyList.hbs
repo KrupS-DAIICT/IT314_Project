@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <title>Document</title>
+    
+    {{!-- <link rel="stylesheet" href="facultyList.css"> --}}
+    <style>
+        
+*{
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+}
+header{
+  display: flex;
+  justify-content: space-between;
+  background-color: black;
+  color: white;
+  align-items: center;
+  height: 8vh;
+  padding-left: 7vw;
+  padding-right: 5vw;
+  border: 2px solid rgb(0, 0, 0);
+  border-bottom-left-radius: 35px;
+  border-bottom-right-radius: 35px;
+}
+header a{
+  color: white;
+  font-size: 20px;
+  margin: 10px;
+}
+
+footer{
+  display: flex;
+  margin-top: 5vw;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #588414;
+  color: white;
+}
+form{
+  display: flex;
+  justify-content: center;
+  margin-top: 3vh;
+}
+form.example input[type=text] {
+padding: 11px 25px;
+font-size: 17px;
+background: #070505;
+border: 1px solid black;
+color: white;
+width: 30vw;
+border-bottom-left-radius: 25px;
+border-top-left-radius: 25px;
+}
+
+form.example button {
+width: 5vw;
+padding: 10px;
+background: #000000;
+color: rgb(255, 255, 255);
+font-size: 17px;
+border: 1px solid rgb(0, 0, 0);
+border-left: none;
+cursor: pointer;
+border-bottom-right-radius: 25px;
+border-top-right-radius: 25px;
+}
+
+.left a {
+      display: block;
+      padding: 1vh 4vw 2vh 2vw;
+      text-decoration: none;
+      text-decoration: underline;
+      color: #ffffff; /* Link color */
+      font-size: 20px;
+    }
+.right {
+  position:static;
+  text-align: left;
+  width: 28vw;
+  font-size: 20px;
+}
+
+
+
+.l{
+  background-color: black;
+  border-top-left-radius: 2vw;
+  border-bottom-left-radius: 2vw;
+
+}
+.r{
+  background-color: black;
+  border-top-right-radius: 2vw;
+  border-bottom-right-radius: 2vw;
+}
+.med{
+  background-color: black;
+  color: white;
+  width: 40vw;
+}
+.c{
+  display: flex;
+  justify-content: center;
+}
+.mid_2{
+  display: flex;
+  justify-content: center;
+}
+.mid_inner{
+  width: 20vw;
+  height: 20vw;
+}
+button:hover {
+  background: #060079;
+  }
+
+    </style>
+
+</head>
+<body>
+    <header>
+        <h1>FacultyHub</h1>
+        <nav>
+            <a href="#">Home</a>
+            <a href="#">University</a>
+            <a href="#">About Us</a>
+            <a href="#">Login/Sign up</a>
+        </nav>
+    </header>
+
+    <form class="example" action="/action_page.php">
+        <input type="text" placeholder="Search.." name="search2">
+        <button type="submit"><i class="fa fa-search"></i></button>
+    </form>
+
+    <div class="album py-5 bg-body-tertiary">
+        <div class="container">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                {{#each faculties}}
+                    <div class="col">
+                        <div class="card shadow-sm">
+                            <img src="data:image/jpeg;base64,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" alt="{{facultyName}} Image">
+                            <div class="card-body">
+                                <h5 class="card-title">{{facultyName}}</h5>
+                                <p class="card-text">{{institute}}</p>
+                                <ul>
+                                    <li>Email: {{email}}</li>
+                                    <li>Contact: {{contactNo}}</li>
+                                    <li>Address: {{address}}</li>
+                                    <li>Website: {{website}}</li>
+                                </ul>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="btn-group">
+                                        <!-- Add your buttons as needed -->
+                                    </div>
+                                    <small class="text-body-secondary">9 mins</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {{/each}}
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="left">
+            <h2>Important Links</h2>
+            <a href="#">Home</a>
+            <a href="#">University</a>
+            <a href="#">About Us</a>
+            <a href="#">Login/Sign up</a>
+        </div>
+        <div class="right">
+            <h2>About the platform</h2>
+            <p>This platform provides information on professional achievements and contacts of faculties from multiple universities to help knowledge seekers and professionals connect.</p>
+        </div>
+    </footer>
+</body>
+</html>

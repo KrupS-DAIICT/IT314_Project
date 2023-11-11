@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faculty Information Form</title>
+    <style>
+        /* Basic styling for the form */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        form {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2, h3 {
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        .file-input-label {
+            display: inline-block;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .file-input-label:hover {
+            background-color: #45a049;
+        }
+
+        #image-preview {
+            max-width: 100%;
+            height: auto;
+            margin-top: 10px;
+        }
+
+        /* Reset Button */
+        input[type="reset"] {
+            background-color: #ccc;
+            color: #333;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+
+        input[type="reset"]:hover {
+            background-color: #bbb;
+        }
+
+        /* Submit Button */
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Faculty Information Form</h2>
+
+    <!-- The form starts here -->
+    <form action="/addFaculty" method="post" enctype="multipart/form-data">
+
+        <!-- Personal Information Section -->
+        <h3>Personal Information</h3>
+
+        <label for="facultyname">Faculty Name:</label>
+        <input type="text" id="facultyname" name="facultyname" required>
+
+        <label for="institute">Institute:</label>
+        <input type="text" id="institute" name="institute" required>
+
+        <label for="contact">Contact No:</label>
+        <input type="tel" id="contact" name="contact" required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="address">Address:</label>
+        <textarea id="address" name="address" rows="4" required></textarea>
+
+        <label for="website">Website:</label>
+        <input type="url" id="website" name="website">
+
+        <!-- Education Information Section -->
+        <h3>Education Information</h3>
+
+        <label for="education">Education:</label>
+        <input type="text" id="education" name="education">
+
+        <label for="institute_education">Institute of Education:</label>
+        <input type="text" id="institute_education" name="institute_education">
+
+        <label for="designation">Designation:</label>
+        <input type="text" id="designation" name="designation">
+
+        <label for="courses_taught">Courses Taught:</label>
+        <textarea id="courses_taught" name="courses_taught" rows="4"></textarea>
+
+        <!-- Publications Section -->
+        <h3>Publications</h3>
+
+        <label for="publications">Publications:</label>
+        <textarea id="publications" name="publications" rows="4"></textarea>
+
+        <!-- Biography Section -->
+        <h3>Biography</h3>
+
+        <label for="biography">Biography:</label>
+        <textarea id="biography" name="biography" rows="8"></textarea>
+
+        <!-- Image Upload Section -->
+        <h3>Image Upload</h3>
+
+        <label for="image" class="file-input-label">
+            Choose Image
+        </label>
+        <input type="file" id="image" name="file" accept="image/*">
+
+        <div id="image-preview"></div>
+
+        <!-- Reset and Submit Buttons -->
+        <input type="reset" value="Reset">
+        <input type="submit" value="Submit">
+
+    </form>
+
+    <!-- JavaScript to preview the selected image -->
+    <script>
+        document.getElementById('image').addEventListener('change', function (event) {
+            var preview = document.getElementById('image-preview');
+            while (preview.firstChild) {
+                preview.removeChild(preview.firstChild);
+            }
+    
+            var file = event.target.files[0];
+    
+            if (file) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    var img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.alt = 'Image Preview';
+                    
+                    // Set a fixed size for the preview image (e.g., 100px by 100px)
+                    img.style.width = '100px';
+                    img.style.height = '100px';
+    
+                    preview.appendChild(img);
+                };
+                reader.readAsDataURL(file);
+            }
+        });  
+    </script>
+
+</body>
+</html>
+
+
+
+
