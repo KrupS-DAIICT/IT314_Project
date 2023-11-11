@@ -1,0 +1,82 @@
+/* main part */
+
+form{
+    display: flex;
+    justify-content: center;
+    margin-top: 3vh;
+}
+form.example input[type=text] {
+  padding: 11px 25px;
+  font-size: 17px;
+  background: #070505;
+  border: 1px solid black;
+  color: white;
+  width: 30vw;
+  border-bottom-left-radius: 25px;
+  border-top-left-radius: 25px;
+}
+
+form.example button {
+  width: 5vw;
+  padding: 10px;
+  background: #000000;
+  color: rgb(255, 255, 255);
+  font-size: 17px;
+  border: 1px solid rgb(0, 0, 0);
+  border-left: none;
+  cursor: pointer;
+  border-bottom-right-radius: 25px;
+  border-top-right-radius: 25px;
+}
+
+form.example button:hover {
+  background: #060079;
+}
+
+main h1{
+    text-align: center;
+    margin: 15px;
+}
+
+main #colleges{
+    margin: 2vw 15vw;
+    display: grid;
+    grid-template-columns: auto auto;
+
+}
+
+main #colleges .college{
+    display: flex;
+    padding: 15px;
+    margin: 10px;
+    align-items: center;
+    width: 30vw;
+    box-shadow: 0 2px 4px rgb(87, 105, 107);
+    cursor: pointer;
+}
+main #colleges .college:hover{
+    background-color: #e9eaee;
+}
+
+main #colleges .college:active{
+    box-shadow: 0 0 2px darkslategray;
+    transform: translateY(2px);
+}
+
+.name{
+    font-size: 1.6vw;
+    font-weight: bold;
+    margin-left: 3vw;
+}
+
+.logo{
+    height: 5vw;
+    width: 5vw;
+}
+
+#colleges a{
+    color: black;
+}
+#colleges a:active{
+    color: red;
+}
