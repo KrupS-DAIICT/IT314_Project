@@ -24,7 +24,7 @@
 <body>
     <section class="container p-4 mt-5" style="max-width:500px">
         <h4 class="text-center mb-4">ENTER NEW PASSWORD</h4>
-        <form method="POST" action="/reset-pass/{{data.email}}" style="max-width:500px;">
+        <form method="POST" action="/reset-pass?email={{data.email}}&role={{data.role}}" style="max-width:500px;">
             <div class="mb-3">
                 <label class="form-label">New password</label>
                 <input type="password" name="pass" class="form-control" placeholder="*****">

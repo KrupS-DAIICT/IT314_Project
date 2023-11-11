@@ -71,6 +71,12 @@
             -webkit-animation-name: swing;
             animation-name: swing;
         }
+        .kp{
+            background-color: black;
+            color: white;
+            
+        }
+
     </style>
 </head>
 
@@ -102,7 +108,7 @@
       <h3>You can now log in</h3>
 
       <p>@SmitPatel</p>
-      <button type="button" class="btn btn-danger" onclick="gotohome()">Primary</button>
+      <button type="button" class="btn btn-danger kp" onclick="gotohome()">Primary</button>
     </div>`
         : `<div style="background-color: #991B1B">
       <h2>${message}</h2>
@@ -126,7 +132,7 @@
     document.body.innerHTML = bodyContent;
 
     function gotohome() {
- window.location.href="/";
+ window.location.href="/home";
 }
 </script>
 

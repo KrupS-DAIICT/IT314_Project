@@ -105,10 +105,12 @@ footer{
       {{!-- <a href="/signup" class="btn btn-light">Sign up</button> --}}
 
       {{#if user}}
+    
+        <a href="/changepassword">ChangePassword</a><br>
         <form class="logout" action="/logout" method="POST">
             <button type="submit">LogOut</button>
         </form>
-        
+        <a href="/admin_profile/{{user._id}}">profile</a>
         {{else}}
        <form  action="/login" method="get">
        <button type="submit" class="btn btn-light">Sign in</button>

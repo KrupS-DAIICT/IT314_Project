@@ -12,7 +12,7 @@
   <header>
     <h1>FacultyHub</h1>
     <nav>
-      <a href="#">Home</a>
+      <a href="/home">Home</a>
       <a href="#">University</a>
       <a href="#">About Us</a>
       <a href="#">Login/Sign up</a>
@@ -24,8 +24,8 @@
     <section id="sign_up">
       <form action="/login" method="POST" >
         <div class="radio">
-          <p><input class="rb" type="radio" name="role" value="admin"> Admin</p>
-          <p><input class="rb" type="radio" name="role" value="faculty"> Faculty</p>
+          <p><input class="rb" type="radio" name="role" value="admin" required> Admin</p>
+          <p><input class="rb" type="radio" name="role" value="faculty" required> Faculty</p>
         </div>
         <label for="email">Email</label><br>
         <input class="ip" type="email" name="username" placeholder="Enter your username" required><br>
