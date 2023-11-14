@@ -1,10 +1,11 @@
-*{
-    margin: 0;
-    padding: 0;
-    text-decoration: none;
-}
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap');
 
-/* header part*/
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
 header{
     font-family: sans-serif;
     display: flex;
@@ -28,7 +29,7 @@ header a{
 /* footer part*/
 footer{
     display: flex;
-    margin-top: 2vw;
+    margin-top: 1vw;
     padding-top: 1vw;
     justify-content: space-around;
     align-items: center;
@@ -54,88 +55,142 @@ footer{
     position: static;
     text-align: left;
 }
+body{
+  background: #ffffff;
+  padding: 0 10px;
+}
+.wrapper{
+  max-width: 400px;
+  width: 100%;
+  background: #ffffff;
+  margin: 20px auto;
+  /* box-shadow: 1px 1px 2px rgba(0,0,0,0.125); */
+  padding: 30px;
+}
 
-/* main part */
-section{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-main h1{
-    text-align: center;
-    font-size: 5vh;
-    padding: 3vh;
-    font-family: sans-serif;
+.wrapper .title{
+  font-size: 4vh;
+  font-weight: 700;
+  margin-bottom: 5vh;
+  color: #000000;
+  text-transform: uppercase;
+  text-align: center;
 }
 
-.main_content{
-    display: flex;
-    
+.wrapper .form{
+  width: 100%;
 }
-form{
-    font-family: sans-serif;
-    width: 59vh;
-    height: 4vh;
-    font-size: 3vh;
-    padding-top: 3vh;
-    padding-bottom: 2vh;
-    align-items: center;
-    justify-content: center;
+
+.wrapper .form .inputfield{
+  margin-bottom: 15px;
+  display: flex;
+  /* align-items: center; */
+  flex-direction: column;
+  align-items: flex-start;
 }
-.input{
-    padding: 3.5vh;
+
+.wrapper .form .inputfield label{
+   width: 200px;
+   color: #000000;
+   margin-right: 10px;
+  font-size: 14px;
 }
-.b{
-    border: 1.5px solid black;
-    border-radius: 5px;
-    width: 25vw;
-    font-size:2.5vh;
-    height: 4vh;
-    padding: 0 10px 0 10px ;
+
+
+.Profile {
+  text-align: left; 
+  margin: 10px 0;
 }
-.pb{
-    height: 5vw;
+
+#actual-btn {
+  opacity: 40%;
+  padding-top: 1vh;
 }
-input{
-    float: right;
+
+.wrapper .form .inputfield .input,
+.wrapper .form .inputfield .textarea{
+  width: 100%;
+  outline: none;
+  border: 1px solid #bab4b4;
+  font-size: 15px;
+  padding: 8px 10px;
+  border-radius: 3px;
+  transition: all 0.3s ease;
 }
-button{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    width: 10vw;
-    height: 6vh;
-    border: 1px solid rgb(0, 0, 0);
-    border-radius: 1vw;
-    background-color: black;
-    color: white;
-    font-size: 3vh;
-    transition-duration: 0.4s;
-    cursor: pointer;
+
+.wrapper .form .inputfield .textarea{
+  width: 100%;
+  height: 125px;
+  resize: none;
 }
-.main_button{
-    display: flex;
-    position: relative;
-    margin-top: 2vh;
-    display: flex;
-    justify-content: center;
-    gap:10vh ;
+
+.wrapper .form .inputfield .input:focus,
+.wrapper .form .inputfield .textarea:focus,
+.wrapper .form .inputfield .custom_select select:focus{
+  border: 1px solid #000000;
 }
- /* #bt{
+
+.wrapper .form .inputfield p{
+   font-size: 14px;
+   color: #757575;
+}
+
+
+ .wrapper .form .button .inputfield .btn{
+  width: 10vw; 
+  padding: 10px 10px;
+  font-size: 15px; 
+  border-color: #000000;
+  background:  #ffffff;
+  color: #000000;
+  cursor: pointer;
+  border-radius: 3px;
+  outline: none;
+  display: block;
+  justify-content: center;
+  
+} 
+
+.wrapper .form .button .inputfield{
+    flex: 1;
     display: inline-block;
-    align-items: center;
-    justify-content: space-around;
-    padding-left: 40vh;
+    margin-right: 1.5vw;
+}
+ .wrapper .form .button{
+    display: flex;
+    justify-content: space-between; 
+    padding: 10px;
+    
+} 
+
+.wrapper .form .inputfield .btn:hover{
+  background: #000000;
+  color: white;
+}
+
+.wrapper .form .inputfield:last-child{
+  margin-bottom: 0;
+}
+
+@media (max-width:768px) {
+  .wrapper .form .inputfield{
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .wrapper .form .inputfield label{
+    margin-bottom: 5px;
+  }
+  @media (max-width: 968px) {
+    .wrapper .form .button .inputfield .btn {
+      width: 100%; 
+      margin: 10px 0;
+      margin-right:0; 
+    }
+    
+    .wrapper .form .button .inputfield {
+      margin-right: 4vw;
+      margin-left: 4vw; 
+    }
+  }
     
 }
-#bt1{
-    display: inline-flex;
-    justify-content: center;
-    padding-left: 40vh; 
-} */ 
-button:hover {
-    background-color: #4CAF50;
-    color: white;
-
-  }
