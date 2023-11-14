@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FacultyHub</title>
-    <link rel="stylesheet" href="Add_faculty.css">
+    <link rel="stylesheet" href="taskstyle.css">
 </head>
 
 <body>
@@ -18,71 +18,79 @@
         </nav>
     </header>
 
-    <main>
-        <h1>Add Faculty</h1>
-        <section>
-        <div class="FacultyInput">
-            <form action="/Addfaculty" method="post">
-                <div class="input">
-                    <label>Faculty Name*</label><br>
-                    <input type="text" name="Faculty_Name" class="b">
-                </div>
-                <div class="input">
-                    <label>Institute*</label><br>
-                    <input type="text" name="Institute" class="b">
-                </div>
-                <div class="input">
-                    <label>Email-address*</label><br>
-                    <input type="text" name="email" class="b">
-                </div>
-                <div class="input">
-                    <label>Contact No*</label><br>
-                    <input type="text" name="Contact_No" class="b">
-                </div>
-                <div class="input">
-                    <label>Education*</label><br>
-                    <input type="text" name="Education" class="b">
-                </div>
-                <div class="input">
-                    <label>Institute of Education*</label><br>
-                    <input type="text" name="Institute of Education" class="b">
-                </div>
-                <div class="input">
-                    <label>Address*</label><br>
-                    <input type="text" name="Address" class="b">
-                </div>
-                <div class="input">
-                    <label>Designation(POR)*</label><br>
-                    <input type="text" name="Designation(POR)" class="b">
-                </div>
-                <div class="input">
-                    <label>Field of specialization</label><br>
-                    <input type="text" name="Field_of_specialization" class="b">
-                </div>
-                <div class="input">
-                    <label>Courses Taught*</label><br>
-                    <input type="text" name="Courses_Taught" class="b">
-                </div>
-                <div class="input">
-                    <label>Website:</label><br>
-                    <input type="text" name="Website" class="b">
-                </div>
-                <div class="input pb">
-                    <label>Publications:</label><br>
-                    <input type="text" name="Publications" class="b pb">
-                </div>
-                <div class="input pb">
-                    <label>Biography*</label><br>
-                    <input type="text" name="Biography" class="b pb">
-                </div>
-            </section>
-            </form>
+    <div class="wrapper">
+        <div class="title">
+          Add Faculty
         </div>
-    <div  class="main_button">
-    <div id="bt"><button type="button" >Reset</button></div>
-    <div id="bt1"><button type="button" >Done</button></div>
+        <form>
+        <div class="form">
+           <div class="inputfield">
+              <label>Faculty Name*</label><br>
+              <input type="text" class="input" required>
+           </div>  
+            <div class="inputfield">
+              <label>Institute*</label><br>
+              <input type="text" class="input" required>
+           </div>  
+           <div class="inputfield">
+              <label>Email-address*</label><br>
+              <input type="text" class="input" required>
+           </div> 
+           <div class="inputfield">
+              <label>Contact No*</label><br>
+              <input type="text" class="input" required>
+           </div> 
+           <div class="inputfield">
+              <label>Education*</label><br>
+              <input type="text" class="input" required>
+           </div> 
+           <div class="inputfield">
+              <label>Institute of Education*</label><br>
+              <input type="text" class="input" required>
+           </div> 
+           <div class="inputfield">
+              <label>Address*</label><br>
+              <input type="text" class="input" required>
+           </div> 
+           <div class="inputfield">
+              <label>Designation(POR)*</label><br>
+              <input type="text" class="input" required>
+           </div> 
+           <div class="inputfield">
+              <label>Field_of specialization</label><br>
+              <input type="text" class="input">
+           </div> 
+           <div class="inputfield">
+              <label>Courses Taught*</label><br>
+              <input type="text" class="input" required>
+           </div> 
+           <div class="inputfield">
+              <label>Website</label><br>
+              <input type="text" class="input">
+           </div> 
+           <div class="Profile">
+              <label>Profile Picture*</label><br>
+              <input type="file" id="actual-btn" required>
+           </div> 
+           <div class="inputfield">
+                <label>Publications</label>
+                <textarea class="textarea"></textarea>
+           </div>
+           <div class="inputfield">
+                <label>Biography*</label>
+                <textarea class="textarea"></textarea required>
+           </div>
+        <div class="button">
+           <div class="inputfield">
+                <input type="reset" value="Reset" class="btn">
+           </div>
+           <div class="inputfield">
+                <input type="submit" value="Done" class="btn">
+           </div>
+        </div>
+        </div>
+      </form>
     </div>
-    </main>
 
     <footer>
         <div class="left">
