@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express'); // require express
 const bcrypt = require('bcrypt'); // require bcrypt
 const path = require('path'); // require path
@@ -5,11 +6,14 @@ const Admin = require("../models/admin"); // require admin.js
 const Faculty = require("../models/faculty"); // require faculty.js
 const router = express.Router(); // require router
 // const cookieParser = require('cookie-parser'); // require cookie-parser
+const generateOTP = require("../functions/generateOTP");
+const lockUser = require("../models/lockUser");
+const sendEmailLock = require("../functions/sendEmailLock");
+const SigninCount = require("../models/signinCount");
+const createToken = require("../functions/createToken");
+const { log } = require('console');
 
-app = express();
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-// app.use(cookieParser());
+const limit = 10 * 24 * 60 * 60;
 
 router.get("/signin", async (req, res) => {
     const filePath = path.join(__dirname, "../../views", "signin");
@@ -17,33 +21,103 @@ router.get("/signin", async (req, res) => {
 });
 
 router.post("/signin", async (req, res) => {
+    const { role, username, password } = req.body;
+
     try {
-        const person = req.body.role;
-        const email = req.body.email;
-        const password = req.body.Password;
+        const db = role === 'admin' ? Admin : Faculty;
+        const result = await db.findOne({ $and: [{ email: username }, { verified: 1 }] }).exec();
 
-        const user = person == "admin" ? Admin : Faculty;
-        const userEmail = await user.findOne({ email: email });
-        const isMatch = await bcrypt.compare(password, userEmail.password);
-
-        // generate auth token
-        const token = await userEmail.generateAuthToken();
-        res.cookie("signin", token, {
-            expires: new Date(Date.now() + 60*1000),
-            httpOnly: true
-        });
-
-        if(isMatch) {
-            const redirectPath = path.join(__dirname, "../../views", "addFaculty");
-            res.status(201).render(redirectPath);
+        if (!result) {
+            log("Result not found");
+            handleInvalidDetails(res);
+            return;
         }
-        else    
-            res.send(`<script>alert("Invalid credentials."); window.history.back()</script>`);
 
+        if (result.lock) {
+            handleAccountLock(username, role, result, req, res);
+            return;
+        }
 
-    } catch (e) {
-        res.status(400).send(e);
+        const auth = await bcrypt.compare(password, result.password);
+
+        if (auth) {
+            const result2 = SigninCount.findOne({ $and: [{ ip: req.ip }, { email: username }] }).exec();
+            if (result2) {
+                await SigninCount.deleteOne({ _id: result2._id });
+            }
+
+            const token = createToken(result, role);
+            res.cookie("accesstoken", token, { httpOnly: true, maxAge: limit }).status(200);
+
+            res.send(`<script>alert("You have successfully Signed in to your account"); window.location.href="/";</script>`);
+        } else {
+            const result2 = await SigninCount.findOne({ $and: [{ ip: req.ip }, { email: username }] }).exec();
+
+            if (!result2) {
+                try {
+                    const user = new SigninCount({
+                        ip: req.ip,
+                        email: username,
+                        count: 1
+                    });
+                    const userSaved = await user.save();
+
+                    handleInvalidDetails(userSaved, res);
+                } catch (error) {
+                    log(error);
+                }
+            }
+
+            if (result2.count >= 5) {
+                await SigninCount.updateOne({ _id: result2._id }, { count: result2.count + 1 });
+                handleAccountLock(username, role, db, req, res);
+                return;
+            } else {
+                await SigninCount.updateOne({ _id: result2._id }, { count: result2.count + 1 });
+                const updatedUser = await SigninCount.findOne({ $and: [{ ip: req.ip }, { email: username }] }).exec();
+                handleInvalidDetails(updatedUser, res);
+                return;
+            }
+
+        }
+    } catch (error) {
+        log(error);
     }
+
 });
+
+function handleInvalidDetails(user, res) {
+    log("Invalid details 1");
+    res.send(`<script>alert("Invalid Details, remaining attempts before your account gets locked: ${5 - user.count}"); window.history.back();</script>`);
+}
+
+async function handleAccountLock(username, role, db, req, res) {
+    log('Account locked');
+    await db.updateOne({ lock: true });
+
+    const otp = generateOTP(30);
+
+    const result = await lockUser.findOne({ email: username }).exec();
+    // log(result);
+
+    try {
+        if (result) {
+            await lockUser.updateOne({ email: username }, { link: otp });
+        } else {
+            const lockedUser = new lockUser({ email: username, link: otp });
+            await lockedUser.save();
+            log("saved");
+        }
+    } catch (error) {
+        log(error);
+    }
+
+    const port = process.env.PORT || 8000;
+    const resetLink = `http://localhost:${port}/unlock-account?email=${username}?&role=${role}?&hash=${otp}`;
+    // log(resetLink);
+    await sendEmailLock(username, resetLink);
+
+    res.send(`<script>alert("Your account is locked, reset link is sent to your email."); window.history.back(); window.location.href="/signin";</script>`);
+}
 
 module.exports = router; // export router

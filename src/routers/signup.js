@@ -6,14 +6,15 @@ const validator = require("validator");
 const generateOTP = require("../functions/generateOTP");
 const sendEmail = require("../functions/sendEmail");
 const { userDelete } = require("../functions/userFunctions");
-const { generateAndStoreOTP, verifyOTP } = require("../functions/otpFunctions");
+const { generateAndStoreOTP } = require("../functions/otpFunctions");
 
 router.get("/signup", async (req, res) => {
+    // req.session.signupStep = 1;
     const filePath = path.join(__dirname, "../../views", "signup");
     res.render(filePath);
 });
 
-async function registerUser(data, res) {
+async function registerUser(data, req, res) {
     const { adminName, email, Password, cPassword, mobile_no, university } = data;
 
     if (Password !== cPassword) {
@@ -25,17 +26,17 @@ async function registerUser(data, res) {
     }
 
     const userExists = await Admin.findOne({ email });
+    // console.log(userExists);
 
-    if (userExists) {
-        if (userExists.verified === 1) {
-            return res.send({ error: "Email is already registered" });
-        } else {
-            return res.send({ error: "Your previous verification is still pending" });
-        }
+    if (userExists !== null && userExists.verified === true) {
+        return res.send(`<script>alert("Email is already registered"); window.history.back(); </script>`);
+    }
+    else if (userExists && userExists.verified === false) {
+        return res.send(`<script>alert("Verification is incomplete for this user. Redirecting to verification page."); window.history.back(); </script>`)
     }
 
-    const OTP = generateAndStoreOTP(email);
-    // console.log(OTP);
+    const OTP = generateAndStoreOTP(email, 6);
+    console.log(OTP);
 
     try {
         const tempAdmin = new Admin({
@@ -48,16 +49,19 @@ async function registerUser(data, res) {
         });
 
         // Save the user
-        await tempAdmin.save();
+        if (!userExists) {
+            await tempAdmin.save();
+        }
 
         // Send OTP to the user
-        await sendEmail(email, OTP);
+        // const emailSent = await sendEmail(email, OTP);
 
         // Delete user if time runs out
-        setTimeout(userDelete, 30000, email);
+        setTimeout(userDelete, 5 * 60 * 1000, email);
 
         // Redirect to the OTP verification page
-        res.render("verifyotp");
+        // req.session.signupStep = 2;
+        res.redirect('/signup/verifyotp');
 
     } catch (error) {
         console.log(`tempAdmin.save() error: ${error})`);
@@ -68,7 +72,7 @@ async function registerUser(data, res) {
 // create a new faculty into the database
 router.post("/signup/verifyotp", async (req, res) => {
     const data = req.body;
-    await registerUser(data, res);
+    await registerUser(data, req, res);
 });
 
 module.exports = router; // export router

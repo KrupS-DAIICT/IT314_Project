@@ -1,0 +1,100 @@
+console.log(req.ip);
+    const email = req.body.username;
+    const password = req.body.password;
+    const role = req.body.role;
+
+    try {
+        var result;
+        if (role === 'admin') {
+            result = await Admin.findOne({ $and: [{ email: email }, { verified: 1 }] }).exec();
+        } else {
+            result = await Faculty.findOne({ $and: [{ email: email }, { verified: 1 }] }).exec();
+        }
+
+        if (result) {
+            if (!result.lock) {
+                const auth = await bcrypt.compare(password, result.password);
+
+                if (auth) {
+                    const result2 = SigninCount.findOne({ $and: [{ ip: req.ip }, { email: req.body.username }] }).exec();
+                    if (result2) {
+                        await SigninCount.deleteOne({ _id: result2._id });
+                    }
+
+                    const token = createToken(result, role);
+                    res.cookie("accesstoken", token, { httpOnly: true, maxAge: limit }).status(200);
+
+                    res.send(`<script>alert("You have successfully Signed in to your account"); window.location.href="/home";</script>`);
+                }
+                else {
+                    const result2 = await SigninCount.findOne({ $and: [{ ip: req.ip }, { email: req.body.username }] }).exec();
+                    if (result2) {
+                        if (result2.count < 5) {
+                            await SigninCount.updateOne({ _id: result2._id }, { count: result2.count + 1 });
+                            console.log(result2);
+                        }
+                        else if (result2.count == 5) {
+                            if (role === "admin")
+                                await Admin.updateOne({ email: req.body.username }, { lock: 1 });
+                            else {
+                                await Faculty.updateOne({ email: req.body.username }, { lock: 1 });
+                            }
+                            await SigninCount.updateOne({ _id: result2._id }, { count: result2.count + 1 });
+                            setTimeout(adminLockUpdate, 300000, req.body.username, req.body.role);
+
+                            const otp = generateOTP(30);
+                            console.log(otp);
+                            try {
+                                const user = new lockUser({
+                                    email: req.body.username,
+                                    link: otp,
+
+                                });
+                                const result6 = await user.save();
+                                console.log(result6);
+                                // res.send("<h1>Data recive successfully");
+                            } catch (err) {
+                                console.log(err);
+                            }
+                            const resetLink = `http://localhost:${process.env.PORT}/unlock-account?email=${req.body.username}?&role=${req.body.role}?&hash=${otp}`
+
+                            await sendEmailLock(req.body.username, resetLink);
+                            console.log("sendmialllll");
+                        }
+                        else {
+                            await SigninCount.updateOne({ _id: result2._id }, { count: result2.count + 1 });
+                        }
+                    }
+                    else {
+                        try {
+                            const user = new SigninCount({
+                                ip: req.ip,
+                                email: req.body.username,
+                                count: 1
+
+                            });
+                            const result1 = await user.save();
+                            console.log(result1);
+                        } catch (err) {
+                            console.log(err);
+
+                        }
+                    }
+                    console.log("invalid details");
+                    res.send(`<script>alert("Invalid Details"); window.history.back();</script>`);
+                }
+            }
+            else {
+                console.log("Your account has been locked");
+                res.send(`<script>alert("Your account has been locked"); window.history.back();</script>`);
+
+            }
+        }
+        else {
+            console.log("Invalid Dtails");
+            res.send(`<script>alert("Invalid Details"); window.history.back();</script>`);
+        }
+    } catch (error) {
+        console.log(err);
+        res.status(400).send("Notfound");
+    }

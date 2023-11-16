@@ -19,21 +19,22 @@ const handleExcel = async (req, res) => {
                 const saveFacultyPromises = [];
 
                 worksheet.eachRow({ includeEmpty: true }, (row, rowNumber) => {
-                    const facultyData = {
-                        name: row.getCell(1).value,
-                        institute: row.getCell(2).value,
-                        email: row.getCell(3).value,
-                        contactNo: row.getCell(4).value,
-                        education: row.getCell(5).value,
-                        instituteOfEducation: row.getCell(6).value,
-                        fieldOfSpecialization: row.getCell(7).value,
-                        courcesTaught: row.getCell(8).value,
-                        website: row.getCell(9).value,
-                        publications: row.getCell(10).value,
-                        biography: row.getCell(11).value,
-                    };
-
-                    saveFacultyPromises.push(Faculty.create(facultyData));
+                    if (rowNumber > 1) {
+                        const facultyData = {
+                            name: row.getCell(1).value,
+                            institute: row.getCell(2).value,
+                            email: row.getCell(3).value,
+                            contactNo: row.getCell(4).value,
+                            education: row.getCell(5).value,
+                            instituteOfEducation: row.getCell(6).value,
+                            fieldOfSpecialization: row.getCell(7).value,
+                            courcesTaught: row.getCell(8).value,
+                            website: row.getCell(9).value,
+                            publications: row.getCell(10).value,
+                            biography: row.getCell(11).value,
+                        };
+                        saveFacultyPromises.push(Faculty.create(facultyData));
+                    }
                 });
 
                 // Wait for all faculty documents to be saved before deleting the file

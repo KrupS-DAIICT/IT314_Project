@@ -12,7 +12,7 @@
   <header>
     <h1>FacultyHub</h1>
     <nav>
-      <a href="#">Home</a>
+      <a href="/home">Home</a>
       <a href="#">University</a>
       <a href="#">About Us</a>
       <a href="#">Login/Sign up</a>
@@ -24,8 +24,8 @@
     <section id="sign_up">
       <form action="/signin" method="POST">
         <div class="radio">
-          <p><input class="rb" type="radio" name="role" value="admin"> Admin</p>
-          <p><input class="rb" type="radio" name="role" value="faculty"> Faculty</p>
+          <p><input class="rb" type="radio" name="role" value="admin" required> Admin</p>
+          <p><input class="rb" type="radio" name="role" value="faculty" required> Faculty</p>
         </div>
         <label for="email">Email</label><br>
         <input class="ip" type="email" name="username" placeholder="Enter your username" required><br>
@@ -38,7 +38,7 @@
         <p class="p">
           creat account? <a href="/signup">sign up</a>
           <br>
-          <a href="/resetlink">Forgot Password?</a>
+          <a href="/reset-pass">Forgot Password?</a>
         </p>
       </form>
       <img src="images/sign_in.png" alt="sign_up">
@@ -48,7 +48,7 @@
   <footer>
     <div class="left">
       <h2>Important Links</h2>
-      <a href="/">Home</a>
+      <a href="/home">Home</a>
       <a href="#">University</a>
       <a href="#">About Us</a>
       <a href="#">Login/Sign up</a>

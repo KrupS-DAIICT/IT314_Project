@@ -1,3 +1,4 @@
+require('dotenv').config();
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const validator = require('validator');
@@ -48,20 +49,6 @@ const adminSchema = new mongoose.Schema({
         }
     }]
 });
-
-// Generate Auth Token
-adminSchema.methods.generateAuthToken = async function (req, res) {
-    try {
-        const admin = this;
-        const token = jwt.sign({ _id: admin._id.toString() }, process.env.SECRET_KEY);
-        admin.tokens = admin.tokens.concat({ token: token });
-        await this.save();
-
-        return token;
-    } catch (e) {
-        res.status(400).send(e);
-    }
-}
 
 // Encrypt password before saving
 adminSchema.pre('save', async function (next) {
