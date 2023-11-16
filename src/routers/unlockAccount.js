@@ -24,7 +24,7 @@ router.get("/unlock-account", async (req, res) => {
                 await userModel.updateOne({ email: emailSlice }, { lock: false });
                 await SigninCount.deleteOne({ email: emailSlice });
                 await lockUser.deleteOne({ email: emailSlice });
-                res.send(`<script>alert(Your account is unlocked.), window.location.href = "/signin"</script>`);
+                res.redirect("/signin");
             } else {
                 return res.status(400).json({
                     message: "You have provided an invalid reset link"

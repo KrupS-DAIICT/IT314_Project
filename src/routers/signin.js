@@ -49,7 +49,7 @@ router.post("/signin", async (req, res) => {
             const token = createToken(result, role);
             res.cookie("accesstoken", token, { httpOnly: true, maxAge: limit }).status(200);
 
-            res.send(`<script>alert("You have successfully Signed in to your account"); window.location.href="/";</script>`);
+            res.redirect("/");
         } else {
             const result2 = await SigninCount.findOne({ $and: [{ ip: req.ip }, { email: username }] }).exec();
 
@@ -66,6 +66,7 @@ router.post("/signin", async (req, res) => {
                 } catch (error) {
                     log(error);
                 }
+                return;
             }
 
             if (result2.count >= 5) {

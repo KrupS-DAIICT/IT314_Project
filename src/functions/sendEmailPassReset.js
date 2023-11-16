@@ -3,11 +3,13 @@ require('dotenv').config()
 
 const sendEmailPassReset = async (mail, resetLink) => {
     var transporter = nodemailer.createTransport({
-        service: 'gmail',
+        service: process.env.EMAIL_SERVICE,
+        port: 587,
+        secure: true,
         auth: {
             user: process.env.SENDER_EMAIL,
-            pass: process.env.SENDER_PASSWORD
-        }
+            pass: process.env.SENDER_PASSWORD,
+        },
     });
 
 

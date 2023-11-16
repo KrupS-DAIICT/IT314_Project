@@ -18,21 +18,21 @@ async function registerUser(data, req, res) {
     const { adminName, email, Password, cPassword, mobile_no, university } = data;
 
     if (Password !== cPassword) {
-        return res.send({ error: "Password and Confirm Password do not match" });
+        return res.send(`<script>alert("Password and Confirm Password do not match"); window.history.back();</script>`);
     }
 
     if (!validator.isEmail(email)) {
-        return res.send({ error: "Not a valid Email" });
+        return res.send(`<script>alert("Not a valid email"); window.history.back();</script>`);
     }
 
     const userExists = await Admin.findOne({ email });
     // console.log(userExists);
 
-    if (userExists !== null && userExists.verified === true) {
+    if (userExists && userExists.verified === true) {
         return res.send(`<script>alert("Email is already registered"); window.history.back(); </script>`);
     }
     else if (userExists && userExists.verified === false) {
-        return res.send(`<script>alert("Verification is incomplete for this user. Redirecting to verification page."); window.history.back(); </script>`)
+        return res.send(`<script>alert("Verification is incomplete for this user. Redirecting to verification page."); window.location.href="/signup/verifyotp"; </script>`)
     }
 
     const OTP = generateAndStoreOTP(email, 6);

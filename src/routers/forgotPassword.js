@@ -1,11 +1,14 @@
 const express = require('express'); // require express
+const bcrypt = require("bcrypt");
+const { log } = require('console');
 const Admin = require("../models/admin"); // require admin.js
 const Faculty = require("../models/faculty"); // require faculty.js
 const router = express.Router(); // require router
 const forgotPass = require("../models/forgotPass");
 const sendEmailPassReset = require("../functions/sendEmailPassReset");
-const { log } = require('console');
 const generateOTP = require('../functions/generateOTP');
+
+const saltRounds = 10;
 
 router.get("/resetlink", async (req, res) => {
     res.render("reset_email");
@@ -118,7 +121,8 @@ router.post("/reset-pass/:id", async (req, res) => {
             });
         }
 
-        await db.updateOne({ email }, { password });
+        const temp = await db.findOneAndUpdate({ email }, { password: await bcrypt.hash(password, saltRounds) });
+        log(temp);
         await forgotPass.deleteOne({ email });
 
         return res.send(`<script>alert("Password updated"); window.location.href = "/signin" </script>`);
