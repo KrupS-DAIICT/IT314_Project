@@ -1,4 +1,4 @@
- *{
+  *{
     margin: 0;
     padding: 0;
     text-decoration: none;
@@ -59,7 +59,7 @@ h1{
     padding-top: 10px;
 }
 
-.container{
+.content_box{
     width: 100%;
     background-color: rgb(255, 255, 255);  
 
@@ -225,3 +225,143 @@ footer{
     width: 100%;
 }
 }
+
+
+
+
+
+/* available internships */
+.content_box .content{
+  padding: 15px 10% 15px 10%;
+}
+.content_box .imgBx {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-right: 0.5vw;
+    border-color: 1px solid black;
+    transition: .3s linear;
+}
+
+.content_box .imgBx img {
+    border: 1px solid black;
+    border-radius: 1vw;
+    position: relative;
+    width: 5vw;
+    height: 5vw;
+
+}
+
+.content_box .details {
+   
+    width: 90%;
+    height: 2vw;
+    box-sizing: border-box;
+}
+
+.content_box .details h2{
+    margin: 0;
+    padding: 0;
+    font-size: 1vw;
+    line-height: 1em;
+    color: #444;
+}
+
+.content_box .details h2 span {
+    font-size: 0.8vw;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #999;
+}
+
+.content_box .details a img{
+    width: 1vw;
+    height: 1vw;
+    border-radius: 0.2vw;
+    background-color: white;
+    float: right;
+    border: 1px solid black;
+    margin-left: auto;
+    margin-top: 0;
+    display: flex;
+}
+.content_box .details a img:hover{
+    color: rgb(187, 185, 199);
+    background-color: rgb(253, 251, 251);
+}
+.content_box .content1 .In_card .button .btn{
+    
+    margin: 0.6vw;
+    height: 1.7vw;
+    width: 5vw; 
+    font-size: 80%; 
+    background:  #000000;
+    color: #ffffff;
+    cursor: pointer;
+    border-radius: 3px;
+    outline: none;
+    display: flex;
+    justify-content: center; 
+}
+
+
+   .content_box .content1 .In_card{
+    border: 1px solid black;
+    display: inline-flex;
+    margin: 0.5vw;
+    padding: 0.5vw;
+    border-radius: 1vw;
+    width: 48%;
+    justify-content: space-between;
+}
+/* responsive for internships */
+@media (max-width:768px){
+    .content_box .content1 .In_card{
+        width: 65vw;
+        height: 15vw;
+        justify-content: center;
+        margin:15px 0px;
+        margin-left: 10%;
+    }
+    .content_box .content1 .In_card .button .btn{
+    padding: 0.1vw ; 
+    float: left;
+    height: 4vw;
+    width: 8vw; 
+    font-size: 60%; 
+    background:  #000000;
+    color: #ffffff;
+    cursor: pointer;
+    border-radius: 3px;
+    
+    
+    }
+    .content_box .details h2{
+
+        padding: 1vw;
+        font-size: 3vw;
+        color: #444;
+    }
+    
+    .content_box .details h2 span {
+        padding-top: 5vw;
+        font-size: 2.5vw;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        color: #999;
+    }
+    .content_box .imgBx img{
+        width: 13vw;
+        height: 13vw;
+        padding: 0;
+
+    }
+    .content_box .details a img{
+        width: 4vw;
+        height: 4vw;
+    }
+    
+
+}
+
