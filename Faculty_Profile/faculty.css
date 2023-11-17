@@ -304,7 +304,19 @@ footer{
     display: flex;
     justify-content: center; 
 }
+.btn1 {
+    background-color: rgb(255, 255, 255); 
+    color: rgb(0, 0, 0); 
+    font-size: 20px; 
+    cursor: pointer;
+    float: right;
+    border: 0.5px solid black;
+    border-radius: 0.2vw;
+    padding-right: 3px;
+    padding-left: 3px;
+   margin-top: 5px;
 
+  }
 
    .content_box .content1 .In_card{
     border: 1px solid black;
@@ -358,8 +370,22 @@ footer{
 
     }
     .content_box .details a img{
-        width: 4vw;
+        width: 4.4vw;
         height: 4vw;
+    }
+    .btn1 .fa-trash{
+        width: 2.5vw;
+        height: 2.5vw;
+        padding-right: 8vw;
+    }
+    .btn1{
+        margin-top: -1.5vw;  
+        margin-right: 1vw; 
+        padding-left: 4px;
+        width: 4.7vw;
+        height: 4.8vw;
+        font-size: 3.2vw;
+    
     }
     
 
