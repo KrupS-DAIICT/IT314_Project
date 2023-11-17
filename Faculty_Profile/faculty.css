@@ -1,4 +1,4 @@
-  *{
+ *{
     margin: 0;
     padding: 0;
     text-decoration: none;
@@ -276,8 +276,8 @@ footer{
 }
 
 .content_box .details a img{
-    width: 1vw;
-    height: 1vw;
+    width: 1.6vw;
+    height: 1.6vw;
     border-radius: 0.2vw;
     background-color: white;
     float: right;
@@ -301,8 +301,9 @@ footer{
     cursor: pointer;
     border-radius: 3px;
     outline: none;
-    display: flex;
+    display: inline-flex;
     justify-content: center; 
+    
 }
 .btn1 {
     background-color: rgb(255, 255, 255); 
@@ -317,6 +318,7 @@ footer{
    margin-top: 5px;
 
   }
+
 
    .content_box .content1 .In_card{
     border: 1px solid black;
@@ -387,7 +389,10 @@ footer{
         font-size: 3.2vw;
     
     }
+
     
 
 }
 
+  
+  
