@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FacultyHub</title>
+    <link rel="stylesheet" href="colleges.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+</head>
+
+<body>
+    {{>header}}
+
+    <main class="col">
+        {{>search}}
+
+        <h2>Registered Universities/Colleges</h2>
+        <div id="colleges">
+            <a href="/faculty">
+                <div class="college">
+                    <img src="da_logo.png" alt="daiict" class="logo">
+                    <p class="name">DAIICT</p>
+                </div>
+            </a>
+            <a href="/admin_profile">
+            <div class="college">
+                <img src="ni_logo.png" alt="nirma university" class="logo">
+                <p class="name">NIRMA</p>
+            </div>
+            </a>
+            <a href="#">
+            <div class="college">
+                <img src="ii_logo.png" alt="IIT Gandhinagar" class="logo">
+                <p class="name">IIT Gandhinagar</p>
+            </div>
+            </a>
+            <a href="#">
+            <div class="college">
+                <img src="pd_logo.png" alt="PDEU" class="logo">
+                <p class="name">PDEU</p>
+            </div>
+            </a>
+        </div>
+    </main>
+
+    {{>footer}}
+</body>
+
+</html>

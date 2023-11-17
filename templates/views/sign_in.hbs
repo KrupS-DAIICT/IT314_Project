@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FacultyHub</title>
+  <link rel="stylesheet" href="hf.css">
+  <link rel="stylesheet" href="sign_in.css">
+</head>
+
+<body>
+  {{> header }}
+
+  <main class="mup">
+    <h2>Sign in</h2>
+    <section id="sign_up" class="in">
+      <form action="/signin" method="post">
+        <div class="radio">
+          <p><input class="rb" type="radio" name="role" value="admin"> Admin</p>
+          <p><input class="rb" type="radio" name="role" value="faculty"> Faculty</p>
+        </div>
+        <label for="email">Email</label>
+        <input class="ip" type="email" name="email" required>
+        <label for="password">Password</label>
+        <input class="ip" type="password" name="Password" required>
+        <div class="bt">
+          <button type="submit" value="Submit" id="green">Submit</button>
+          <button type="reset" value="reset" id="red">Reset</button>
+        </div>
+        <p class="p">
+          Don't have an account? <a href="/">sign up.</a>
+        </p>
+        <a href="#" id="forgot">forgot password</a>
+      </form>
+      <img id="in" src="sign_in.png" alt="sign_up">
+    </section>
+  </main>
+
+{{>footer}}
+</body>
+
+</html>
