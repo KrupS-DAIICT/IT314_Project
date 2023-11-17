@@ -5,12 +5,14 @@ const bcrypt = require('bcrypt');
 const Admin = require("../models/admin"); // require admin.js
 const requireAuth = require("../functions/requireAuth");
 const Faculty = require("../models/faculty"); // require faculty.js
+const path = require('path');
 const router = express.Router(); // require router
 
 const saltRounds = 10;
 
 router.get("/change-password", requireAuth, (req, res) => {
-    res.render("changepassword");
+    filePath = path.join(__dirname, '../../templates/views/', 'changepassword');
+    res.render(filePath);
 })
 
 router.post("/change-password", async (req, res) => {

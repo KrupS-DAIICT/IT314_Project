@@ -12,7 +12,7 @@ const upload = multer({ storage: storage });
 
 router.get("/signup", async (req, res) => {
     // req.session.signupStep = 1;
-    const filePath = path.join(__dirname, "../../views", "signup");
+    const filePath = path.join(__dirname, "../../templates/views", "signup");
     res.render(filePath);
 });
 

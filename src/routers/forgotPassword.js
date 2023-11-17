@@ -7,11 +7,13 @@ const router = express.Router(); // require router
 const forgotPass = require("../models/forgotPass");
 const sendEmailPassReset = require("../functions/sendEmailPassReset");
 const generateOTP = require('../functions/generateOTP');
+const path = require('path');
 
 const saltRounds = 10;
 
 router.get("/resetlink", async (req, res) => {
-    res.render("reset_email");
+    const filePath = path.join(__dirname, '../../templates/views', 'reset_email');
+    res.render(filePath);
 });
 
 router.get("/reset-pass", async (req, res) => {

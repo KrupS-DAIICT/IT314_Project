@@ -63,7 +63,27 @@ const facultySchema = new mongoose.Schema({
     department: {
         type: String,
         default: ""
-    }
+    },
+    internship: [
+        {
+            name: {
+                type: String,
+                default: ""
+            },
+            description: {
+                type: String,
+                default: ""
+            },
+            field: {
+                type: String,
+                default: ""
+            },
+            duration: {
+                type: String,
+                default: ""
+            },
+        }
+    ]
 });
 
 // Encrypt password before saving

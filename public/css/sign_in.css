@@ -1,0 +1,148 @@
+
+.mup h2{
+    padding: 1vw 0 0.5vw 0; 
+    text-align: center;
+}
+
+#sign_up{
+    display: flex;
+    justify-content: space-around;
+    background-color: rgb(13, 8, 52);
+    color: white;
+    margin: 1vh 7vw 1vh 7vw;
+    border: 1px solid rgb(13, 8, 52);
+    border-radius: 20px;
+}
+section{
+    padding: 3vw;
+}
+img{
+    height: 50vh;
+    width: 30vw;
+    border-radius: 20px;
+}
+
+form{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 35vw;
+    height: 50vh;
+}
+label{
+    font-size: 3vh;
+}
+.ip{
+    margin: 1vh;
+    width: 30vw;
+    height: 3.2vh;
+    border-radius: 4px ;
+    border:2px solid rgb(247, 247, 247);
+    border-radius: 20px;
+    padding:0.7vw 1vw;
+    font-size: 20px;
+}
+.radio{
+    display: flex;
+    font-size: 20px;
+    margin: .5vh;
+}
+.radio p{
+    padding: 0px 5vw 0 0px;
+    margin: 0;
+}
+label,input,.bt{
+    padding: 0.8vw 0;
+}
+input[type=radio] {
+    background-color: #ffffff;
+    }
+input[type=radio] {
+    -ms-transform: scale(1.5); /* IE 9 */
+    -webkit-transform: scale(1.5); /* Chrome, Safari, Opera */
+    transform: scale(1.5);
+    margin: 0.3vw;
+    }
+    
+.p{
+    font-size: 15px;
+    margin-right: 3vh;
+    margin-bottom: 0;
+    text-align: center;
+}
+
+.p a{
+    color:yellow;
+    text-decoration: none;
+}
+.p a:hover{
+    color: red;
+}
+
+.p a:active{
+    color:rgb(0, 0, 0);
+}
+.bt{
+    text-align: center;
+    margin-right: 3vw;
+}
+
+.bt button{
+    width: 7vw;
+    height: 5vh;
+    border: 1px solid rgb(13, 8, 52);
+    border-radius: 2vw;
+    cursor: pointer;
+    transition-duration: 0.4s;
+    box-shadow: 0 2px 4px rgb(87, 105, 107);
+    margin: 0.5vw 3vw;
+}
+#green:hover{
+    background-color: green;
+    font-weight: bold;
+}
+#red:hover{
+    background-color: red;
+    font-weight: bold;
+}
+.bt button:active{
+    box-shadow: 0 0 2px darkslategray;
+    transform: translateY(2px);
+}
+#forgot{
+    text-align: center;
+    color: aqua;
+    margin-right: 3vh;
+    text-decoration: none;
+}
+#forgot:hover{
+    color: red;
+}
+#forgot:active{
+    color: black;
+}
+
+@media (max-width: 800px) {
+    #sign_up {
+      flex-direction: column-reverse;
+      align-items: center;
+    }
+  
+    img {
+      height: auto;
+      width: 80%;
+      margin: 20px;
+    }
+  
+    form {
+      width: 80%;
+    }
+    input.ip {
+        width: 60vw;
+      }
+      .bt button{
+        width: 13vh;
+        border-radius: 20px;
+        margin-bottom: 5px;
+      }
+  }

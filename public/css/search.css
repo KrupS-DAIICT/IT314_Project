@@ -1,0 +1,58 @@
+#search{
+  display: flex;
+  justify-content: center;
+}
+#searchForm{
+  display: flex;
+  justify-content: center;
+  margin-top: 1vh;
+  background-color: black;
+  padding: 0.4vw 1vw 0.2vw 1vw;
+  border: 1px solid black;
+  border-radius: 50px;
+  box-shadow: 0 2px 4px rgb(87, 96, 163);;
+}
+.main_part{
+  margin: 0 1vw;
+  color: white;
+}
+#searchForm input{
+  width: 13vw;
+  border-radius: 20px;
+  padding-left: 1vw;
+  color: black;
+  opacity: 85%;
+}
+#searchForm input:hover{
+  opacity: 100%;
+}
+#university select{
+  width: 10vh;
+  height: 25px;
+  border-radius: 10px;
+  text-align: center;
+  margin: 0 1vw 0 0.3vw;
+}
+#course select{
+  width: 25vh;
+  height: 25px;
+  border-radius: 10px;
+  text-align: center;
+  margin: 0 1vw 0 0.3vw;
+}
+#searchForm button{
+  height: 30px;
+  width: 50px;
+  border: 1px solid black;
+  border-radius: 100px;
+  background-color: black;
+  color: white;
+}
+#searchForm button:hover{
+  color: black;
+  background-color: white;
+}
+#searchForm button:active{
+  background-color: blue;
+  color: black;
+}

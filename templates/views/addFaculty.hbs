@@ -5,30 +5,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FacultyHub</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../css/addFaculty.cc
+    ">
 </head>
 
 <body>
-    <header>
-        <h1>FacultyHub</h1>
-        <nav>
-            <a href="#">Home</a>
-            <a href="#">University</a>
-            <a href="#">About Us</a>
-            <a href="#">Login/Sign up</a>
-        </nav>
-    </header>
+    {{>header}}
 
     <main>
         <div class="container">
             <form action="" class="search-bar">
                 <button type="search">
-                    <img src="images/pngwing.com.png">
+                    <img src="../../images/pngwing.com.png">
                 </button>
                 <input type="text" placeholder="Search with university name and faculty name or area of intelligence"
                     name="q">
                 <button type="filter">
-                    <img src="images/filter.png">
+                    <img src="../../images/filter.png">
                 </button>
             </form>
 
@@ -51,9 +44,6 @@
                 <label for="Education">Education*</label><br>
                 <input class="ip" type="text" name="education"><br>
 
-                <label for="Institude of Education">Institude of Education*</label><br>
-                <input class="ip" type="text" name="institudeOfEducation"><br>
-
                 {{!-- <label for="Address">Address*</label><br>
                 <input class="Address" type="text" name="address"><br> --}}
 
@@ -68,9 +58,6 @@
 
                 <label for="Publications">Publications</label><br>
                 <input class="ip" type="text" name="publications"><br>
-
-                <label for="Biography">Biography*</label><br>
-                <input class="Biography" type="text" name="biography"><br>
 
                 <label for="Excle">Excel</label><br>
                 <input class="Excel" type="file" name="excelFile"><br>
@@ -87,20 +74,7 @@
         </section>
     </main>
 
-    <footer>
-        <div class="left">
-            <h2>Important Links</h2>
-            <a href="#">Home</a>
-            <a href="#">University</a>
-            <a href="#">About Us</a>
-            <a href="#">Login/Sign up</a>
-        </div>
-        <div class="right">
-            <h2>About the platform</h2>
-            <p>This platform provides information of professional achievement and contact of faculties of multiple
-                universities to help knowledge seekers and professionals to connect.</p>
-        </div>
-    </footer>
+    {{>footer}}
 </body>
 
 </html>

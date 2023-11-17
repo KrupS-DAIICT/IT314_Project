@@ -16,7 +16,7 @@ const { log } = require('console');
 const limit = 10 * 24 * 60 * 60;
 
 router.get("/signin", async (req, res) => {
-    const filePath = path.join(__dirname, "../../views", "signin");
+    const filePath = path.join(__dirname, "../../templates/views", "sign_in");
     res.render(filePath);
 });
 
@@ -24,6 +24,7 @@ router.post("/signin", async (req, res) => {
     // if already signed in
 
     const { role, username, password } = req.body;
+    log(role, username, password);
 
     try {
         const db = role === 'admin' ? Admin : Faculty;
@@ -31,11 +32,11 @@ router.post("/signin", async (req, res) => {
 
         if (!result) {
             log("Result not found");
-            handleInvalidDetails(res);
+            await handleInvalidDetails(res);
             return;
         }
 
-        if (result.lock) {
+        if (result && result.lock) {
             handleAccountLock(username, role, result, req, res);
             return;
         }
@@ -90,7 +91,7 @@ router.post("/signin", async (req, res) => {
 
 });
 
-function handleInvalidDetails(user, res) {
+async function handleInvalidDetails(user, res) {
     log("Invalid details 1");
     res.send(`<script>alert("Invalid Details, remaining attempts before your account gets locked: ${5 - user.count}"); window.history.back();</script>`);
 }

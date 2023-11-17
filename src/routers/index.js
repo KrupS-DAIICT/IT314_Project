@@ -6,7 +6,7 @@ const requireAuth = require("../functions/requireAuth");
 
 router.get("/", async (req, res) => {
     // req.session.signupStep = 1;
-    const filePath = path.join(__dirname, "../../views", "index");
+    const filePath = path.join(__dirname, "../../templates/views/", "index");
     res.render(filePath);
 });
 

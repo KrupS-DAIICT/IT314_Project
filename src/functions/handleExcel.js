@@ -60,7 +60,7 @@ const handleExcel = async (req, res) => {
                             // this values changes according to the columns of excel File
                             // 1 based indexing
                             name: row.getCell(1).value,
-                            institute: 'IIT Gandhinagar',
+                            institute: 'Indian Institute of Technology Gandhinagar (IITGN) (IIT Gandhinagar)',
                             email: row.getCell(5).value,
                             address: row.getCell(7).value,
                             password: generateRandomPassword(),
@@ -68,8 +68,8 @@ const handleExcel = async (req, res) => {
                             website: row.getCell(6).value,
                             publications: row.getCell(8).value,
                             // contactNo: row.getCell(3).value,
-                            // specialization: row.getCell(8).value,
-                            // coursesTaught: row.getCell(10).value,
+                            // specialization: row.getCell(7).value,
+                            // coursesTaught: row.getCell(9).value,
                             department: row.getCell(3).value,
                         };
 
@@ -107,7 +107,7 @@ const handleExcel = async (req, res) => {
                     });
             })
             .catch((err) => {
-                console.log(err);
+                console.log(err, "hello");
                 res.status(500).send("Error reading Excel file");
             });
     } catch (e) {
@@ -116,4 +116,4 @@ const handleExcel = async (req, res) => {
     }
 };
 
-module.exports = handleExcel;
+module.exports = { handleExcel, generateRandomPassword };

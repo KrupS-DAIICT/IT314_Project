@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.get("/signup/otpverified", async (req, res) => {
     // console.log(`signupStep: ${req.session.signupStep} dest: 3`);
-    const filePath = path.join(__dirname, "../../views", "otpverified");
+    const filePath = path.join(__dirname, "../../templates/views", "otpverified");
     res.render(filePath);
 });
 

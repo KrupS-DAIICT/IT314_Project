@@ -5,9 +5,11 @@ const { log } = require('console');
 const Faculty = require('../models/faculty');
 const Math = require('math');
 const setOption = require('../functions/setOption');
+const path = require('path');
 
 router.get("/search", setOption, async (req, res) => {
-    res.render("search_faculty");
+    const filePath = path.join(__dirname, '../../templates/views/', 'search_faculty');
+    res.render(filePath);
 });
 
 router.get('/search-faculty', setOption, async (req, res) => {

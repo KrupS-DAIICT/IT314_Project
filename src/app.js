@@ -1,4 +1,6 @@
 require('dotenv').config();
+require('./db/conn');
+
 const express = require('express');
 const session = require('express-session');
 const path = require('path');
@@ -7,12 +9,17 @@ const hbs = require('hbs');
 const cookieparser = require('cookie-parser');
 const checkUser = require('./functions/checkUser');
 
-require('./db/conn');
-
 const app = express();
-
 const port = process.env.PORT || 8000;
+
 const static_path = path.join(__dirname, "../public");
+const templatePath = path.join(__dirname, "../templates/views");
+const partialPath = path.join(__dirname, "../templates/partials");
+
+app.use(express.static(static_path));
+app.set("view engine", "hbs");
+app.set("views", templatePath);
+hbs.registerPartials(partialPath);
 
 app.use(session({
     secret: process.env.SECRET_KEY,
@@ -26,9 +33,6 @@ app.use(checkSignupStep); // use checkSignupStep
 app.use(express.json());
 app.use(cookieparser());
 app.use(express.urlencoded({ extended: false }));
-app.use(express.static(static_path));
-app.set("view engine", "hbs");
-app.set("views", "./views");
 
 hbs.registerHelper('eq', function (a, b) {
     return a === b;
@@ -51,6 +55,9 @@ app.use(signinRouter); // use signin.js
 // routing - signup
 const signupRouter = require("./routers/signup"); // require signup.js
 app.use(signupRouter); // use signup.js
+
+const addUniversityRouter = require("./routers/addUniversity"); // require signup.js
+app.use(addUniversityRouter); // use signup.js
 
 // routing - verifyotp
 const verifyotpRouter = require("./routers/verifyotp"); // require verifyotp.js

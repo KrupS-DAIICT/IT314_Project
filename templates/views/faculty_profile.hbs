@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FacultyHub</title>
+  <link rel="stylesheet" href="../css/faculty_profile.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script>
+
+
+    function showSubmitButton() {
+      document.getElementById("submitBtn").style.display = "block";
+      document.getElementById("editBtn").style.display = "none";
+      document.getElementById("id1").style.display = "block";
+      document.getElementById("id2").style.display = "block";
+      var form = document.getElementById("myForm");
+      var elements = form.elements;
+      for (var i = 0; i < elements.length; i++) {
+        elements[i].disabled = false;
+      }
+      var upload = document.getElementById("myFile");
+      upload.disabled = false;
+
+      var e1 = document.getElementById("f1");
+      var el1s = e1.elements;
+      for (var i = 0; i < el1s.length; i++) {
+        el1s[i].disabled = false;
+      }
+
+      var e2 = document.getElementById("f2");
+      var el2s = e2.elements;
+      for (var i = 0; i < el2s.length; i++) {
+        el2s[i].disabled = false;
+      }
+    }
+
+    function hideSubmitButton() {
+      document.getElementById("editBtn").style.display = "block";
+      document.getElementById("submitBtn").style.display = "none";
+
+      document.getElementById("id1").style.display = "none";
+      document.getElementById("id2").style.display = "none";
+      var form = document.getElementById("myForm");
+      var elements = form.elements;
+      for (var i = 0; i < elements.length; i++) {
+        elements[i].disabled = true;
+      }
+      var e1 = document.getElementById("f1");
+      var el1s = e1.elements;
+      for (var i = 0; i < el1s.length; i++) {
+        el1s[i].disabled = true;
+      }
+
+      var e2 = document.getElementById("f2");
+      var el2s = e2.elements;
+      for (var i = 0; i < el2s.length; i++) {
+        el2s[i].disabled = true;
+      }
+
+      var upload = document.getElementById("myFile");
+      upload.disabled = true;
+      var edit = document.getElementById("editBtn");
+      edit.disabled = false;
+    }
+  </script>
+</head>
+
+<body>
+  {{>header}}
+  <main>
+    <h1>Profile</h1>
+    <div class="container-fluid" id="main">
+      <div class="col-lg-4 col-md-8 m-auto mt-5" id="main1">
+        <input disabled type="file" id="myFile" name="filename" style="display: none;">
+        <label for='myFile'><img class="img-fluid" id="img1" src="../../images/sign_up.png"></label>
+      </div>
+      <div class="col-lg-6 m-auto" id="main2">
+        <div class="card-body">
+          <form id="myForm" action="/faculty-profile-update/{{profile._id}}" method="post">
+            <div>
+              <label>Faculty Name</label>
+              <input disabled type="text" class="form-control" value="{{profile.name}}">
+            </div>
+            <div>
+              <label>Institute</label>
+              <input disabled type="text" class="form-control" value="{{profile.institute}}">
+            </div>
+            <div>
+              <label>Department</label>
+              <input disabled type="text" class="form-control" value="{{profile.department}}">
+            </div>
+            <div>
+              <label>Email-Address</label>
+              <input disabled type="email" class="form-control" value="{{profile.email}}">
+            </div>
+            <div>
+              <label>Contact No</label>
+              <input disabled type="text" class="form-control" value="{{profile.contactNo}}">
+            </div>
+            <div>
+              <label>Education</label>
+              <input disabled type="text" class="form-control" value="{{profile.education}}">
+            </div>
+            <div>
+              <label>Address</label>
+              <input disabled type="text" class="form-control" value="{{profile.address}}">
+            </div>
+            <div>
+              <label>Field of specialization</label>
+              <input disabled type="text" class="form-control" value="{{profile.specialization}}">
+            </div>
+            <div>
+              <label>Courses Taught</label>
+              <input disabled type="text" class="form-control" value="{{profile.coursesTaught}}">
+            </div>
+            <div>
+              <label>Website</label>
+              <input disabled type="text" class="form-control" value="{{profile.website}}">
+            </div>
+            <div>
+              <label>Publications</label>
+              <input disabled type="text" class="form-control" id="larger-input" value="{{profile.publications}}">
+            </div>
+            <div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="tab_box">
+        <button class="tab_btn">Add Internships</button>
+        <button class="tab_btn">Internships</button>
+      </div>
+    </div>
+    <div class="container-fluid" id="intern_project">
+      <div class="col-lg-9 col-md-9 m-auto content_box">
+        <div class="content">
+          <div class="card-body">
+            <form id=f1 action="/faculty-profile/:id/add-internship" method="post">
+              <h2 class="text-center">Add Internships</h2>
+              <div>
+                <label>Name</label>
+                <input disabled type="text" class="form-control" , name="title">
+              </div>
+              <div>
+                <label>Type</label>
+                <input disabled type="text" class="form-control" name="type">
+              </div>
+              <div>
+                <label>Duration</label>
+                <input disabled type="text" class="form-control" name="duration">
+              </div>
+              <div>
+                <label>Description</label>
+                <input disabled type="text" class="form-control" name="desc">
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="content_box">
+        <div class="content">
+          <h2 class="text-center">Available Internships</h2>
+          <div class="content1">
+            <div class="In_card">
+              <div class="imgBx">
+                <img src="OIP.jpeg" alt="">
+              </div>
+              <div class="details">
+                <div class="card">
+                  <h2>Research Intern <a href="mailto:202101108@daiict.ac.in">
+                      <img src="avatar.png" alt=""></a><br>
+                    <span>Dr.Kaushal </span>
+                  </h2>
+                  <div class="button">
+                    <input type="submit" value="Apply" class="btn">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="In_card">
+              <div class="imgBx">
+                <img src="OIP.jpeg" alt="">
+              </div>
+              <div class="details">
+                <div class="card">
+                  <h2>Research Intern <a href="mailto:202101108@daiict.ac.in">
+                      <img src="avatar.png" alt=""></a><br>
+                    <span>Dr.Kaushal </span>
+                  </h2>
+                  <div class="button">
+                    <input type="submit" value="Apply" class="btn">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="In_card">
+              <div class="imgBx">
+                <img src="OIP.jpeg" alt="">
+              </div>
+              <div class="details">
+                <div class="card">
+                  <h2>Research Intern <a href="mailto:202101108@daiict.ac.in">
+                      <img src="avatar.png" alt=""></a><br>
+                    <span>Dr.Kaushal </span>
+                  </h2>
+                  <div class="button">
+                    <input type="submit" value="Apply" class="btn">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="butn">
+            <button type="button" class="btn btn-outline-secondary" id="editBtn"
+              onclick="showSubmitButton()">Edit</button>
+            <button type="button" class="btn btn-primary" id="submitBtn" style="display: none ;"
+              onclick="hideSubmitButton()">Submit</button>
+          </div>
+        </div>
+      </div>
+
+
+      <script>
+        const tabs = document.querySelectorAll('.tab_btn');
+        const all_content = document.querySelectorAll('.content');
+        ;
+
+
+        tabs.forEach((tab, index) => {
+          tab.addEventListener('click', (e) => {
+            tabs.forEach(tab => { tab.classList.remove('active') });
+            tab.classList.add('active');
+
+            all_content.forEach(content => { content.classList.remove('active') })
+            all_content[index].classList.add('active');
+
+          })
+        })
+
+      </script>
+  </main>
+  {{>footer}}
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>

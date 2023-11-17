@@ -1,0 +1,57 @@
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+  integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script>
+  function toggleOptions() {
+    var optionsDiv =
+      document.getElementById("options-container"); if (optionsDiv.style.display ===
+        "none") { optionsDiv.style.display = "flex"; } else {
+      optionsDiv.style.display
+        = "none";
+    }
+  }
+</script>
+
+<link rel="stylesheet" href="../css/style.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+  integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+  crossorigin="anonymous" referrerpolicy="no-referrer" />
+<nav class="navbar navbar-dark navbar-expand-lg px-5">
+  <div class="container-fluid">
+    <a class="navbar-brand text-light fw-bolder fs-4" href="#">FacultyHub</a>
+    <button class="navbar-toggler nav_bt" type="button" data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+      aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0 fw-semibold grid gap-3">
+        <li>
+          <a href="/" class="other_three">Home</a>
+        </li>
+        <li>
+          <a href="/search" class="other_three">University</a>
+        </li>
+        <li>
+          <a href="/aboutus" class="other_three">About Us</a>
+        </li>
+
+        <li style="margin-right: 35px;">
+          <button onclick="toggleOptions()" id="icon_s"><i class="far fa-grin-alt" style="font-size:36px"></i></button>
+          <div id="options-container">
+            <a href="#" class="options_bt">Log Out</a>
+            <a href="#" class="options_bt">Delete Account</a>
+            <a href="#" class="options_bt">Edit Profile</a>
+          </div>
+        </li>
+        <li class="login_bt">
+          <a href="/signin">Sign in</a>
+        </li>
+        <li class="login_bt">
+          <a href="/signup">Sign up</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

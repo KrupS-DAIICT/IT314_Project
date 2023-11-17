@@ -9,7 +9,7 @@ const createToken = require("../functions/createToken");
 
 router.get("/signup/verifyotp", async (req, res) => {
     // console.log(`signupStep: ${req.session.signupStep} dest: 2`);
-    const filePath = path.join(__dirname, "../../views", "verifyotp");
+    const filePath = path.join(__dirname, "../../templates/views", "verifyotp");
     res.render(filePath);
 });
 

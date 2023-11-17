@@ -14,6 +14,10 @@ router.get("/admin-profile/:id", requireAuth, async (req, res) => {
     const profileId = req.params.id;
     const token = req.cookies.accesstoken;
     const data = jwt.verify(token, process.env.SECRET_KEY);
+    log(data, token, profileId);
+    log(profileId == data._id);
+    log(data.role === 'admin');
+
 
     if (data && profileId == data._id && data.role === 'admin') {
         try {
@@ -52,12 +56,12 @@ router.post('/admin-profile-update/:id', upload.single('image'), async (req, res
         const result = await Admin.updateOne({ _id: profileId }, {
             name: req.body.name,
             email: req.body.email,
-            mobile_no: req.body.mobile_no,
+            phone: req.body.mobile_no,
             university: req.body.eniversity
         });
         // log(result);
 
-        return res.send(`<script>alert("Data received successfully"); window.location.href = "/";</script>`)
+        return res.send(`<script>alert("Data saved successfully"); window.location.href="/admin-profile/${profileId}";</script>`);
     } catch (error) {
         console.log(err)
         return res.status(500).json({
