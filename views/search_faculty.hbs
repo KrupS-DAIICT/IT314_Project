@@ -27,7 +27,7 @@
     </header>
 
 
-    <form id="searchForm" action="/search-faculty" method="post">
+    <form id="searchForm" action="/search-faculty" method="get">
         <input type="text" placeholder="Search.." name="search2" value="{{searchdata.search_query}}">
         <br>
         {{!-- <label for="location">location:</label>
@@ -39,10 +39,8 @@
         <label for="university">University:</label>
         <select name="university" id="university">
             <option value="all">ALL</option>
-            <option value="all">daiict</option>
-            <option value="all">nirma</option>
-            {{!-- <option value="daiict" {{#if (eq serachdata.university2 "daiict")}}selected{{/if}}>daiict</option>
-            <option value="nirma" {{#if (eq serachdata.university2 "nirma")}}selected{{/if}}>nirma</option> --}}
+            <option value="daiict" {{#if (eq serachdata.university2 "daiict" )}}selected{{/if}}>daiict</option>
+            <option value="nirma" {{#if (eq serachdata.university2 "nirma" )}}selected{{/if}}>nirma</option>
 
             {{#each universityoption}}
                 <option value="{{this.university}}" {{#if (eq ../searchdata.university

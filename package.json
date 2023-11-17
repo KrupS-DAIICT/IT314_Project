@@ -11,6 +11,7 @@
   "author": "Krupesh Parmar",
   "license": "ISC",
   "dependencies": {
+    "axios": "^1.6.2",
     "bcrypt": "^5.1.1",
     "console": "^0.7.2",
     "cookie-parser": "^1.4.6",

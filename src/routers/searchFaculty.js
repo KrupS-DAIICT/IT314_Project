@@ -4,17 +4,16 @@ const router = express.Router(); // require router
 const { log } = require('console');
 const Faculty = require('../models/faculty');
 const Math = require('math');
+const setOption = require('../functions/setOption');
 
-router.get("/search-faculty", async (req, res) => {
+router.get("/search", setOption, async (req, res) => {
     res.render("search_faculty");
 });
 
-router.post('/search-faculty', async (req, res) => {
-    const currentUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
+router.get('/search-faculty', setOption, async (req, res) => {
     const course = req.query.course;
     const search_query = req.query.search2;
     const university = req.query.university;
-    log(currentUrl, course, search_query, university);
     // Pagination parameters
     // const perPage = 6; // Number of results per page
     // const page = parseInt(req.query.page) || 1; // Current page, default to 1

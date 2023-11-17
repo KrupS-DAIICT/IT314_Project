@@ -30,6 +30,10 @@ app.use(express.static(static_path));
 app.set("view engine", "hbs");
 app.set("views", "./views");
 
+hbs.registerHelper('eq', function (a, b) {
+    return a === b;
+});
+
 app.get('*', checkUser);
 
 // routing - Home Page

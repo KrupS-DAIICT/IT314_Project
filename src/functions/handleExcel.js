@@ -3,6 +3,41 @@ const ExcelJS = require("exceljs");
 const Faculty = require("../models/faculty");
 const fs = require("fs");
 const path = require("path");
+const axios = require('axios');
+const { log } = require("console");
+// const generateRandomPassword = require("../functions/generateRandomPassword")
+
+function generateRandomPassword() {
+    const lowercaseLetters = 'abcdefghijklmnopqrstuvwxyz';
+    const uppercaseLetters = lowercaseLetters.toUpperCase();
+    const numbers = '0123456789';
+    const specialCharacters = '!@#$%^&*()_-+=<>?';
+
+    const allCharacters = lowercaseLetters + uppercaseLetters + numbers + specialCharacters;
+
+    let password = '';
+    for (let i = 0; i < 8; i++) {
+        const randomIndex = Math.floor(Math.random() * allCharacters.length);
+        password += allCharacters.charAt(randomIndex);
+    }
+
+    return password;
+}
+
+const downloadAndStoreImage = async (imageUrl, imageName) => {
+    const imagePath = path.join(__dirname, "../../public/images/", imageName);
+    // log(imagePath);
+
+    try {
+        const response = await axios.get(imageUrl, { responseType: "arraybuffer" });
+        fs.writeFileSync(imagePath, response.data);
+        log("Image downloaded and stored successfully:", imagePath);
+        return imagePath;
+    } catch (error) {
+        console.error("Error downloading or storing image:", error.message);
+        return null;
+    }
+};
 
 const handleExcel = async (req, res) => {
     try {
@@ -11,28 +46,49 @@ const handleExcel = async (req, res) => {
         }
 
         const excelPath = path.join(__dirname, "../../public/uploads", req.file.filename);
+        // log(excelPath);
 
         const workbook = new ExcelJS.Workbook();
-        workbook.xlsx.readFile(excelPath)
+        workbook.csv.readFile(excelPath)
             .then(async () => {
                 const worksheet = workbook.getWorksheet(1);
                 const saveFacultyPromises = [];
 
-                worksheet.eachRow({ includeEmpty: true }, (row, rowNumber) => {
+                worksheet.eachRow({ includeEmpty: true }, async (row, rowNumber) => {
                     if (rowNumber > 1) {
                         const facultyData = {
+                            // this values changes according to the columns of excel File
+                            // 1 based indexing
                             name: row.getCell(1).value,
-                            institute: row.getCell(2).value,
-                            email: row.getCell(3).value,
-                            contactNo: row.getCell(4).value,
-                            education: row.getCell(5).value,
-                            instituteOfEducation: row.getCell(6).value,
-                            fieldOfSpecialization: row.getCell(7).value,
-                            courcesTaught: row.getCell(8).value,
-                            website: row.getCell(9).value,
-                            publications: row.getCell(10).value,
-                            biography: row.getCell(11).value,
+                            institute: 'IIT Gandhinagar',
+                            email: row.getCell(5).value,
+                            address: row.getCell(7).value,
+                            password: generateRandomPassword(),
+                            education: row.getCell(4).value,
+                            website: row.getCell(6).value,
+                            publications: row.getCell(8).value,
+                            // contactNo: row.getCell(3).value,
+                            // specialization: row.getCell(8).value,
+                            // coursesTaught: row.getCell(10).value,
+                            department: row.getCell(3).value,
                         };
+
+                        const imageUrl = row.getCell(9).value;
+                        if (imageUrl) {
+                            const imageName = `image_${rowNumber}_${Date.now()}.jpeg`;
+                            const imagePath = await downloadAndStoreImage(imageUrl, imageName);
+                            // log("hello", imageName, imagePath);
+
+                            if (imagePath) {
+                                facultyData.image = {
+                                    data: fs.readFileSync(imagePath),
+                                    contentType: "image, jpeg",
+                                };
+
+                                fs.unlinkSync(imagePath);
+                            }
+                        }
+
                         saveFacultyPromises.push(Faculty.create(facultyData));
                     }
                 });
@@ -43,7 +99,7 @@ const handleExcel = async (req, res) => {
                         // Delete the saved file after all data is successfully saved
                         fs.unlinkSync(excelPath);
                         console.log("File deleted successfully");
-                        res.status(200).send("Data saved and file deleted");
+                        res.status(200).send(`<script>alert("Data saved successfully."); window.history.back();</script>`);
                     })
                     .catch((saveError) => {
                         console.error("Error saving faculty data:", saveError);

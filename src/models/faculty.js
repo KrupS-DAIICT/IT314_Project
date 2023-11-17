@@ -8,53 +8,46 @@ const facultySchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    contactNo: {
+        type: String,
+        default: ""
+    },
     institute: {
         type: String,
         required: true
     },
+    address: {
+        type: String,
+        default: ""
+    },
     email: {
         type: String,
-        required: true,
-        unique: [true, "Email already exists"],
-        validate(value) {
-            if (!validator.isEmail(value)) {
-                throw new Error("Invalid Email");
-            }
-        }
+        default: "Not Available"
     },
     password: {
         type: String,
         required: true
     },
-    contactNo: {
-        type: Number,
-        required: true,
-        unique: true,
-        minlength: 10, maxlength: 10,
+    education: {
+        type: String,
+        default: ""
     },
-    Qualification: String,
-    instituteOfEducation: String,
-    fieldOfSpecialization: String,
-    coursesTaught: String,
+    coursesTaught: {
+        type: String,
+        default: ""
+    },
+    specialization: {
+        type: String,
+        default: ""
+    },
     website: {
         type: String,
-        unique: true,
-        validate(value) {
-            if (!validator.isURL(value)) {
-                throw new Error("Invalid Website");
-            }
-        }
+        default: ""
     },
-    publications: String,
-    biography: String,
-    // universityID: {
-    //     type: Number,
-    //     required: true
-    // },
-    // CollegeID: {
-    //     type: Number,
-    //     required: true
-    // }
+    publications: {
+        type: [String],
+        default: []
+    },
     verified: {
         type: Boolean,
         default: false
@@ -65,8 +58,12 @@ const facultySchema = new mongoose.Schema({
     },
     image: {
         data: Buffer,
-        contentType: String
+        contentType: String,
     },
+    department: {
+        type: String,
+        default: ""
+    }
 });
 
 // Encrypt password before saving

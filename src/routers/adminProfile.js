@@ -43,7 +43,7 @@ router.post('/admin-profile-update/:id', upload.single('image'), async (req, res
     const token = req.cookies.accesstoken;
     const data = jwt.verify(token, process.env.SECRET_KEY);
 
-    if (data.email !== req.bosy.email) {
+    if (data.email !== req.body.email) {
         log("change email");
         res.cookie("accesstoken", '', { maxAge: 1 });
     }
