@@ -5,15 +5,16 @@ const { log } = require('console');
 const Faculty = require('../models/faculty');
 const Math = require('math');
 
-router.get("/s", async (req, res) => {
+router.get("/search-faculty", async (req, res) => {
     res.render("search_faculty");
 });
 
-router.get('/search', async (req, res) => {
+router.post('/search-faculty', async (req, res) => {
     const currentUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
     const course = req.query.course;
     const search_query = req.query.search2;
     const university = req.query.university;
+    log(currentUrl, course, search_query, university);
     // Pagination parameters
     // const perPage = 6; // Number of results per page
     // const page = parseInt(req.query.page) || 1; // Current page, default to 1

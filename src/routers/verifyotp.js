@@ -44,14 +44,15 @@ async function verifyOTPFunction(data, req, res) {
 
         const finalAdmin = await Admin.findOne({ email });
         if (finalAdmin) {
-            const token = await createToken(finalAdmin, 'admin');
+            const token = createToken(finalAdmin, 'admin');
             // console.log('Generated token:', token);
         } else {
             console.log('Admin not found');
         }
 
         // req.session.signupStep = 3;
-        res.redirect('/signup/otpverified');
+        // res.redirect('/signup/otpverified');
+        res.send(`<script>alert("OTP verification successful. redirecting to sign in page.."); window.location.href="/signin"</script>`);
 
     } catch (error) {
         console.log("Error verifying OTP: ", error);

@@ -21,6 +21,8 @@ router.get("/signin", async (req, res) => {
 });
 
 router.post("/signin", async (req, res) => {
+    // if already signed in
+
     const { role, username, password } = req.body;
 
     try {
@@ -41,7 +43,8 @@ router.post("/signin", async (req, res) => {
         const auth = await bcrypt.compare(password, result.password);
 
         if (auth) {
-            const result2 = SigninCount.findOne({ $and: [{ ip: req.ip }, { email: username }] }).exec();
+            const result2 = await SigninCount.findOne({ $and: [{ ip: req.ip }, { email: username }] }).exec();
+            log(result2);
             if (result2) {
                 await SigninCount.deleteOne({ _id: result2._id });
             }

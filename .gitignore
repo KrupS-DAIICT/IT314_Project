@@ -3,3 +3,5 @@ node_modules
 signup_post.txt
 temp.html
 test.xlsx
+views/otpverified.hbs
+routers/otpverified.js

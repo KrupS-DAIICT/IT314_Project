@@ -1,8 +1,17 @@
 const express = require('express'); // require express
+const { log } = require('console');
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
 const Admin = require("../models/admin"); // require admin.js
+const requireAuth = require("../functions/requireAuth");
 const Faculty = require("../models/faculty"); // require faculty.js
 const router = express.Router(); // require router
-const { log } = require('console');
+
+const saltRounds = 10;
+
+router.get("/change-password", requireAuth, (req, res) => {
+    res.render("changepassword");
+})
 
 router.post("/change-password", async (req, res) => {
     const token = req.cookies.accesstoken;
@@ -22,9 +31,9 @@ router.post("/change-password", async (req, res) => {
         }
 
         if (req.body.newpassword === req.body.cnewpassword) {
-            await db.updateOne({ email }, { password: req.body.newpassword });
+            await db.updateOne({ email }, { password: await bcrypt.hash(req.body.newpassword, saltRounds) });
             console.log('Password is updated');
-            return res.send('<script>alert("Your Password is Updated");window.location.href="/home";</script>');
+            return res.send('<script>alert("Your Password is Updated");window.location.href="/";</script>');
         } else {
             return res.send('<script>alert("Passwords Do Not Match");window.history.back()</script>');
         }

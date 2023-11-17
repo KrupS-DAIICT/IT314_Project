@@ -3,10 +3,12 @@ const path = require('path');
 const Admin = require("../models/admin");
 const router = express.Router();
 const validator = require("validator");
-const generateOTP = require("../functions/generateOTP");
-const sendEmail = require("../functions/sendEmail");
+const multer = require('multer');
 const { userDelete } = require("../functions/userFunctions");
 const { generateAndStoreOTP } = require("../functions/otpFunctions");
+
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
 
 router.get("/signup", async (req, res) => {
     // req.session.signupStep = 1;
@@ -15,7 +17,7 @@ router.get("/signup", async (req, res) => {
 });
 
 async function registerUser(data, req, res) {
-    const { adminName, email, Password, cPassword, mobile_no, university } = data;
+    const { adminName, email, Password, cPassword, mobile_no, university, image } = data;
 
     if (Password !== cPassword) {
         return res.send(`<script>alert("Password and Confirm Password do not match"); window.history.back();</script>`);
@@ -41,11 +43,15 @@ async function registerUser(data, req, res) {
     try {
         const tempAdmin = new Admin({
             name: adminName,
-            email,
+            email: email,
             password: Password,
-            OTP,
+            OTP: OTP,
             phone: mobile_no,
-            university,
+            university: university,
+            image: {
+                data: req.file.buffer.toString('base64'),
+                contentType: req.file.mimetype
+            }
         });
 
         // Save the user
@@ -70,7 +76,7 @@ async function registerUser(data, req, res) {
 }
 
 // create a new faculty into the database
-router.post("/signup/verifyotp", async (req, res) => {
+router.post("/signup/verifyotp", upload.single('image'), async (req, res) => {
     const data = req.body;
     await registerUser(data, req, res);
 });

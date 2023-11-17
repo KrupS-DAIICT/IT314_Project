@@ -1,10 +1,14 @@
 require('dotenv').config();
 const express = require('express'); // require express
+const multer = require('multer');
 const Admin = require("../models/admin"); // require admin.js
 const router = express.Router(); // require router
 const { log } = require('console');
 const jwt = require("jsonwebtoken");
 const requireAuth = require("../functions/requireAuth");
+
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
 
 router.get("/admin-profile/:id", requireAuth, async (req, res) => {
     const profileId = req.params.id;
@@ -34,7 +38,7 @@ router.get("/admin-profile/:id", requireAuth, async (req, res) => {
     }
 });
 
-router.post('/admin-profile-update/:id', async (req, res) => {
+router.post('/admin-profile-update/:id', upload.single('image'), async (req, res) => {
     const profileId = req.params.id;
     const token = req.cookies.accesstoken;
     const data = jwt.verify(token, process.env.SECRET_KEY);

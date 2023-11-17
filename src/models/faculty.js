@@ -62,7 +62,11 @@ const facultySchema = new mongoose.Schema({
     lock: {
         type: Boolean,
         default: false
-    }
+    },
+    image: {
+        data: Buffer,
+        contentType: String
+    },
 });
 
 // Encrypt password before saving

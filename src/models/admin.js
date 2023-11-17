@@ -42,6 +42,10 @@ const adminSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
+    image: {
+        data: Buffer,
+        contentType: String
+    },
     tokens: [{
         token: {
             type: String,

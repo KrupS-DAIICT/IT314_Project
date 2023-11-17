@@ -60,7 +60,7 @@
   <main>
     <h2>Sign up</h2>
     <section id="sign_up">
-      <form action="/signup/verifyotp" method="post">
+      <form action="/signup/verifyotp" method="post" enctype="multipart/form-data">
         <label for="adminName">Full Name</label><br>
         <input class="ip" type="text" id="adminName" name="adminName" required><br>
         <label for="email">Email</label><br>
@@ -73,6 +73,7 @@
         <input class="ip" type="tel" id="mobile_no" name="mobile_no" pattern="[0-9]{10}" required><br>
         <label for="university">University</label><br>
         <input class="ip" type="text" id="university" name="university" required><br>
+        <input class="ip" type="file" name="image" accept="image/*" required><br>
         <div class="bt">
           <button type="submit" value="Submit">Submit</button>
           <button type="reset" value="reset">Reset</button><br>

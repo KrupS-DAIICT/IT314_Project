@@ -52,9 +52,9 @@ app.use(signupRouter); // use signup.js
 const verifyotpRouter = require("./routers/verifyotp"); // require verifyotp.js
 app.use(verifyotpRouter); // use verifyotp.js
 
-// routing - otpverified
-const otpverifiedRouter = require("./routers/otpverified"); // require otpverified.js
-app.use(otpverifiedRouter); // use otpverified.js
+// // routing - otpverified
+// const otpverifiedRouter = require("./routers/otpverified"); // require otpverified.js
+// app.use(otpverifiedRouter); // use otpverified.js
 
 // routing - unlockAccount
 const unlockAccountRouter = require("./routers/unlockAccount");
