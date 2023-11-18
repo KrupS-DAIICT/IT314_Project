@@ -6,6 +6,7 @@ const validator = require("validator");
 const multer = require('multer');
 const { userDelete } = require("../functions/userFunctions");
 const { generateAndStoreOTP } = require("../functions/otpFunctions");
+const { log } = require('console');
 
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
@@ -60,7 +61,7 @@ async function registerUser(data, req, res) {
         }
 
         // Send OTP to the user
-        // const emailSent = await sendEmail(email, OTP);
+        const emailSent = await sendEmail(email, OTP);
 
         // Delete user if time runs out
         setTimeout(userDelete, 5 * 60 * 1000, email);
@@ -70,7 +71,7 @@ async function registerUser(data, req, res) {
         res.redirect('/signup/verifyotp');
 
     } catch (error) {
-        console.log(`tempAdmin.save() error: ${error})`);
+        console.log(`tempAdmin.save() error: ${error}`);
         res.status(500).send({ error: "Server error" });
     }
 }

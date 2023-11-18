@@ -8,9 +8,11 @@ const requireAuth = require("../functions/requireAuth");
 const Faculty = require("../models/faculty");
 const { log } = require("console");
 const router = express.Router();
+const sendEmailLoginCredentials = require("../functions/sendEmailLoginCredentials");
+const validator = require("validator");
 
 
-router.get("/addfaculty", async (req, res) => {
+router.get("/addfaculty", requireAuth, async (req, res) => {
     const filePath = path.join(__dirname, "../../templates/views/", "addFaculty");
     res.render(filePath);
 });
@@ -75,6 +77,11 @@ router.post("/addfaculty", upload.single("excelFile"), async (req, res) => {
     }
 
     const { facultyName, email, contactNo, education, fieldOfSpecialization, coursesTaught, website, publications } = req.body;
+
+    if (!validator.isEmail(email)) {
+        return res.send(`<script>alert("Not a valid email"); window.history.back();</script>`);
+    }
+
     const token = req.cookies.accesstoken;
     const data = jwt.verify(token, process.env.SECRET_KEY);
     log(data);
@@ -104,6 +111,10 @@ router.post("/addfaculty", upload.single("excelFile"), async (req, res) => {
             password: pass,
         });
         log(pass);
+
+        // send email before registring
+        // await sendEmailLoginCredentials(email, pass, data.university, facultyName);
+
         res.status(200).send(`<script>alert("Faculty Added successfully"); window.location.href="/addfaculty"</script>`)
     } catch (error) {
         console.log(error);

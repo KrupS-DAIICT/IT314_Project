@@ -7,6 +7,7 @@ const path = require("path");
 const axios = require('axios');
 const { log } = require("console");
 const jwt = require("jsonwebtoken");
+const sendEmailLoginCredentials = require("../functions/sendEmailLoginCredentials");
 // const generateRandomPassword = require("../functions/generateRandomPassword")
 
 function generateRandomPassword() {
@@ -60,24 +61,25 @@ const handleExcel = async (req, res) => {
 
                 worksheet.eachRow({ includeEmpty: true }, async (row, rowNumber) => {
                     if (rowNumber > 1) {
+                        const password = generateRandomPassword();
                         const facultyData = {
                             // this values changes according to the columns of excel File
                             // 1 based indexing
                             name: row.getCell(1).value,
                             institute: data.university,
                             email: row.getCell(5).value,
-                            address: row.getCell(4).value,
-                            password: generateRandomPassword(),
-                            education: row.getCell(2).value,
+                            address: row.getCell(7).value,
+                            password: password,
+                            education: row.getCell(4).value,
                             website: row.getCell(6).value,
                             publications: row.getCell(8).value,
-                            contactNo: row.getCell(3).value,
-                            specialization: row.getCell(7).value,
-                            coursesTaught: row.getCell(9).value,
-                            // department: row.getCell(3).value,
+                            // contactNo: row.getCell(3).value,
+                            // specialization: row.getCell(7).value,
+                            // coursesTaught: row.getCell(9).value,
+                            department: row.getCell(3).value,
                         };
 
-                        const imageUrl = row.getCell(10).value;
+                        const imageUrl = row.getCell(9).value;
                         if (imageUrl) {
                             const imageName = `image_${rowNumber}_${Date.now()}.jpeg`;
                             const imagePath = await downloadAndStoreImage(imageUrl, imageName);
@@ -92,6 +94,12 @@ const handleExcel = async (req, res) => {
                                 fs.unlinkSync(imagePath);
                             }
                         }
+
+                        // send email before saving
+                        // const mail = row.getCell(5).value;
+                        // const university = data.university;
+                        // const name = row.getCell(1).value;
+                        // await sendEmailLoginCredentials(mail, password, university, name);
 
                         saveFacultyPromises.push(Faculty.create(facultyData));
                     }

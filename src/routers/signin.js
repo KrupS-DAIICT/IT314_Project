@@ -24,7 +24,7 @@ router.post("/signin", async (req, res) => {
     // if already signed in
 
     const { role, username, password } = req.body;
-    log(role, username, password);
+    // log(role, username, password);
 
     try {
         const db = role === 'admin' ? Admin : Faculty;
@@ -45,7 +45,7 @@ router.post("/signin", async (req, res) => {
 
         if (auth) {
             const result2 = await SigninCount.findOne({ $and: [{ ip: req.ip }, { email: username }] }).exec();
-            log(result2);
+            // log(result2);
             if (result2) {
                 await SigninCount.deleteOne({ _id: result2._id });
             }
