@@ -16,24 +16,23 @@
             <select name="course">
                 <option value="all">ALL</option>
                 {{#each courseOption}}
-                    <option value="{{this.department}}" {{#if (eq ../searchdata.department
-                        this.department)}}selected{{/if}}>
-                        {{this.department}}
+                    <option value="{{this}}" {{#if (eq searchdata this)}}selected{{/if}}>
+                        {{this}}
                     </option>
                 {{/each}}
             </select>
         </div>
         <div id="university" class="main_part">
             <label for="university">University:</label>
-            <select name="university" id="university">
+            <select name="university" id="university2">
                 <option value="all">ALL</option>
                 {{!-- <option value="daiict" {{#if (eq serachdata.university2 "daiict" )}}selected{{/if}}>daiict
                 </option>
                 <option value="nirma" {{#if (eq serachdata.university2 "nirma" )}}selected{{/if}}>nirma</option> --}}
 
                 {{#each universityOption}}
-                    <option value="{{this.university}}" {{#if (eq university2 this.university)}}selected{{/if}}>
-                        {{this.university}}
+                    <option value="{{this}}" {{#if (eq university2 this)}}selected{{/if}}>
+                        {{this}}
                     </option>
                 {{/each}}
             </select>

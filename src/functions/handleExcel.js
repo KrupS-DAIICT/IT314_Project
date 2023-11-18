@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require("express");
 const ExcelJS = require("exceljs");
 const Faculty = require("../models/faculty");
@@ -5,6 +6,7 @@ const fs = require("fs");
 const path = require("path");
 const axios = require('axios');
 const { log } = require("console");
+const jwt = require("jsonwebtoken");
 // const generateRandomPassword = require("../functions/generateRandomPassword")
 
 function generateRandomPassword() {
@@ -40,6 +42,8 @@ const downloadAndStoreImage = async (imageUrl, imageName) => {
 };
 
 const handleExcel = async (req, res) => {
+    const token = req.cookies.accesstoken;
+    const data = jwt.verify(token, process.env.SECRET_KEY);
     try {
         if (!req.file || !req.file.filename) {
             return res.status(400).send("No file uploaded or invalid file format.");
@@ -60,20 +64,20 @@ const handleExcel = async (req, res) => {
                             // this values changes according to the columns of excel File
                             // 1 based indexing
                             name: row.getCell(1).value,
-                            institute: 'Indian Institute of Technology Gandhinagar (IITGN) (IIT Gandhinagar)',
+                            institute: data.university,
                             email: row.getCell(5).value,
-                            address: row.getCell(7).value,
+                            address: row.getCell(4).value,
                             password: generateRandomPassword(),
-                            education: row.getCell(4).value,
+                            education: row.getCell(2).value,
                             website: row.getCell(6).value,
                             publications: row.getCell(8).value,
-                            // contactNo: row.getCell(3).value,
-                            // specialization: row.getCell(7).value,
-                            // coursesTaught: row.getCell(9).value,
-                            department: row.getCell(3).value,
+                            contactNo: row.getCell(3).value,
+                            specialization: row.getCell(7).value,
+                            coursesTaught: row.getCell(9).value,
+                            // department: row.getCell(3).value,
                         };
 
-                        const imageUrl = row.getCell(9).value;
+                        const imageUrl = row.getCell(10).value;
                         if (imageUrl) {
                             const imageName = `image_${rowNumber}_${Date.now()}.jpeg`;
                             const imagePath = await downloadAndStoreImage(imageUrl, imageName);
@@ -82,7 +86,7 @@ const handleExcel = async (req, res) => {
                             if (imagePath) {
                                 facultyData.image = {
                                     data: fs.readFileSync(imagePath),
-                                    contentType: "image, jpeg",
+                                    contentType: "image/jpeg",
                                 };
 
                                 fs.unlinkSync(imagePath);

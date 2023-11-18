@@ -14,7 +14,7 @@ router.get("/admin-profile/:id", requireAuth, async (req, res) => {
     const profileId = req.params.id;
     const token = req.cookies.accesstoken;
     const data = jwt.verify(token, process.env.SECRET_KEY);
-    log(data, token, profileId);
+    log(data.university, token, profileId);
     log(profileId == data._id);
     log(data.role === 'admin');
 

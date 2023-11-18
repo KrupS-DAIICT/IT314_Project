@@ -16,6 +16,7 @@ router.get('/search-faculty', setOption, async (req, res) => {
     const course = req.query.course;
     const search_query = req.query.search2;
     const university = req.query.university;
+    log(course, search_query, university);
     // Pagination parameters
     // const perPage = 6; // Number of results per page
     // const page = parseInt(req.query.page) || 1; // Current page, default to 1
@@ -26,20 +27,20 @@ router.get('/search-faculty', setOption, async (req, res) => {
     //   query.location = { $regex: location, $options: 'i' };
     // }
     // if (course) {
-    //   query.course = { $regex: course, $options: 'i' };
+    //     query.course = { $regex: course, $options: 'i' };
     // }
 
     if (university) {
-        query.university = { $regex: university, $options: 'i' };
+        query.institute = { $regex: university, $options: 'i' };
     }
     if (course) {
-        query.course = { $regex: course, $options: 'i' };
+        query.department = { $regex: course, $options: 'i' };
     }
 
     if (search_query) {
         query.name = { $regex: search_query, $options: 'i' };;
     }
-    console.log(query);
+    // console.log(query);
     // Calculate the skip value for pagination
     //  const skip = (page - 1) * perPage;
 

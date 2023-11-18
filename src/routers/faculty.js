@@ -15,6 +15,14 @@ router.get("/addfaculty", async (req, res) => {
     res.render(filePath);
 });
 
+router.get("/faculty/:id", async (req, res) => {
+    const profileId = req.params.id;
+    const profile = await Faculty.findOne({ _id: profileId });
+    // log(profile);
+    // res.render('page', { profile });
+    res.status(200).send(`<h1>got data</h1>`);
+});
+
 router.get("/faculty-profile/:id", requireAuth, async (req, res) => {
     const profileId = req.params.id;
     const token = req.cookies.accesstoken;
@@ -66,8 +74,10 @@ router.post("/addfaculty", upload.single("excelFile"), async (req, res) => {
         return;
     }
 
-    const { facultyName, institute, email, contactNo, education, fieldOfSpecialization, coursesTaught, website, publications } = req.body;
-    log(req.body);
+    const { facultyName, email, contactNo, education, fieldOfSpecialization, coursesTaught, website, publications } = req.body;
+    const token = req.cookies.accesstoken;
+    const data = jwt.verify(token, process.env.SECRET_KEY);
+    log(data);
 
     try {
         const faculty = await Faculty.findOne({ email });
@@ -83,7 +93,7 @@ router.post("/addfaculty", upload.single("excelFile"), async (req, res) => {
         const pass = generateRandomPassword();
         const faculty = await Faculty.create({
             name: facultyName,
-            institute,
+            institute: data.university,
             email,
             contactNo,
             education,

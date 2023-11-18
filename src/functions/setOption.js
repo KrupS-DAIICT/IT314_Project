@@ -4,13 +4,15 @@ const Faculty = require("../models/faculty");
 
 const setOption = async (req, res, next) => {
     try {
-        const universityOption = await Admin.find({}, 'university image').exec();
+        const universityOption = await Admin.find({}, 'university').distinct('university');
+        log(universityOption);
         res.locals.universityOption = universityOption;
         res.locals.universityData = universityOption;
 
         const courseOption = await Faculty.find({}, 'department').distinct('department');
-        log(courseOption);
-        res.locals.courseOption = courseOption;
+        const filteredCourseOptions = courseOption.filter(option => option != null && option.trim() != '');
+        log(filteredCourseOptions);
+        res.locals.courseOption = filteredCourseOptions;
         next();
     } catch (error) {
         console.log(error);
