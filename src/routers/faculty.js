@@ -18,11 +18,22 @@ router.get("/addfaculty", requireAuth, async (req, res) => {
 });
 
 router.get("/faculty/:id", async (req, res) => {
-    const profileId = req.params.id;
-    const profile = await Faculty.findOne({ _id: profileId });
+    try {
+        const profileId = req.params.id;
+        const faculty = await Faculty.findOne({ _id: profileId });
+
+        if (!faculty) {
+            return res.status(404).json({
+                message: "Not found"
+            });
+        }
+
+        res.status(200).render('faculty_search_profile', { faculty });
+    } catch (error) {
+        log(error);
+    }
     // log(profile);
     // res.render('page', { profile });
-    res.status(200).send(`<h1>got data</h1>`);
 });
 
 router.get("/faculty-profile/:id", requireAuth, async (req, res) => {
