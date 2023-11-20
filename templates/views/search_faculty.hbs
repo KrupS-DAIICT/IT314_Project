@@ -21,11 +21,9 @@
                     {{#each data}}
                         <div class="col">
                             <div class="card shadow-sm">
-                                <img alt="Faculty Image"
-                                    src="data:{{this.image.contentType}};base64,{{this.image.data[0]}}">
-                                <title>Placeholder</title>
-                                <rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%"
-                                    fill="#eceeef" dy=".3em">Thumbnail</text>
+                                <img alt="Faculty Image" class="img-fluid" id="img1"
+                                    src="data:{{this.image.contentType}};base64,{{this.image.data}}"
+                                    onerror="this.onerror=null; this.src='https://www.bing.com/images/search?q=blank%20profile%20image&FORM=IQFRBA&id=E9A45CA64F9637C3256BDC7FD0943D2B5517A4F3'">
                                 </img>
                                 <div class="card-body">
                                     <a href="/faculty/{{this._id}}">
@@ -34,7 +32,9 @@
                                     <p class="card-text"> {{this.institute}} </p>
                                     <ul>
                                         <li>{{this.email}}</li>
-                                        <li>{{this.contactNo}}</li>
+                                        {{#if this.contactNo}}
+                                            <li>{{this.contactNo}}</li>
+                                        {{/if}}
                                         {{!-- <li>Adress</li>
                                     <li>Website</li> --}}
                                     </ul>
@@ -65,8 +65,9 @@
 
     function updateAction() {
 
+
         var nameInput = document.getElementById("searchForm").elements["search2"];
-        var locationInput = document.getElementById("searchForm").elements["location"];
+        // var locationInput = document.getElementById("searchForm").elements["location"];
         var courseInput = document.getElementById("searchForm").elements["course"];
         var universitySelect = document.getElementById("searchForm").elements["university"];
 

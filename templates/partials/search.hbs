@@ -12,11 +12,11 @@
         <input type="text" name="location" id="location">
         <br> --}}
         <div id="course" class="main_part">
-            <label for="course">Course:</label>
-            <select name="course">
+            <label for="course">Department:</label>
+            <select id="course2" name="course">
                 <option value="all">ALL</option>
                 {{#each courseOption}}
-                    <option value="{{this}}" {{#if (eq searchdata this)}}selected{{/if}}>
+                    <option value="{{this}}" {{#if (eq ../searchdata.department this)}}selected{{/if}}>
                         {{this}}
                     </option>
                 {{/each}}
@@ -31,7 +31,7 @@
                 <option value="nirma" {{#if (eq serachdata.university2 "nirma" )}}selected{{/if}}>nirma</option> --}}
 
                 {{#each universityOption}}
-                    <option value="{{this}}" {{#if (eq university2 this)}}selected{{/if}}>
+                    <option value="{{this}}" {{#if (eq ../searchdata.university this)}}selected{{/if}}>
                         {{this}}
                     </option>
                 {{/each}}

@@ -29,11 +29,11 @@ router.post("/signin", async (req, res) => {
     try {
         const db = role === 'admin' ? Admin : Faculty;
         const result = await db.findOne({ $and: [{ email: username }, { verified: 1 }] }).exec();
+        log(result);
 
         if (!result) {
             log("Result not found");
-            await handleInvalidDetails(res);
-            return;
+            res.send(`<script>alert("Invalid Details"); window.history.back();</script>`);
         }
 
         if (result && result.lock) {
@@ -42,6 +42,7 @@ router.post("/signin", async (req, res) => {
         }
 
         const auth = await bcrypt.compare(password, result.password);
+        log(auth);
 
         if (auth) {
             const result2 = await SigninCount.findOne({ $and: [{ ip: req.ip }, { email: username }] }).exec();

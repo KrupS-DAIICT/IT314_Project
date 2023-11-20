@@ -23,6 +23,7 @@ router.get('/search-faculty', setOption, async (req, res) => {
 
     // Build the query based on the filters with $regex
     const query = {};
+    const searchdata = {};
     // if (location) {
     //   query.location = { $regex: location, $options: 'i' };
     // }
@@ -30,15 +31,22 @@ router.get('/search-faculty', setOption, async (req, res) => {
     //     query.course = { $regex: course, $options: 'i' };
     // }
 
-    if (university) {
-        query.institute = { $regex: university, $options: 'i' };
-    }
-    if (course) {
-        query.department = { $regex: course, $options: 'i' };
-    }
+    try {
+        if (university) {
+            query.institute = { $regex: university, $options: 'i' };
+            searchdata.university = university;
+        }
+        if (course) {
+            query.department = { $regex: course, $options: 'i' };
+            searchdata.department = course;
+        }
 
-    if (search_query) {
-        query.name = { $regex: search_query, $options: 'i' };;
+        if (search_query) {
+            query.name = { $regex: search_query, $options: 'i' };
+            searchdata.search_query = search_query;
+        }
+    } catch (error) {
+
     }
     // console.log(query);
     // Calculate the skip value for pagination
@@ -53,7 +61,7 @@ router.get('/search-faculty', setOption, async (req, res) => {
         // const totalPages = Math.ceil(data.length/ perPage);
         // console.log(totalPages);
         // ,page: page, totalPages: totalPages,currentUrl:currentUrl
-        res.render('search_faculty', { data });
+        res.render('search_faculty', { data, searchdata });
     }
 })
 
