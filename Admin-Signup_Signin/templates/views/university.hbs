@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FacultyHub</title>
+    <link rel="stylesheet" href="css/university.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+</head>
+
+<body>
+
+
+    <main>
+        <form class="example" id="searchForm" action="/searchuniversity" method="get">
+            <select name="university" id="university" >
+            <option value="all" >ALL</option>
+            {{!-- <option value="daiict" {{#if (eq serachdata.university2 "daiict")}}selected{{/if}}>daiict</option>
+            <option value="nirma" {{#if (eq serachdata.university2 "nirma")}}selected{{/if}}>nirma</option> --}}
+
+            {{#each universityoption}}
+            <option value="{{this.university}}" {{#if (eq ../searchdata.university this.university)}}selected{{/if}}>{{this.university}}</option>
+            {{/each}}
+        </select>
+            <button type="submit" onclick="updateAction()"><i class="fa fa-search"></i></button>
+        </form>
+
+        <h1>Registered Universities</h1>
+        <div id="colleges">
+            {{#each universitydata}}
+            <a href="/search?university={{this.university}}">
+                <div class="college">
+                    <img src="data:{{this.image2.contentType}};base64,{{this.image2.data}}" alt="daiict" class="logo">
+                    <p class="name">{{this.university}}</p>
+                </div>
+            </a>
+            {{/each}}
+    
+        </div>
+    </main>
+</body>
+<script>
+    function updateAction() {
+     var universitySelect = document.getElementById("searchForm").elements["university"];
+     if (universitySelect.selectedIndex === 0) {
+            universitySelect.removeAttribute("name");
+        }
+
+    }
+</script>
+    
+</html>

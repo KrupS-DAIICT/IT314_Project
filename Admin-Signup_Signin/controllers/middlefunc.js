@@ -10,6 +10,7 @@ const requireauth = (req,res,next) =>{
             
             if(err){
                 res.redirect('/login');
+                
             }
             else{
                 
@@ -35,8 +36,16 @@ const checkuser = (req,res,next) =>{
             else{
                 try{
                     if(decodedToken.role === "admin"){
-                    const user=await Sign_up.findOne({ email: decodedToken.email}).exec();
+                    const user=await Sign_up.findOne({ email: decodedToken.email},'_id email university').exec();
+                    if(!user){
+                        res.cookie("accesstoken",'',{maxAge:1})
+                        res.redirect("/home");
+                    }
+                    else{
+                    user.role="admin";
+                    console.log(user);
                     res.locals.user=user
+                    }
                     }
                     else{
                     //faculty
@@ -62,6 +71,9 @@ try{
     const universityoption=await Sign_up.find({},'university image').exec();
     res.locals.universityoption=universityoption;
     res.locals.universitydata=universityoption
+
+   // const courseoption=await faculty.find({},'course').distinct('course');
+    //res.locals.courseoption=courseoption;
     next();
 }
 catch(err){

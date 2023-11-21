@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FacultyHub</title>
+  <style>
+    *{
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+}
+header{
+    display: flex;
+    justify-content: space-between;
+    background-color: black;
+    color: white;
+    align-items: center;
+    height: 8vh;
+    padding-left: 7vw;
+    padding-right: 5vw;
+    border: 2px solid rgb(0, 0, 0);
+    border-bottom-left-radius: 35px;
+    border-bottom-right-radius: 35px;
+}
+header a{
+    color: white;
+    font-size: 20px;
+    margin: 10px;
+}
+h2{
+    text-align: center;
+    font-size: 30px;
+    margin: 3vh;
+}
+#sign_up{
+    display: flex;
+    justify-content: space-around;
+    background-color: rgb(13, 8, 52);
+    color: white;
+    margin: 1vh 5vw 1vh 5vw;
+    border: 1px solid rgb(13, 8, 52);
+    border-radius: 20px;
+}
+section{
+    padding: 3vw;
+}
+img{
+    height: 80vh;
+    width: 45vw;
+    border-radius: 20px;
+}
+
+form{
+    width: 35vw;
+    height: 80vh;
+}
+label{
+    font-size: 20px;
+    margin: 0.5vh;
+}
+input.ip{
+    margin: 1.5vh;
+    width: 30vw;
+    height: 4vh;
+    border-radius: 4px ;
+    border:2px solid rgb(247, 247, 247);
+    border-radius: 20px;
+    padding-left: 0.8vw;
+    font-size: 20px;
+}
+.radio{
+    display: flex;
+    font-size: 20px;
+    margin: .5vh;
+}
+.radio p{
+    padding: 0px 5vw 3vh 0px;
+}
+.p{
+    font-size: 15px;
+    margin-top: 10px;
+    margin-left: 9vw;
+}
+
+button{
+    margin: 1vh 2vw 1vh 5vw;
+    width: 120px;
+    height: 40px;
+    border: 1px solid rgb(13, 8, 52);
+    border-radius: 20px;
+}
+
+footer{
+    display: flex;
+    margin-top: 5vw;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #588414;
+    color: white;
+}
+.left a {
+        display: block;
+        padding: 1vh 4vw 2vh 2vw;
+        text-decoration: none;
+        text-decoration: underline;
+        color: #ffffff; /* Link color */
+        font-size: 20px;
+      }
+.right {
+    position:static;
+    text-align: left;
+    width: 28vw;
+    font-size: 20px;
+}
+
+.right h2{
+    position: static;
+    text-align: left;
+}
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>FacultyHub</h1>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#">University</a>
+      <a href="#">About Us</a>
+      <a href="#">Login/Sign up</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Sign up</h2>
+    <section id="sign_up">
+      <form action="/signup_post" method="POST" enctype="multipart/form-data" >
+        <div class="radio">
+          <p><input class="rb" type="radio" name="role" value="admin"> Admin</p>
+          <p><input class="rb" type="radio" name="role" value="faculty"> Faculty</p>
+        </div>
+        <label for="name">Full Name</label><br>
+        <input class="ip" type="text" name="Company_Name" required><br>
+        <label for="email">Email</label><br>
+        <input class="ip" type="email" name="email" required><br>
+        <label for="password">Password</label><br>
+        <input class="ip" type="password" name="Password" id="pass" minlength="8" required><br>
+        <label for="cPassword">Conform Password</label><br>
+        <input class="ip" type="password" name="cPassword" id="cpass" required><br>
+        <label for="mobile_no">Mobile no</label><br>
+        <input class="ip" type="tel" name="mobile_no" pattern="[0-9]{10}" required><br>
+        <label for="university">University</label><br>
+        <input class="ip" type="text" name="university" required><br>
+        admin photo:
+        <input type="file" id="image1"  name="image1" accept="image/*" required><br>
+        collage logo:
+        <input type="file" id="image2" name="image2" accept="image/*" required><br>
+        <button type="submit" value="Submit" id="sub">Submit</button>
+        <button type="reset" value="reset">Reset</button><br>
+        <p class="p">
+          Already have an account? <a href="/login">Signin</a>
+        </p>
+      </form>
+      <img src="images/sign_up.jpg" alt="sign_up">
+    </section>
+  </main>
+
+  <footer>
+    <div class="left">
+      <h2>Important Links</h2>
+      <a href="#">Home</a>
+      <a href="#">University</a>
+      <a href="#">About Us</a>
+      <a href="#">Login/Sign up</a>
+    </div>
+    <div class="right">
+      <h2>About the platform</h2>
+      <p>This platform provides information of professional achievement and contact of faculties of multiple
+        universities to help knowledge seekers and professionals to connect.</p>
+    </div>
+  </footer>
+
+
+
+  <script>
+
+
+    // document.getElementById('sub').addEventListener('click', () => {
+
+      
+      
+    //     const userInput = prompt('Enter OTP:');
+    //     if (userInput !== null) {
+    //         // Send the user input to the backend
+    //         fetch('/sub', {
+    //             method: 'POST',
+    //             headers: {
+    //                 'Content-Type': 'application/json'
+    //             },
+    //             body: JSON.stringify({ userInput })
+    //         })
+    //         .then(response => response.json())
+    //         .then(data => {
+    //             // Handle the response from the backend if needed
+    //             console.log(data);
+    //         })
+    //         .catch(error => {
+    //             console.error('Error:', error);
+    //         });
+    //     }
+      
+    // });
+  
+</script>
+
+
+
+</body>
+
+
+
+
+</html>

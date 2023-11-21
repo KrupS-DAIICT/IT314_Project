@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	{{!-- <link rel="stylesheet" href="css/admin_style2.css"> --}}
+    <style>
+        *{
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    font-family: sans-serif;
+}
+.navbar{
+    background-color: black;
+    color: white;
+    border: 2px solid rgb(0, 0, 0);
+    border-bottom-left-radius: 35px;
+    border-bottom-right-radius: 35px;
+    box-shadow: 0 3px 4px rgb(87, 105, 107);
+}
+
+.navbar-toggler {
+    color: white;
+}
+#navbarSupportedContent a{
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+    margin-right: 5px;
+    padding: 0.4vw 0.6vw;
+    border: 2px solid transparent;
+    
+    border-radius: 2vw;
+  transition-duration: 1s;
+  box-shadow: 0 0px 2px rgb(0, 0, 0);
+}
+#navbarSupportedContent a:hover{
+    color: #000000;
+    background-color: rgb(252, 251, 251);
+    border: 2px solid rgb(248, 230, 230);
+    box-shadow: 0 2px 4px rgb(255, 255, 255);
+
+}
+#navbarSupportedContent a:active{
+    box-shadow: 0 0 2px darkslategray;
+    transform: translateY(2px);
+}
+button:active{
+/*    box-shadow: 0 0 2px darkslategray;*/
+    transform: translateY(2px);
+}
+#main{
+    display: flex;
+    margin-bottom: 100px;
+}
+#img1{
+    float: right;
+    border: 2px solid black;
+    border-radius: 40px;
+    top:20px;
+    cursor: pointer;
+    box-shadow: 8px 8px 4px rgb(87, 105, 107);
+    width: 30vw; 
+    height: 30vh;
+}
+
+h1{
+    text-align: center;
+    padding-top: 10px;
+}
+
+footer{
+    display: flex;
+    margin-top: 1vw;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #588414;
+    color: white;
+}
+.left a{
+        display: block;
+        margin-left: 5%;
+        padding: 1vh 4vw 2vh 2vw;
+        text-decoration: none;
+        text-decoration: underline;
+        color: #ffffff; /* Link color */
+        font-size: 20px;
+      }
+.right {
+    position:static;
+    text-align: left;
+    width: 28vw;
+    font-size: 20px;
+}
+
+.right h2{
+    position: static;
+    text-align: left;
+}
+
+.footer_title{
+    margin-left: 5%;
+}
+
+@media only screen and (max-width: 800px) {
+  footer{
+    flex-direction: column;
+  }
+  .left {
+    width: 100%;
+    margin: 0px;
+    padding: 2vw;
+  }
+  .footer_title{
+    margin-left: 0px;
+  }
+  .left a {
+    margin-left: 0px;
+    padding: 0px;
+  }
+  .right {
+    width: 100%;
+    padding: 2vw;
+  }
+  
+}
+@media only screen and (max-width: 992px){
+#main{
+    flex-direction:column;
+}
+#main1{
+    width: 50%;
+}
+#img1{
+    float: right;
+    border: 2px solid black;
+    border-radius: 40px;
+    top:20px;
+    cursor: pointer;
+    box-shadow: 8px 8px 4px rgb(87, 105, 107);
+}
+#main2{
+    width: 100%;
+}
+}
+    </style>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<title></title>
+</head>
+<body>
+ <header>
+         <nav class="navbar navbar-dark navbar-expand-lg px-5">
+            <div class="container-fluid">
+               <a class="navbar-brand text-light fw-bolder fs-4" href="#">FacultyHub</a>
+               <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                  aria-label="Toggle navigation">
+               <span class="navbar-toggler-icon"></span>
+               </button>
+               <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                  <ul class="navbar-nav ms-auto mb-2 mb-lg-0 fw-semibold grid gap-3">
+                     <li> <a href="#">Home</a> </li>
+                     <li> <a href="#">University</a> </li>
+                     <li> <a href="#">About Us</a> </li>
+                     <li> <a href="#">Login/Sign up</a> </li>
+                  </ul>
+               </div>
+            </div>
+         </nav>
+         <script>
+       function showSubmitButton() {
+        document.getElementById("submitBtn").style.display = "block";
+          document.getElementById("editBtn").style.display = "none";
+            var form = document.getElementById("myForm");
+            var elements = form.elements;
+            for (var i = 0; i < elements.length; i++) {
+                elements[i].disabled = false;
+            }
+        }
+         function hideSubmitButton() {
+          document.getElementById("editBtn").style.display = "block";
+          document.getElementById("submitBtn").style.display = "none";
+            var form = document.getElementById("myForm");
+            var elements = form.elements;
+            for (var i = 0; i < elements.length; i++) {
+                elements[i].disabled = true;
+            }
+            var edit=document.getElementById("editBtn");
+            edit.disabled=false;
+        }
+      </script>
+      </header>
+
+
+  <main>
+  	<h1>Profile</h1>
+  		<div class="container-fluid" id="main">
+        <div class="col-lg-4 col-md-8 m-auto mt-5" id="main1">
+         
+
+        <label for='myFile'><img class="img-fluid" id="img1" src="data:{{profile.image.contentType}};base64,{{profile.image.data}}"  onerror="this.onerror=null; this.src='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'"></label>
+        </div>
+    <div class="col-lg-6 m-auto" id="main2">
+      <div class="card-body">
+        <form id="myForm" action="/admin_profile_update/{{profile._id}}" method="post" enctype="multipart/form-data" >
+
+          <div class="col-lg-4 col-md-8 m-auto mt-5" id="main1">
+            <input disabled type="file" id="myFile" name="image" style="display: none;" accept="image/*">
+          
+         </div>
+
+
+          <div >
+            <label>Full Name</label>
+            <input disabled type="text" name="name" class="form-control" value="{{profile.name}}" required >
+          </div>
+          <div>
+            <label>Email-Address</label>
+            <input disabled type="email" name="email" class="form-control" value="{{profile.email}}" required>
+          </div>
+       
+          <div>
+            <label>Mobile No</label>
+            <input disabled type="text" name="mobile_no" class="form-control" value="{{profile.mobile_no}}" required>
+          </div>
+          <div>
+            <label>University</label>
+            <input disabled type="text" name="university" class="form-control" value="{{profile.university}}" required>
+          </div>
+          <div>
+            <label>Government Proof</label>
+            <input disabled type="text" class="form-control">
+          </div>
+          <div>
+            
+            <input disabled type="checkbox" class="form-check-input">
+            <label>Agree the Terms and Conditions</label>
+          </div>
+          <div class="form-group mt-2">
+            <button type="button" class="btn btn-outline-secondary" id="editBtn" onclick="showSubmitButton()">Edit</button>
+       <button type="submit" class="btn btn-primary" id="submitBtn" style="display: none;" >Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+            
+
+  </main>
+  <footer>
+    <div class="col-lg-6 left" >
+      <h2 class="footer_title">Important Links</h2>
+      <a href="#">Home</a>
+      <a href="#">University</a>
+      <a href="#">About Us</a>
+      <a href="#">Login/Sign up</a>
+    </div>
+    <div class="col-lg-6 right ">
+      <h2>About the platform</h2>
+      <p>This platform provides information of professional achievement and contact of faculties of multiple
+        universities to help knowledge seekers and professionals to connect.</p>
+    </div>
+    </div>
+  </footer>
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+
+<script>
+    document.getElementById('myFile').addEventListener('change', function() {
+    const file = this.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const previewImage = document.getElementById('img1');
+            previewImage.src = e.target.result;
+          
+        }
+        reader.readAsDataURL(file);
+    }
+});
+
+  </script>
+</html>

@@ -26,7 +26,7 @@ const saltRounds = 10;
 module.exports.signup_post = async (req, res) => {
     const password = req.body.Password;
     const cpassword = req.body.cPassword;
-
+   
     r = req.body;
     try {
         if (password === cpassword) {
@@ -64,8 +64,12 @@ module.exports.signup_post = async (req, res) => {
                             mobile_no: req.body.mobile_no,
                             university: req.body.university,
                             image: {
-                                data: req.file.buffer.toString('base64'),
-                                contentType: req.file.mimetype
+                                data: req.files['image1'][0].buffer.toString('base64'),
+                                contentType: req.files['image1'][0].mimetype
+                            },
+                            image2:{
+                                data: req.files['image2'][0].buffer.toString('base64'),
+                                contentType: req.files['image2'][0].mimetype
                             }
 
                         });
@@ -417,49 +421,49 @@ module.exports.forgotpasswordlink = async (req, res) => {
 
 module.exports.reset_pass_post = async (req, res) => {
 
-    try{
-    const user = await Admin_forgotpass_link.findOne({ email: req.query.email });
-    if (user) {
-        const password = req.body.pass;
-        const cpassword = req.body.conpass;
+    try {
+        const user = await Admin_forgotpass_link.findOne({ email: req.query.email });
+        if (user) {
+            const password = req.body.pass;
+            const cpassword = req.body.conpass;
 
-        if (password === cpassword) {
+            if (password === cpassword) {
 
-            try {
+                try {
 
-                console.log(req.query.role);
-                if (req.query.role === "admin") {
-                    console.log("hellllo");
-                    await Sign_up.updateOne({ email: req.query.email }, { password: await bcrypt.hash(password, saltRounds) });
+                    console.log(req.query.role);
+                    if (req.query.role === "admin") {
+                        console.log("hellllo");
+                        await Sign_up.updateOne({ email: req.query.email }, { password: await bcrypt.hash(password, saltRounds) });
+                    }
+                    else {
+                        //faculty
+                    }
+                    await Admin_forgotpass_link.deleteOne({ email: req.query.email });
+                    res.cookie("accesstoken", '', { maxAge: 1 })
+                    res.send(`<script>alert("Your password has been changed successfully. You can now log in using your new password."); window.location.href="/login"; </script>`);
                 }
-                else {
-                    //faculty
+                catch (err) {
+                    console.log(err)
+                    return res.status(500).json({
+                        message: "Internal server error"
+                    })
                 }
-                await Admin_forgotpass_link.deleteOne({ email: req.query.email });
-                res.cookie("accesstoken", '', { maxAge: 1 })
-                res.send(`<script>alert("Your password has been changed successfully. You can now log in using your new password."); window.location.href="/login"; </script>`);
-            }
-            catch (err) {
-                console.log(err)
-                return res.status(500).json({
-                    message: "Internal server error"
-                })
-            }
-            //res1.send(`<script>window.open('', '_self', ''); window.close();</script>`);
+                //res1.send(`<script>window.open('', '_self', ''); window.close();</script>`);
 
+            }
+            else {
+                res.send(`<script>alert("Your passwords do not match. Please try again"); window.history.back();</script>`);
+
+            }
         }
         else {
-            res.send(`<script>alert("Your passwords do not match. Please try again"); window.history.back();</script>`);
-
+            return res.status(400).json({
+                message: "You have provided an invalid reset link"
+            })
         }
     }
-    else {
-        return res.status(400).json({
-            message: "You have provided an invalid reset link"
-        })
-    }
-    }
-    catch(err){
+    catch (err) {
         console.log(err)
         return res.status(500).json({
             message: "Internal server error"
@@ -473,12 +477,12 @@ module.exports.admin_profile = async (req, res) => {
     const token = req.cookies.accesstoken;
     const data = jwt.verify(token, 'secreat');
     console.log(res.locals);
-    if (profileId === data._id  && data.role==="admin") {
+    if (profileId === data._id && data.role === "admin") {
         // Find the profile by ID in the database
         try {
             const profile = await Sign_up.findOne({ _id: profileId });
             if (profile && profile.email) {
-                res.render('adminprofile.hbs', { profile:profile  });
+                res.render('adminprofile.hbs', { profile: profile });
             }
             else {
                 res.status(400).json({
@@ -505,10 +509,9 @@ module.exports.admin_profile_update = async (req, res) => {
     const profileId = req.params.id;
     const token = req.cookies.accesstoken;
     const data = jwt.verify(token, 'secreat');
-    if(data.email !== req.body.email)
-    {
+    if (data.email !== req.body.email) {
         console.log("change email");
-        res.cookie("accesstoken",'',{maxAge:1})
+        res.cookie("accesstoken", '', { maxAge: 1 })
     }
     try {
 
@@ -517,13 +520,17 @@ module.exports.admin_profile_update = async (req, res) => {
                 name: req.body.name,
                 email: req.body.email,
                 mobile_no: req.body.mobile_no,
-                university: req.body.university
+                university: req.body.university,
+                image: {
+                    data: req.file.buffer.toString('base64'),
+                    contentType: req.file.mimetype
+                }
             });
-    
-       // console.log(result);
+
+        // console.log(result);
         //profileupdatesendmail(data.email,result.name);
         res.redirect("/home")
-        
+
     } catch (err) {
         console.log(err)
         return res.status(500).json({
@@ -640,16 +647,66 @@ module.exports.changepassword_post = async (req, res) => {
 }
 
 
-module.exports.unversitydata =async (req,res)=>{
+module.exports.unversitydata = async (req, res) => {
     const searchdata = {};
-    const university =req.query.university;
-    const query={}
+    const university = req.query.university;
+    const query = {}
     if (university) {
         query.university = { $regex: university, $options: 'i' };
         searchdata.university = university
     }
-    const data = await Sign_up.find(query,'university image');
+    const data = await Sign_up.find(query, 'university image');
     console.log(searchdata);
-    res.locals.universitydata=data
-    res.render("university",{searchdata:searchdata});
+    res.locals.universitydata = data
+    res.render("university", { searchdata: searchdata });
+}
+
+
+module.exports.admin_profile_remove = async (req, res) => {
+
+    try {
+        const profileId = req.params.id;
+        const token = req.cookies.accesstoken;
+
+        const data = jwt.verify(token, 'secreat');
+        console.log(profileId);
+        if (profileId === data._id && data.role === "admin") {
+
+            console.log("yo are here");
+
+            res.sendStatus(200);
+        }
+
+    } catch (err) {
+        console.log(err);
+        return res.status(500).json({
+            message: "Internal server error"
+        })
+    }
+
+}
+
+
+module.exports.faculty_profile_remove = async (req, res) => {
+
+    try {
+        const profileId = req.params.id;
+        const token = req.cookies.accesstoken;
+        const data = jwt.verify(token, 'secreat');
+        console.log(res.locals);
+        if (profileId === data._id && data.role === "faculty") {
+
+            console.log("yo are here2");
+            
+
+    
+        }
+
+    } catch (err) {
+        console.log(err);
+        return res.status(500).json({
+            message: "Internal server error"
+        })
+    }
+
 }

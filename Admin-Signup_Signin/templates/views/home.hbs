@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/4d50a8d6d6.js" crossorigin="anonymous"></script>
+    
+    <title></title>
+    <style>
+        
+/*Main Content*/
+
+#form12{
+    background-color: black;
+}
+.carousel-inner{
+    height: 400px;
+}
+.third-div{
+    width: 200px; 
+    height: 200px;
+}
+/*Footer Content*/
+
+footer{
+    display: flex;
+    margin-top: 1vw;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #588414;
+    color: white;
+    padding: 1vw;
+}
+.left a{
+        display: block;
+        margin-left: 5%;
+        padding: 1vh 4vw 2vh 2vw;
+        text-decoration: none;
+        text-decoration: underline;
+        color: #ffffff; /* Link color */
+        font-size: 20px;
+      }
+.right {
+    position:static;
+    text-align: left;
+    width: 28vw;
+    font-size: 20px;
+}
+
+.right h2{
+    position: static;
+    text-align: left;
+}
+
+.footer_title{
+    margin-left: 5%;
+}
+
+.l{
+    background-color: black;
+    border-top-left-radius: 2vw;
+    border-bottom-left-radius: 2vw;
+
+}
+.r{
+    background-color: black;
+    border-top-right-radius: 2vw;
+    border-bottom-right-radius: 2vw;
+}
+.med{
+    background-color: black;
+    color: white;
+    width: 40vw;
+}
+.c{
+    display: flex;
+    justify-content: center;
+}
+.mid_2{
+    display: flex;
+    justify-content: center;
+}
+.mid_inner{
+    width: 20vw;
+    height: 20vw;
+}
+
+.hm{
+  width: 50vw;
+  height: 80vw;
+}
+
+
+@media only screen and (max-width: 800px) {
+  footer{
+    flex-direction: column;
+  }
+  .mid_2{
+    flex-direction: column;
+    align-items: center;
+  }
+  .mid_inner{
+    margin-bottom: 20px;
+  }
+  .left {
+    width: 100%;
+    margin: 0px;
+    padding: 2vw;
+  }
+  .footer_title{
+    margin-left: 0px;
+  }
+  .left a {
+    margin-left: 0px;
+    padding: 0px;
+  }
+  .right {
+    width: 100%;
+    padding: 2vw;
+  }
+  .setting{
+    height: 25vh;
+  }
+  .mid_inner{
+    width: 20vh;
+    height: 20vh;
+  }
+}
+
+
+    </style>
+</head>
+
+<body>
+    <!-- Header Content -->
+    {{>header}}
+    <!-- Main Content -->
+
+    <main>
+        <div>
+            {{>search}}
+            <div class="d-flex mt-4 justify-content-center flex-column align-items-center mb-2">
+                <div class="text-bold fs-4 fw-bolder">
+                    Trending Topics
+                </div>
+            </div>
+            <div id="carouselExampleAutoplaying" class="carousel slide container w-50" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="images/da_logo.png" class="d-block w-100 " alt="...">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="images/ii_logo.png" class="d-block w-100" alt="...">
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying"
+                    data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying"
+                    data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+            <div class="d-flex mt-4 justify-content-center flex-column align-items-center mb-4">
+                <div class="text-bold fs-4 fw-bolder">
+                    Universities
+                </div>
+            </div>
+            <div class="mid_2">
+                <img src="images/da_logo.png" alt="" class="mid_inner">
+                <img src="images/ii_logo.png" alt="" class="mid_inner">
+                <img src="images/ni_logo.png" alt="" class="mid_inner">
+                <img src="images/pd_logo.png" alt="" class="mid_inner">
+            </div>
+    </main>
+
+    {{>footer}}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

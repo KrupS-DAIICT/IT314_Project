@@ -10,9 +10,14 @@ const hbs = require("hbs");
 
 var app = express();
 
-app.set("view engine", "hbs");
-app.set("views", "./views");
+// app.set("view engine", "hbs");
+// app.set("views", "./views");
 
+const templatePath = pathm.join(__dirname,"./templates/views");
+const partialPath = pathm.join(__dirname,"./templates/partials");
+app.set('view engine', 'hbs');
+app.set("views",templatePath);
+hbs.registerPartials(partialPath);
 
 const { Sign_up, Signup_otp ,Signin_count} = require("./schema/reg.js");
 const { checkuser, requireauth,setoption } = require("./controllers/middlefunc.js");
@@ -30,8 +35,9 @@ app.use(express.static(pathm.join(__dirname,"/public")));
 
 
 const storage = multer.memoryStorage();
-const upload = multer({ storage: storage });
-
+const upload = multer({
+    storage: storage,
+  })
 app.get('*',checkuser);
 
 app.get("/home",(req,res)=>{
@@ -59,6 +65,12 @@ app.get('/login',(req,res)=>{
 app.get('/reset-pass', controlers.forgotpasswordlink);
 app.get('/admin_profile/:id',requireauth,controlers.admin_profile);
 
+app.delete('/admin_profile_remove/:id',requireauth,controlers.admin_profile_remove);
+
+
+app.delete('/faulty_profile_remove/:id',requireauth,controlers.faculty_profile_remove);
+
+
 app.get('/otp',(req,res)=>{
     res.render('otp');
 })
@@ -70,7 +82,7 @@ app.get('/s',setoption,(req,res)=>{
 
 app.get('/search',setoption,controlers.search_faculty);
 
-app.post('/signup_post',upload.single('image'),controlers.signup_post)
+app.post('/signup_post',upload.fields([{ name: 'image1', maxCount: 1 }, { name: 'image2', maxCount: 1 }]),controlers.signup_post)
 app.post('/singup_otp',controlers.signup_post_otp);
 app.post('/login', controlers.login_post);
 app.post('/logout',requireauth,(req,res)=>{

@@ -1,0 +1,34 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="search.css">
+<div id="search" style="margin-top: 10px;">
+    <form id="searchForm" action="/search" method="get">
+        <div id="search_first">
+            <input type="text" placeholder="Search.." name="search2" value="{{searchdata.search_query}}"
+                class="main_part">
+        </div>
+        {{!-- <label for="location">location:</label>
+        <input type="text" name="location" id="location">
+        <br> --}}
+        <div id="course" class="main_part">
+            <label for="Course">Course:</label>
+            <input type="text" name="course">
+        </div>
+        <div id="university" class="main_part">
+            <label for="university">University:</label>
+            <select name="university" id="university">
+                <option value="all">ALL</option>
+                {{!-- <option value="daiict" {{#if (eq serachdata.university2 "daiict" )}}selected{{/if}}>daiict
+                </option>
+                <option value="nirma" {{#if (eq serachdata.university2 "nirma" )}}selected{{/if}}>nirma</option> --}}
+
+                {{#each universityoption}}
+                <option value="{{this.university}}" {{#if (eq university2 this.university)}}selected{{/if}}>
+                    {{this.university}}</option>
+                {{/each}}
+            </select>
+            <button type="submit" onclick="updateAction()"><i class="fa fa-search"></i></button>
+        </div>
+    </form>
+</div>
