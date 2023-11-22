@@ -1,4 +1,4 @@
 node_modules
 .env
-./templates/views/otpverified.hbs
-./src/routers/otpverified.js
+templates/views/otpverified.hbs
+src/routers/otpverified.js
