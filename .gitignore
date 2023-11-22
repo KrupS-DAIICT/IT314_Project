@@ -1,8 +1,6 @@
+.gitignore
 node_modules
 .env
-signup_post.txt
-temp.html
-test.xlsx
 views/otpverified.hbs
 routers/otpverified.js
 using_hbs/
