@@ -5,8 +5,8 @@ const Admin = require("../models/admin"); // require admin.js
 const Faculty = require("../models/faculty"); // require faculty.js
 const router = express.Router(); // require router
 const forgotPass = require("../models/forgotPass");
-const sendEmailPassReset = require("../functions/sendEmailPassReset");
-const generateOTP = require('../functions/generateOTP');
+const { sendEmailPassReset } = require("../functions/mails");
+const { generateOTP } = require('../functions/otpFunctions');
 const path = require('path');
 
 const saltRounds = 10;

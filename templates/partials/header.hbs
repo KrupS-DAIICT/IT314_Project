@@ -1,19 +1,80 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-  integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+  integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
   integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <script>
   function toggleOptions() {
-    var optionsDiv =
-      document.getElementById("options-container"); if (optionsDiv.style.display ===
-        "none") { optionsDiv.style.display = "flex"; } else {
-      optionsDiv.style.display
-        = "none";
+    var optionsDiv = document.getElementById("options-container");
+    if (optionsDiv.style.display === "none") {
+      optionsDiv.style.display = "flex";
+    } else {
+      optionsDiv.style.display = "none";
     }
   }
+
+  function deleteadmin() {
+
+    const deleteButton = document.getElementById('delete-admin');
+    console.log("admin here");
+
+    const confirmation = confirm('Are you sure you want to delete your profile? All the faculties associated with your university will also be deleted.');
+    if (confirmation) {
+      // Send a request to the backend to delete the profile
+      fetch("/admin-profile-remove/{{user._id}}", {
+        method: 'delete',
+      })
+        .then(response => {
+          if (response.ok) {
+            alert('Profile deleted successfully!');
+
+            // You can redirect or perform other actions as needed after successful deletion
+            window.location.href = '/';
+          } else {
+            throw new Error('Failed to delete profile');
+          }
+        })
+        .catch(error => {
+          alert(error.message);
+          // Handle the error or display a message to the user
+        });
+
+    }
+  }
+
+
+  function deletefaculty() {
+
+    const deleteButton = document.getElementById('delete-faculty');
+    console.log("faculty here");
+
+
+    const confirmation = confirm('Are you sure you want to delete your profile?');
+    if (confirmation) {
+      // Send a request to the backend to delete the profile
+      fetch("/faculty-profile-remove/{{user._id}}", {
+        method: 'delete',
+      })
+        .then(response => {
+          if (response.ok) {
+            alert('Profile deleted successfully!');
+            window.location.href = '/';
+            // You can redirect or perform other actions as needed after successful deletion
+          } else {
+            throw new Error('Failed to delete profile');
+          }
+        })
+        .catch(error => {
+          alert(error.message);
+          // Handle the error or display a message to the user
+        });
+
+    }
+  }
+
+
 </script>
 
-<link rel="stylesheet" href="../css/style.css" />
+<link rel="stylesheet" href="../css/style.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
   integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
   crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -31,26 +92,50 @@
           <a href="/" class="other_three">Home</a>
         </li>
         <li>
-          <a href="/search" class="other_three">University</a>
+          <a href="/search" class="other_three">Search</a>
         </li>
         <li>
-          <a href="/aboutus" class="other_three">About Us</a>
+          <a href="/university" class="other_three">University</a>
+        </li>
+        <li>
+          <a href="#" class="other_three">About Us</a>
         </li>
 
-        <li style="margin-right: 35px;">
-          <button onclick="toggleOptions()" id="icon_s"><i class="far fa-grin-alt" style="font-size:36px"></i></button>
-          <div id="options-container">
-            <a href="#" class="options_bt">Log Out</a>
-            <a href="#" class="options_bt">Delete Account</a>
-            <a href="#" class="options_bt">Edit Profile</a>
-          </div>
-        </li>
-        <li class="login_bt">
-          <a href="/signin">Sign in</a>
-        </li>
-        <li class="login_bt">
-          <a href="/signup">Sign up</a>
-        </li>
+        {{#if user}}
+          <li style="margin-right: 35px;">
+
+            <button onclick="toggleOptions()" id="icon_s"><i class='far fa-grin-alt'
+                style='font-size:36px'></i></button>
+            <div id="options-container">
+              <form action="/logout" method="post">
+                <button type="submit" class="options_bt">Logout</button>
+              </form>
+              {{!-- <a href="#" class="options_bt">Log Out</a> --}}
+              {{#if (eq user.role "admin")}}
+                <button id="delete-admin" class="options_bt" onclick="deleteadmin()">Delete
+                  Account</button>
+                <a href="/admin-profile/{{user._id}}" class="options_bt"><button class="options_bt">Edit
+                    Profile</button>
+                </a>
+              {{else}}
+
+                <a href="/faculty-profile/{{user._id}}" class="options_bt"><button class="options_bt">Edit
+                    Profile</button>
+                </a>
+                <button id="delete-faculty" class="options_bt" onclick="deletefaculty()">Delete
+                  Account</button>
+              {{/if}}
+              <a href="/change-password" class="options_bt"><button class="options_bt">ChangePassword</button></a><br>
+            </div>
+          </li>
+        {{else}}
+          <li class="login_bt">
+            <a href="/signin">Login</a>
+          </li>
+          <li class="login_bt">
+            <a href="/signup">Sign up</a>
+          </li>
+        {{/if}}
       </ul>
     </div>
   </div>

@@ -31,8 +31,8 @@
                 <option value="nirma" {{#if (eq serachdata.university2 "nirma" )}}selected{{/if}}>nirma</option> --}}
 
                 {{#each universityOption}}
-                    <option value="{{this}}" {{#if (eq ../searchdata.university this)}}selected{{/if}}>
-                        {{this}}
+                    <option value="{{this.university}}" {{#if (eq ../searchdata.university this)}}selected{{/if}}>
+                        {{this.university}}
                     </option>
                 {{/each}}
             </select>

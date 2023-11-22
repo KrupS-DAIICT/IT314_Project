@@ -4,10 +4,9 @@ require('./db/conn');
 const express = require('express');
 const session = require('express-session');
 const path = require('path');
-const checkSignupStep = require('./middleware/checkSignupStep');
 const hbs = require('hbs');
 const cookieparser = require('cookie-parser');
-const checkUser = require('./functions/checkUser');
+const { checkUser } = require('./functions/userFunctions');
 
 const app = express();
 const port = process.env.PORT || 8000;
@@ -27,8 +26,6 @@ app.use(session({
     saveUninitialized: true,
 }));
 
-// middlewares
-app.use(checkSignupStep); // use checkSignupStep
 
 app.use(express.json());
 app.use(cookieparser());
@@ -55,6 +52,9 @@ app.use(signinRouter); // use signin.js
 // routing - signup
 const signupRouter = require("./routers/signup"); // require signup.js
 app.use(signupRouter); // use signup.js
+
+const universityRouter = require("./routers/university");
+app.use(universityRouter);
 
 const addUniversityRouter = require("./routers/addUniversity"); // require signup.js
 app.use(addUniversityRouter); // use signup.js
@@ -83,6 +83,9 @@ app.use(changePasswordRouter);
 
 const searchFacultyRouter = require("./routers/searchFaculty");
 app.use(searchFacultyRouter);
+
+const removeDataRouter = require("./routers/removeData");
+app.use(removeDataRouter);
 
 
 app.listen(port, () => {

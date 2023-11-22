@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const router = express.Router();
 const validator = require("validator");
-const requireAuth = require("../functions/requireAuth");
+const { requireAuth } = require("../functions/userFunctions");
 
 router.get("/", async (req, res) => {
     // req.session.signupStep = 1;

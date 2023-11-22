@@ -1,28 +1,60 @@
-const Admin = require("../models/admin");
-const jwt = require("jsonwebtoken");
 require("dotenv").config();
+const jwt = require("jsonwebtoken");
+const Admin = require("../models/admin");
+const Faculty = require("../models/faculty");
+
+const requireAuth = (req, res, next) => {
+    const token = req.cookies.accesstoken;
+
+    if (token) {
+        jwt.verify(token, process.env.SECRET_KEY, (err, decodedToken) => {
+            if (err) {
+                res.redirect('/signin');
+            } else {
+                next();
+            }
+        })
+    } else {
+        res.redirect('/signin');
+    }
+};
 
 const checkUser = (req, res, next) => {
     const token = req.cookies.accesstoken;
-    if (token) {
-        jwt.verify(token, process.env.SECRET_KEY, async (err, decodedToken) => {
-            if (err) {
-                console.log(err.message);
-                res.locals.user = null;
-                next();
-            } else {
-                console.log(decodedToken);
-                let user = await Admin.findById(decodedToken._id);
-                res.locals.user = user;
-                next();
-            }
-        });
-    }
-    else {
+
+    if (!token) {
         res.locals.user = null;
-        next();
+        return next();
     }
-}
+
+
+    jwt.verify(token, process.env.SECRET_KEY, async (err, decodedToken) => {
+        if (err) {
+            res.locals.user = null;
+            return next();
+        }
+
+        try {
+            const query = { email: decodedToken.email };
+            const fields = decodedToken.role === 'admin' ? '_id email university' : '_id email institute';
+            const user = await (decodedToken.role === 'admin' ? Admin : Faculty).findOne(query, fields).exec();
+
+            if (!user) {
+                res.cookie("accesstoken", '', { maxAge: 1 });
+                return res.redirect('/');
+            }
+
+            user.role = decodedToken.role;
+            res.locals.user = user;
+            console.log(user);
+            next();
+        }
+        catch (err) {
+            console(err);
+            next(err);
+        }
+    })
+};
 
 const userDelete = async (email) => {
     const user = await Admin.findOne({ email: email });
@@ -30,6 +62,22 @@ const userDelete = async (email) => {
         const deleteData = await Admin.deleteOne({ email: email });
         console.log("User deleted successfully");
     }
-}
+};
 
-module.exports = { checkUser, userDelete };
+const setOption = async (req, res, next) => {
+    try {
+        const universityOption = await Admin.find({}, 'university image').exec();
+        // console.log(universityOption);
+        res.locals.universityOption = universityOption;
+
+        const courseOption = await Faculty.find({}, 'department').distinct('department');
+        const filteredCourseOptions = courseOption.filter(option => option != null && option.trim() != '');
+        // log(filteredCourseOptions);
+        res.locals.courseOption = filteredCourseOptions;
+        next();
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+module.exports = { requireAuth, checkUser, userDelete, setOption };

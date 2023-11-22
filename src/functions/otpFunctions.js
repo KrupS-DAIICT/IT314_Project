@@ -1,8 +1,17 @@
+const otpGenerator = require('otp-generator');
 const { log } = require("console");
-const generateOTP = require("./generateOTP");
-
 const otpCache = {};
 const expTime = 5 * 60 * 1000; // 5 minutes
+
+// function to generate OTP
+function generateOTP(num) {
+    const OTP = otpGenerator.generate(num, {
+        specialChars: false,
+        upperCaseAlphabets: false,
+        lowerCaseAlphabets: false
+    });
+    return OTP;
+}
 
 // Function to generate and store OTP
 function generateAndStoreOTP(email, num) {
@@ -22,4 +31,4 @@ function verifyOTP(email, user_OTP) {
     return false;
 }
 
-module.exports = { generateAndStoreOTP, verifyOTP };
+module.exports = { generateOTP, generateAndStoreOTP, verifyOTP };

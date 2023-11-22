@@ -4,7 +4,7 @@ const router = express.Router(); // require router
 const { log } = require('console');
 const Faculty = require('../models/faculty');
 const Math = require('math');
-const setOption = require('../functions/setOption');
+const { setOption } = require('../functions/userFunctions');
 const path = require('path');
 
 router.get("/search", setOption, async (req, res) => {

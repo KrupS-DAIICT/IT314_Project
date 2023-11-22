@@ -5,7 +5,7 @@ const Admin = require("../models/admin"); // require admin.js
 const router = express.Router(); // require router
 const { log } = require('console');
 const jwt = require("jsonwebtoken");
-const requireAuth = require("../functions/requireAuth");
+const { requireAuth } = require("../functions/userFunctions");
 
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
@@ -63,7 +63,7 @@ router.post('/admin-profile-update/:id', upload.single('image'), async (req, res
 
         return res.send(`<script>alert("Data saved successfully"); window.location.href="/admin-profile/${profileId}";</script>`);
     } catch (error) {
-        console.log(err)
+        console.log(error)
         return res.status(500).json({
             message: "Internal server error"
         });

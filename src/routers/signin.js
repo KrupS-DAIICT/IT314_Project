@@ -6,12 +6,13 @@ const Admin = require("../models/admin"); // require admin.js
 const Faculty = require("../models/faculty"); // require faculty.js
 const router = express.Router(); // require router
 // const cookieParser = require('cookie-parser'); // require cookie-parser
-const generateOTP = require("../functions/generateOTP");
+const { generateOTP } = require("../functions/otpFunctions");
 const lockUser = require("../models/lockUser");
-const sendEmailLock = require("../functions/sendEmailLock");
+const { sendEmailLock } = require("../functions/mails");
 const SigninCount = require("../models/signinCount");
 const createToken = require("../functions/createToken");
 const { log } = require('console');
+const adminLockUpdate = require('../functions/adminLockUpdate');
 
 const limit = 10 * 24 * 60 * 60;
 
@@ -33,7 +34,7 @@ router.post("/signin", async (req, res) => {
 
         if (!result) {
             log("Result not found");
-            res.send(`<script>alert("Invalid Details"); window.history.back();</script>`);
+            return res.send(`<script>alert("Invalid Details"); window.history.back();</script>`);
         }
 
         if (result && result.lock) {
@@ -76,6 +77,7 @@ router.post("/signin", async (req, res) => {
 
             if (result2.count >= 5) {
                 await SigninCount.updateOne({ _id: result2._id }, { count: result2.count + 1 });
+                setTimeout(adminLockUpdate, 300000, username, db);
                 handleAccountLock(username, role, db, req, res);
                 return;
             } else {

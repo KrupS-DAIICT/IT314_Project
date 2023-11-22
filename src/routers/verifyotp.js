@@ -1,14 +1,12 @@
 const express = require('express');
 const path = require('path');
 const jwt = require("jsonwebtoken");
-// const checkSignupStep = require('../middleware/checkSignupStep');
 const Admin = require("../models/admin");
 const { verifyOTP } = require('../functions/otpFunctions');
 const router = express.Router();
 const createToken = require("../functions/createToken");
 
 router.get("/signup/verifyotp", async (req, res) => {
-    // console.log(`signupStep: ${req.session.signupStep} dest: 2`);
     const filePath = path.join(__dirname, "../../templates/views", "verifyotp");
     res.render(filePath);
 });
@@ -50,8 +48,6 @@ async function verifyOTPFunction(data, req, res) {
             console.log('Admin not found');
         }
 
-        // req.session.signupStep = 3;
-        // res.redirect('/signup/otpverified');
         res.send(`<script>alert("OTP verification successful. redirecting to sign in page.."); window.location.href="/signin"</script>`);
 
     } catch (error) {

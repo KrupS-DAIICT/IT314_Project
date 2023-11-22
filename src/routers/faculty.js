@@ -4,12 +4,15 @@ const path = require("path");
 const jwt = require("jsonwebtoken");
 const multer = require("multer");
 const { handleExcel, generateRandomPassword } = require("../functions/handleExcel");
-const requireAuth = require("../functions/requireAuth");
+const { requireAuth } = require("../functions/userFunctions");
 const Faculty = require("../models/faculty");
 const { log } = require("console");
 const router = express.Router();
-const sendEmailLoginCredentials = require("../functions/sendEmailLoginCredentials");
+const { sendEmailLoginCredentials } = require("../functions/mails");
 const validator = require("validator");
+const { generateOTP } = require('../functions/otpFunctions');
+const verifyFaculty = require('../models/verifyFaculty');
+const { deleteAccount } = require('../functions/adminLockUpdate');
 
 
 router.get("/addfaculty", requireAuth, async (req, res) => {
@@ -124,7 +127,18 @@ router.post("/addfaculty", upload.single("excelFile"), async (req, res) => {
         log(pass);
 
         // send email before registring
-        // await sendEmailLoginCredentials(email, pass, data.university, facultyName);
+        const otp = generateOTP(30);
+        const port = process.env.PORT || 8000;
+        const verifyLink = `http://localhost:${port}/verify-account?email=${email}?&hash=${otp}`
+
+        const verifyData = new verifyFaculty({
+            email,
+            link: otp
+        });
+        await verifyData.save();
+
+        await sendEmailLoginCredentials(email, data.university, pass, facultyName, verifyLink);
+        setTimeout(deleteAccount, 1000 * 60 * 60 * 24 * 7, email);
 
         res.status(200).send(`<script>alert("Faculty Added successfully"); window.location.href="/addfaculty"</script>`)
     } catch (error) {

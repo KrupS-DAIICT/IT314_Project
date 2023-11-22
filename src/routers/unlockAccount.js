@@ -5,6 +5,7 @@ const router = express.Router(); // require router
 const lockUser = require("../models/lockUser");
 const SigninCount = require("../models/signinCount");
 const { log } = require('console');
+const verifyFaculty = require('../models/verifyFaculty');
 
 router.get("/unlock-account", async (req, res) => {
     try {
@@ -43,5 +44,43 @@ router.get("/unlock-account", async (req, res) => {
         });
     }
 });
+
+router.get("/verify-account", async (req, res) => {
+    try {
+        log(req.query);
+        const { email, hash } = req.query;
+        log(email, hash);
+
+        if (email && hash) {
+            const emailSlice = email.slice(0, -1);
+            log(emailSlice);
+
+            const user = await verifyFaculty.findOne({ email: emailSlice, link: hash });
+            log(user);
+
+            if (user) {
+                await Faculty.updateOne({ email: emailSlice }, { verified: true });
+                await verifyFaculty.deleteOne({ email: emailSlice });
+                res.send(`<script>alert("Account verified successfully"); window.location.href = "/signin";</script>`);
+            } else {
+                return res.status(400).json({
+                    message: "You have provided an invalid verify link"
+                });
+            }
+        }
+        else {
+            return res.status(400).json({
+                message: "You have provided an invalid verify link"
+            });
+        }
+    } catch (error) {
+        console.log(error)
+        return res.status(500).json({
+            message: "Internal server error"
+        });
+    }
+});
+
+
 
 module.exports = router; // export router

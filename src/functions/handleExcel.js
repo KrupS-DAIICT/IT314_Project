@@ -7,8 +7,11 @@ const path = require("path");
 const axios = require('axios');
 const { log } = require("console");
 const jwt = require("jsonwebtoken");
-const sendEmailLoginCredentials = require("../functions/sendEmailLoginCredentials");
+const { sendEmailLoginCredentials } = require("../functions/mails");
+const { generateOTP } = require('./otpFunctions');
 // const generateRandomPassword = require("../functions/generateRandomPassword")
+const { adminLockUpdate, deleteAccount } = require('../functions/adminLockUpdate');
+const verifyFaculty = require('../models/verifyFaculty');
 
 function generateRandomPassword() {
     const lowercaseLetters = 'abcdefghijklmnopqrstuvwxyz';
@@ -16,15 +19,24 @@ function generateRandomPassword() {
     const numbers = '0123456789';
     const specialCharacters = '!@#$%^&*()_-+=<>?';
 
-    const allCharacters = lowercaseLetters + uppercaseLetters + numbers + specialCharacters;
+    const getRandomChar = (charSet) => {
+        const randomIndex = Math.floor(Math.random() * charSet.length);
+        return charSet.charAt(randomIndex);
+    };
 
-    let password = '';
-    for (let i = 0; i < 8; i++) {
-        const randomIndex = Math.floor(Math.random() * allCharacters.length);
-        password += allCharacters.charAt(randomIndex);
-    }
+    // Ensure at least one character from each character set
+    const password =
+        getRandomChar(lowercaseLetters) +
+        getRandomChar(uppercaseLetters) +
+        getRandomChar(numbers) +
+        getRandomChar(specialCharacters) +
+        // Include additional random characters to meet the desired length
+        Array.from({ length: 4 }, () => getRandomChar(lowercaseLetters + uppercaseLetters + numbers + specialCharacters)).join('');
 
-    return password;
+    // Shuffle the password to randomize the order of characters
+    const shuffledPassword = password.split('').sort(() => Math.random() - 0.5).join('');
+
+    return shuffledPassword;
 }
 
 const downloadAndStoreImage = async (imageUrl, imageName) => {
@@ -95,11 +107,26 @@ const handleExcel = async (req, res) => {
                             }
                         }
 
-                        // send email before saving
+
                         // const mail = row.getCell(5).value;
                         // const university = data.university;
                         // const name = row.getCell(1).value;
-                        // await sendEmailLoginCredentials(mail, password, university, name);
+                        // const otp = generateOTP(30);
+
+                        // add data into verifyFaculty schema
+                        // const verifyData = new verifyFaculty({
+                        //     email: mail,
+                        //     link: otp
+                        // });
+                        // await verifyData.save();
+
+                        // send email before registring
+                        // const port = process.env.PORT || 8000;
+                        // const verifyLink = `http://localhost:${port}/verify-account?email=${mail}?&hash=${otp}`
+
+                        // await sendEmailLoginCredentials(mail, university, password, name, verifyLink);
+                        // setTimeout(deleteAccount, 1000 * 60 * 60 * 24 * 7, mail);
+
 
                         saveFacultyPromises.push(Faculty.create(facultyData));
                     }
