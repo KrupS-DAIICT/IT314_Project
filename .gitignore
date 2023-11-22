@@ -1,6 +1,4 @@
-.gitignore
 node_modules
 .env
-views/otpverified.hbs
-routers/otpverified.js
-using_hbs/
+./templates/views/otpverified.hbs
+./src/routers/otpverified.js
