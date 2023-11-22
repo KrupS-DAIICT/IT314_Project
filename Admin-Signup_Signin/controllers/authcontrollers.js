@@ -24,9 +24,17 @@ const saltRounds = 10;
 
 
 module.exports.signup_post = async (req, res) => {
-    const password = req.body.Password;
-    const cpassword = req.body.cPassword;
-   
+    const password = req.body.password;
+    const cpassword = req.body.cpassword;
+//     const name= req.body.Company_Name;
+//     const  email= req.body.email;
+    
+//     const mobile_no =req.body.mobile_no;
+//     const university =req.body.university;
+//     const address=req.body.Address;
+
+// console.log(password,"  ",email,"  ",university,address)
+                          
     r = req.body;
     try {
         if (password === cpassword) {

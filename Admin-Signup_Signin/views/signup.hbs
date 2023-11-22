@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{{!-- <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -153,7 +153,10 @@ footer{
         <input class="ip" type="tel" name="mobile_no" pattern="[0-9]{10}" required><br>
         <label for="university">University</label><br>
         <input class="ip" type="text" name="university" required><br>
-        <input type="file" name="image" accept="image/*" required><br>
+        admin photo:
+        <input type="file" id="image1"  name="image1" accept="image/*" required><br>
+        collage logo:
+        <input type="file" id="image2" name="image2" accept="image/*" required><br>
         <button type="submit" value="Submit" id="sub">Submit</button>
         <button type="reset" value="reset">Reset</button><br>
         <p class="p">
@@ -218,5 +221,248 @@ footer{
 
 
 
+
+</html> --}}
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FacultyHub</title>
+  <style>
+   h2{
+    text-align: center;
+    font-size: 30px;
+    margin: 2vh;
+}
+#sign_up{
+    display: flex;
+    justify-content: space-around;
+    background-color: rgb(13, 8, 52);
+    color: white;
+    margin: 1vh 8vw 1vh 8vw;
+    border: 1px solid rgb(13, 8, 52);
+    border-radius: 20px;
+}
+section{
+    padding: 2vw 2vw 1.7vw 2vw;
+}
+img{
+    height: 68vh;
+    width: 40vw;
+    border-radius: 20px;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    width: 35vw;
+}
+#admin_details,#univercity_details{
+    display: flex;
+    flex-direction: column;
+}
+label{
+    font-size: 2.7vh;
+    margin: 0;
+}
+.ip{
+    margin: 1vh;
+    width: 30vw;
+    height: 3.2vh;
+    border-radius: 4px ;
+    border:2px solid rgb(247, 247, 247);
+    border-radius: 20px;
+    padding:0.5vw 1vw;
+    font-size: 18px;
+}
+.p{
+    font-size: 15px;
+    margin-top: 10px;
+    text-align: center;
+}
+.bt{
+  display: flex;
+    text-align: center;
+    justify-content: space-around;
+}
+.p{
+    font-size: 15px;
+    margin-right: 3vh;
+    margin-bottom: 0;
+    text-align: center;
+}
+
+.p a{
+    color:yellow;
+    text-decoration: none;
+}
+.p a:hover{
+    color: red;
+}
+.mup h2{
+    padding: 1vw 0 0.5vw 0; 
+}
+
+.p a:active{
+    color:rgb(0, 0, 0);
+}
+.bt button{
+    width: 7vw;
+    height: 5vh;
+    border: 1px solid rgb(13, 8, 52);
+    border-radius: 2vw;
+    cursor: pointer;
+    transition-duration: 0.4s;
+    box-shadow: 0 2px 4px rgb(87, 105, 107);
+    margin: 0.5vw 3vw;
+}
+#green:hover{
+    background-color: green;
+    font-weight: bold;
+}
+#red:hover{
+    background-color: red;
+    font-weight: bold;
+}
+button:active{
+    box-shadow: 0 0 2px rgb(60, 253, 253);
+    transform: translateY(2px);
+}
+
+
+@media (max-width: 800px) {
+    #sign_up {
+      flex-direction: column-reverse;
+      align-items: center;
+    }
+  
+    img {
+      height: auto;
+      width: 80%;
+      margin: 20px;
+    }
+  
+    form {
+      width: 80%;
+    }
+    input.ip {
+        width: 60vw;
+      }
+      .bt button{
+        width: 13vh;
+        border-radius: 20px;
+        margin-bottom: 5px;
+      }
+      #texta{
+        width: 100%;
+    }
+    }
+
+  </style>
+  {{!-- This is JavaScript funcionallty--}}
+  <script>
+    function showAdminDetails() {
+
+     
+      document.getElementById('admin_details').style.display = 'flex';
+      document.getElementById('univercity_details').style.display = 'none';
+      document.getElementById('red').style.display = 'none';
+      document.getElementById('submit').style.display = 'none';
+            document.getElementById('green').style.display = 'block';
+       
+     // document.getElementById('green').setAttribute('onclick', 'showUniversityDetails()');
+    }
+
+    function showUniversityDetails() {
+
+      let valid = true;
+      const fields = document.querySelectorAll(`#admin_details [required]`);
+
+      fields.forEach(field => {
+        if (!field.checkValidity()) {
+          valid = false;
+          field.reportValidity();
+        } 
+      });
+      if(valid){
+      document.getElementById('univercity_details').style.display = 'flex';
+      document.getElementById('admin_details').style.display = 'none';
+      document.getElementById('green').style.display = 'none';
+      document.getElementById('submit').style.display = 'block';
+      document.getElementById('red').style.display = 'block';
+      }
+      
+
+    }
+
+    function submitForm() {
+      // Add any form submission logic here
+      document.forms[0].submit();
+    }
+  </script>
+</head>
+
+<body>
+  {{>header}}
+
+  <main class="mup">
+    <h2>Admin Sign up</h2>
+    <section id="sign_up">
+      <form action="/signup_post" method="post">
+      {{!-- We have made two new div --}}
+      {{!-- first divison  --}}
+        <div id="admin_details">
+          <label for="name">Full Name</label>
+          <input class="ip" type="text" name="Company Name" maxlength="25" required>
+          <label for="email">Email</label>
+        <input class="ip" type="email" name="email" id="email" required>
+        <span id="emailError" style="color: red; font-size: smaller;"></span>
+          <label for="password">Password</label>
+          <input class="ip" type="password" name="password" id="password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$"
+                title="Password must be at least 8 characters long and include at least one uppercase letter, one lowercase letter, and one number" required>
+        <span id="passwordError" style="color: red; font-size: smaller"></span>
+          <label for="cPassword">Conform Password</label>
+           <input class="ip" type="password" name="cPassword" id="cPassword" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$"
+                title="Password must be at least 8 characters long and include at least one uppercase letter, one lowercase letter, and one number" required>
+        <span id="cPasswordError" style="color: red; font-size: smaller"></span>
+          <label for="mobile_no">Mobile no</label>
+          <input class="ip" type="tel" name="mobile_no" pattern="[0-9]{10}" required>
+          <label for="university">Admin Photo</label>
+          <input type="file" name="image1" style="margin-left: 20px;" id="input_file">
+        </div>
+        {{!-- Second div --}}
+        <div id="univercity_details" style="display: none;">
+          <label for="name">University Name</label>
+          <input class="ip" type="text" name="university" required>
+          <label for="email">Address</label>
+          <textarea class="ip" name="Address" style="height: 150px;" id="texta"></textarea>
+          <label for="university">University Logo</label>
+          <input type="file" name="image2" style="margin: 2px 0px 2px 20px;">
+          {{!-- <label for="university">Government Proof</label>
+          <input type="file" name="Government Proof" style="margin: 2px 0px 2px 20px;"> --}}
+        </div>
+        {{!-- This button html is also changed by onclick --}}
+        <div class="bt">
+          <button type="button" value="Submit" id="green" onclick="showUniversityDetails()">Next</button>
+                    <button type="submit" value="Submit" id="submit" style="display: none;">Submit</button>
+
+          <button type="button" value="reset" id="red" onclick="showAdminDetails()" style="display: none;">Back</button>
+        </div>
+        <p class="p">
+          Already have an account? <a href="/sign_in">sign in.</a>
+        </p>
+      </form>
+      <img id="up" src="sign_up.png" alt="sign_up">
+    </section>
+  </main>
+  {{>footer}}
+  <script src="sign_up.js"></script>
+</body>
 
 </html>
