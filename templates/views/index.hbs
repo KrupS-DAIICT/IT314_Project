@@ -4,149 +4,11 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    {{!-- <link rel="stylesheet" href="css/Home.css"> --}}
-    {{!-- <style>
-        /*header Content*/
-
-        header {
-            display: flex;
-            justify-content: space-between;
-            background-color: #0C2340;
-            color: white;
-            align-items: center;
-            height: 8vh;
-            padding-left: 7vw;
-            padding-right: 5vw;
-            border: 2px solid rgb(0, 0, 0);
-            border-bottom-left-radius: 35px;
-            border-bottom-right-radius: 35px;
-        }
-
-        header a {
-            color: white;
-            font-size: 20px;
-            margin: 10px;
-            text-decoration: none;
-        }
-
-        header button {
-            margin: 10px;
-        }
-
-        /*Main Content*/
-
-        #form12 {
-            background-color: #0C2340;
-        }
-
-        .carousel-inner {
-            height: 400px;
-        }
-
-        .third-div {
-            width: 200px;
-            height: 200px;
-        }
-
-        /*Footer Content*/
-
-        footer {
-            display: flex;
-            margin-top: 1vw;
-            justify-content: space-around;
-            align-items: center;
-            background-color: #588414;
-            color: white;
-        }
-
-        .left a {
-            display: block;
-            margin-left: 5%;
-            padding: 1vh 4vw 2vh 2vw;
-            text-decoration: none;
-            text-decoration: underline;
-            color: #ffffff;
-            /* Link color */
-            font-size: 20px;
-        }
-
-        .right {
-            position: static;
-            text-align: left;
-            width: 28vw;
-            font-size: 20px;
-        }
-
-        .right h2 {
-            position: static;
-            text-align: left;
-        }
-
-        .footer_title {
-            margin-left: 5%;
-        }
-    </style> --}}
-
-    {{!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> --}}
-    {{!-- <script src="https://kit.fontawesome.com/4d50a8d6d6.js" crossorigin="anonymous"></script> --}}
-    {{!-- <title></title> --}}
-</head>
-
-<body>
-    <!-- Header Content -->
-
-    {{!-- <header>
-        <h1>FacultyHub</h1>
-        <nav>
-            <a href="/">Home</a>
-            <a href="#">University</a>
-            <a href="/aboutus">About Us</a>
-            {{#if user}}
-        <form class="logout" action="/logout" method="POST">
-            <button type="submit">LogOut</button>
-        </form>
-        
-        {{else}}
-            <a href="/login" class="btn btn-light">Sign in</button>
-            {{/if}}
-            <a href="/signup" class="btn btn-light">Sign up</button>
-
-            {{#if user}}
-                <a href="/change-password">ChangePassword</a><br>
-                <form class="logout" action="/logout" method="POST">
-                    <button type="submit">LogOut</button>
-                </form>
-                <a href="/admin-profile/{{user._id}}">profile</a>
-            {{else}}
-                <form action="/signin" method="get">
-                    <button type="submit" class="btn btn-light">Sign in</button>
-                </form>
-
-            {{/if}}
-
-
-        </nav>
-    </header> --}}
     {{>header}}
 
-
     <!-- Main Content -->
-
     <main>
         <div>
-            <div class="mt-4 d-flex justify-content-center">
-                <div class="input-group bg-primary w-50 rounded-5">
-                    <button id="search-button" type="button" class="btn rounded-start-5">
-                        <i class="fas fa-search" style="color: #ffffff;"></i>
-                    </button>
-                    <input type="text" id="form12" class="form-control shadow-none"
-                        placeholder="Search with university name or faculty name or area of intelligence" />
-                    <button class="btn rounded-end rounded-end-5">
-                        <i class="fa-solid fa-filter" style="color: #ffffff;"></i>
-                    </button>
-                </div>
-            </div>
             <div class="d-flex mt-4 justify-content-center flex-column align-items-center mb-2">
                 <div class="text-bold fs-4 fw-bolder">
                     Trending Topics
@@ -191,6 +53,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
-</body>
+    </body>
 
 </html>

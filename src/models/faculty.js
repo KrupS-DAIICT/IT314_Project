@@ -82,6 +82,10 @@ const facultySchema = new mongoose.Schema({
                 type: String,
                 default: ""
             },
+            position: {
+                type: String,
+                default: ""
+            }
         }
     ]
 });

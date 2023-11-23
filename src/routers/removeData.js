@@ -18,7 +18,7 @@ router.delete("/admin-profile-remove/:id", async (req, res) => {
             try {
                 const admin = await Admin.findById(profileId);
                 const university = admin.university;
-                await admin.remove();
+                await Admin.deleteOne({ _id: profileId });
                 log("Admin removed successfully.");
 
                 // deleting all faculties assosiated with admin
@@ -56,7 +56,35 @@ router.delete("/faculty-profile-remove/:id", async (req, res) => {
         if (profileId === data._id && data.role === "faculty") {
             // deleting faculty data
             await Faculty.deleteOne({ _id: profileId });
+            res.sendStatus(200);
         }
+
+        res.sendStatus(400);
+
+    } catch (err) {
+        console.log(err);
+        return res.status(500).json({
+            message: "Internal server error"
+        })
+    }
+
+});
+
+router.delete("/faculty-remove/:id", async (req, res) => {
+    try {
+        const profileId = req.params.id;
+        const token = req.cookies.accesstoken;
+        const data = jwt.verify(token, process.env.SECRET_KEY);
+        // console.log(data);
+        log(`checking:, ${profileId}, ${data}`);
+
+        // deleting faculty data
+        await Faculty.deleteOne({ _id: profileId });
+        res.sendStatus(200)
+
+
+        // send mail
+
 
     } catch (err) {
         console.log(err);

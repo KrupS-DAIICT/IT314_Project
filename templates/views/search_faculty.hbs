@@ -8,6 +8,36 @@
 
 
     <title>Document</title>
+    <script>
+        function removeFaculty(fetchUrl) {
+
+
+            console.log("heeloo", fetchUrl);
+
+
+            const confirmation = confirm('Are you sure you want to delete this faculty?');
+            if (confirmation) {
+                // Send a request to the backend to delete the profile
+                fetch(fetchUrl, {
+                    method: 'delete',
+                })
+                    .then(response => {
+                        if (response.ok) {
+                            alert('Profile deleted successfully!');
+                            window.location.href = '/search';
+                            // You can redirect or perform other actions as needed after successful deletion
+                        } else {
+                            throw new Error('Failed to delete profile');
+                        }
+                    })
+                    .catch(error => {
+                        alert(error.message);
+                        // Handle the error or display a message to the user
+                    });
+
+            }
+        }
+    </script>
 </head>
 
 <body>
@@ -43,8 +73,14 @@
                                         <div class="btn-group">
                                             <!-- <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
                           <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button> -->
+
+                                            {{#if (eq ../user.role 'admin')}}
+                                                {{#if (eq this.institute ../user.university)}}
+                                                    <button
+                                                        onclick="removeFaculty('/faculty-remove/{{this._id}}')">Delete</button>
+                                                {{/if}}
+                                            {{/if}}
                                         </div>
-                                        <small class="text-body-secondary">9 mins</small>
                                     </div>
                                 </div>
                             </div>

@@ -19,6 +19,22 @@ const requireAuth = (req, res, next) => {
     }
 };
 
+const adminAuth = (req, res, next) => {
+    const token = req.cookies.accesstoken;
+
+    if (token) {
+        jwt.verify(token, process.env.SECRET_KEY, (err, decodedToken) => {
+            if (err) {
+                res.redirect('/signin');
+            } else if (decodedToken.role === 'admin') {
+                next();
+            }
+        })
+    } else {
+        res.redirect('/signin');
+    }
+};
+
 const checkUser = (req, res, next) => {
     const token = req.cookies.accesstoken;
 
@@ -66,9 +82,10 @@ const userDelete = async (email) => {
 
 const setOption = async (req, res, next) => {
     try {
-        const universityOption = await Admin.find({}, 'university image').exec();
+        const universityOption = await Admin.find({}, 'university university_img').exec();
         // console.log(universityOption);
         res.locals.universityOption = universityOption;
+        res.locals.universityData = universityOption;
 
         const courseOption = await Faculty.find({}, 'department').distinct('department');
         const filteredCourseOptions = courseOption.filter(option => option != null && option.trim() != '');
@@ -80,4 +97,4 @@ const setOption = async (req, res, next) => {
     }
 };
 
-module.exports = { requireAuth, checkUser, userDelete, setOption };
+module.exports = { requireAuth, adminAuth, checkUser, userDelete, setOption };

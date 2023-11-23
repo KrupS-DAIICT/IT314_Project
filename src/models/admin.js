@@ -31,7 +31,6 @@ const adminSchema = new mongoose.Schema({
     phone: {
         type: Number,
         required: true,
-        unique: true,
         minlength: 10, maxlength: 10,
     },
     verified: {
@@ -51,7 +50,15 @@ const adminSchema = new mongoose.Schema({
             type: String,
             required: true
         }
-    }]
+    }],
+    university_img: {
+        data: Buffer,
+        contentType: String
+    },
+    address: {
+        type: String,
+        required: true
+    }
 });
 
 // Encrypt password before saving

@@ -5,76 +5,123 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FacultyHub</title>
-    <link rel="stylesheet" href="../css/addFaculty.cc
-    ">
+    <link rel="stylesheet" href="../css/addFaculty.css">
 </head>
 
 <body>
     {{>header}}
 
     <main>
-        <div class="container">
-            <form action="" class="search-bar">
-                <button type="search">
-                    <img src="../../images/pngwing.com.png">
-                </button>
-                <input type="text" placeholder="Search with university name and faculty name or area of intelligence"
-                    name="q">
-                <button type="filter">
-                    <img src="../../images/filter.png">
-                </button>
+        <div class="wrapper">
+            <div class="title">
+                Add Faculty
+            </div>
+            <form id="myForm" method="post" action="/addfaculty" enctype="multipart/form-data">
+                <div class="form">
+                    <div id="indiData">
+                        <div class="inputfield">
+                            <label for="name">Faculty Name*</label>
+                            <input required class="ip" type="text" name="facultyName">
+                        </div>
+                        <div class="inputfield">
+                            <label for="email">Email-Address*</label>
+                            <input required class="ip" type="email" name="email">
+                        </div>
+                        <div class="inputfield">
+                            <label for="Number">Contact No</label>
+                            <input class="ip" type="tel" name="contactNo" pattern="[0-9]{10}">
+                        </div>
+                        <div class="inputfield">
+                            <label for="Education">Education</label>
+                            <input required class="ip" type="text" name="education">
+                        </div>
+                        <div class="inputfield">
+                            <label for="Address">Address</label>
+                            <input class="Address" type="text" name="address">
+                        </div>
+                        <div class="inputfield">
+                            <label for="Specialization">Field of specialization</label>
+                            <input class="ip" type="text" name="fieldOfSpecialization">
+                        </div>
+                        <div class="inputfield">
+                            <label for="Courses">Courses Taught*</label>
+                            <input class="ip" type="text" name="coursesTaught">
+                        </div>
+                        <div class="inputfield">
+                            <label for="Website">Website</label>
+                            <input class="ip" type="text" name="website">
+                        </div>
+                        <div class="inputfield">
+                            <label for="Publications">Publications</label>
+                            <input class="ip" type="text" name="publications">
+                        </div>
+                        <div class="Profile">
+                            <label for="Image">Faculty Image</label>
+                            <input class="Image" type="file" name="faculty_img" accept="image/*">
+                        </div>
+                    </div>
+                    <div id="excelData" style="display: none" class="inputfield">
+                        <label for="Excle">Excel</label>
+                        <input class="Excel" type="file" name="excelFile"
+                            accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+                    </div>
+                    <div class="button">
+                        <div class="inputfield">
+                            <input type="button" value="Excel" class="btn" id="excelBtn" onclick="showExcelData()">
+                        </div>
+                        <div class="inputfield">
+                            <input type="button" value="Back" class="btn" id="backBtn" onclick="showIndiData()"
+                                style="display: none">
+                        </div>
+                        <div class="inputfield">
+                            <input type="reset" value="Reset" class="btn">
+                        </div>
+                        <div class="inputfield">
+                            <input type="submit" value="Done" class="btn">
+                        </div>
+                    </div>
+                </div>
             </form>
-
         </div>
-        <h2>Add Faculty</h2>
-        <section id="Add_Faculty">
-            <form enctype="multipart/form-data" method="POST">
-                <label for="name">Faculty Name*</label><br>
-                <input class="ip" type="text" name="facultyName"><br>
-
-                <label for="email">Email-Address*</label><br>
-                <input class="ip" type="email" name="email"><br>
-
-                <label for="Number">Contact No*</label><br>
-                <input class="ip" type="tel" name="contactNo" pattern="[0-9]{10}"><br>
-
-                <label for="Education">Education*</label><br>
-                <input class="ip" type="text" name="education"><br>
-
-                {{!-- <label for="Address">Address*</label><br>
-                <input class="Address" type="text" name="address"><br> --}}
-
-                <label for="Specialization">Field of specialization</label><br>
-                <input class="ip" type="text" name="fieldOfSpecialization"><br>
-
-                <label for="Courses">Courses Taught*</label><br>
-                <input class="ip" type="text" name="coursesTaught"><br>
-
-                <label for="Website">Website</label><br>
-                <input class="ip" type="text" name="website"><br>
-
-                <label for="Publications">Publications</label><br>
-                <input class="ip" type="text" name="publications"><br>
-
-                {{!-- <label for="Image">Faculty Image</label><br>
-                <input class="Image" type="file" name="facultyImg" accept="image/*"><br> --}}
-
-                <label for="Excle">Excel</label><br>
-                <input class="Excel" type="file" name="excelFile"><br>
-
-                {{!-- <label for="Photo">Profile Picture*</label>
-                <input class="photo" type="file" required><br> --}}
-
-                <button type="Reset" value="Reset">Reset</button>
-                <button type="Done" value="Done">Done</button>
-
-
-            </form>
-
-        </section>
     </main>
 
     {{>footer}}
+
+    <script>
+        function showExcelData() {
+            document.getElementById("indiData").style.display = "none";
+            document.getElementById("excelBtn").style.display = "none";
+            document.getElementById("excelData").style.display = "block";
+            document.getElementById("backBtn").style.display = "block";
+            var form = document.getElementById("myForm");
+            var elements = form.elements;
+            console.log(elements);
+            for (var i = 0; i < elements.length; i++) {
+                if (i != 10) {
+                    elements[i].required = false;
+                } else {
+                    elements[i].required = true;
+                }
+            }
+        }
+
+        function showIndiData() {
+            document.getElementById("indiData").style.display = "block";
+            document.getElementById("excelBtn").style.display = "block";
+            document.getElementById("excelData").style.display = "none";
+            document.getElementById("backBtn").style.display = "none";
+            var form = document.getElementById("myForm");
+            var elements = form.elements;
+            console.log(elements);
+            for (var i = 0; i < elements.length; i++) {
+                if (i != 10 && (i == 0 || i == 1 || i == 3)) {
+                    elements[i].required = true;
+                } else {
+                    elements[i].required = false;
+                }
+            }
+        }
+    </script>
 </body>
 
 </html>

@@ -1,9 +1,10 @@
-h2{
+h2 {
     text-align: center;
     font-size: 30px;
     margin: 2vh;
-}
-#sign_up{
+  }
+
+  #sign_up {
     display: flex;
     justify-content: space-around;
     background-color: rgb(13, 8, 52);
@@ -11,66 +12,83 @@ h2{
     margin: 1vh 8vw 1vh 8vw;
     border: 1px solid rgb(13, 8, 52);
     border-radius: 20px;
-}
-section{
+  }
+
+  section {
     padding: 2vw 2vw 1.7vw 2vw;
-}
-img{
+  }
+
+  img {
     height: 68vh;
     width: 40vw;
     border-radius: 20px;
-}
+  }
 
-form{
+  form {
     display: flex;
     flex-direction: column;
     width: 35vw;
-}
-label{
+  }
+
+  #admin_details,
+  #university_details {
+    display: flex;
+    flex-direction: column;
+  }
+
+  label {
     font-size: 2.7vh;
     margin: 0;
-}
-.ip{
+  }
+
+  .ip {
     margin: 1vh;
     width: 30vw;
     height: 3.2vh;
-    border-radius: 4px ;
-    border:2px solid rgb(247, 247, 247);
+    border-radius: 4px;
+    border: 2px solid rgb(247, 247, 247);
     border-radius: 20px;
-    padding:0.5vw 1vw;
+    padding: 0.5vw 1vw;
     font-size: 18px;
-}
-.p{
+  }
+
+  .p {
     font-size: 15px;
     margin-top: 10px;
     text-align: center;
-}
-.bt{
+  }
+
+  .bt {
+    display: flex;
     text-align: center;
-    margin-right: 3vw;
-}
-.p{
+    justify-content: space-around;
+  }
+
+  .p {
     font-size: 15px;
     margin-right: 3vh;
     margin-bottom: 0;
     text-align: center;
-}
+  }
 
-.p a{
-    color:yellow;
+  .p a {
+    color: yellow;
     text-decoration: none;
-}
-.p a:hover{
-    color: red;
-}
-.mup h2{
-    padding: 1vw 0 0.5vw 0; 
-}
+  }
 
-.p a:active{
-    color:rgb(0, 0, 0);
-}
-.bt button{
+  .p a:hover {
+    color: red;
+  }
+
+  .mup h2 {
+    padding: 1vw 0 0.5vw 0;
+  }
+
+  .p a:active {
+    color: rgb(0, 0, 0);
+  }
+
+  .bt button {
     width: 7vw;
     height: 5vh;
     border: 1px solid rgb(13, 8, 52);
@@ -79,45 +97,51 @@ label{
     transition-duration: 0.4s;
     box-shadow: 0 2px 4px rgb(87, 105, 107);
     margin: 0.5vw 3vw;
-}
-#green:hover{
+  }
+
+  #green:hover {
     background-color: green;
     font-weight: bold;
-}
-#red:hover{
+  }
+
+  #red:hover {
     background-color: red;
     font-weight: bold;
-}
-button:active{
+  }
+
+  button:active {
     box-shadow: 0 0 2px rgb(60, 253, 253);
     transform: translateY(2px);
-}
+  }
 
 
-@media (max-width: 800px) {
+  @media (max-width: 800px) {
     #sign_up {
       flex-direction: column-reverse;
       align-items: center;
     }
-  
+
     img {
       height: auto;
       width: 80%;
       margin: 20px;
     }
-  
+
     form {
       width: 80%;
     }
-    input.ip {
-        width: 60vw;
-      }
-      .bt button{
-        width: 13vh;
-        border-radius: 20px;
-        margin-bottom: 5px;
-      }
-  }
 
-  
-  
+    input.ip {
+      width: 60vw;
+    }
+
+    .bt button {
+      width: 13vh;
+      border-radius: 20px;
+      margin-bottom: 5px;
+    }
+
+    #texta {
+      width: 100%;
+    }
+  }

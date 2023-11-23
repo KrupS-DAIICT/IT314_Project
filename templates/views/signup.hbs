@@ -6,43 +6,109 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FacultyHub</title>
   <link rel="stylesheet" href="../css/sign_up.css">
+  {{!-- This is JavaScript funcionallty--}}
+  <script>
+    function showAdminDetails() {
 
+
+      document.getElementById('admin_details').style.display = 'flex';
+      document.getElementById('university_details').style.display = 'none';
+      document.getElementById('red').style.display = 'none';
+      document.getElementById('submit').style.display = 'none';
+      document.getElementById('green').style.display = 'block';
+
+      // document.getElementById('green').setAttribute('onclick', 'showUniversityDetails()');
+    }
+
+    function showUniversityDetails() {
+
+      let valid = true;
+      const fields = document.querySelectorAll(`#admin_details [required]`);
+
+      fields.forEach(field => {
+        if (!field.checkValidity()) {
+          valid = false;
+          field.reportValidity();
+        }
+      });
+
+      if (valid) {
+        document.getElementById('university_details').style.display = 'flex';
+        document.getElementById('admin_details').style.display = 'none';
+        document.getElementById('green').style.display = 'none';
+        document.getElementById('submit').style.display = 'block';
+        document.getElementById('red').style.display = 'block';
+      }
+
+
+    }
+
+    function submitForm() {
+      // Add any form submission logic here
+      document.forms[0].submit();
+    }
+  </script>
 </head>
 
 <body>
   {{>header}}
 
-  <main>
-    <h2>Sign up</h2>
+  <main class="mup">
+    <h2>Admin Sign up</h2>
     <section id="sign_up">
       <form action="/signup/verifyotp" method="post" enctype="multipart/form-data">
-        <label for="adminName">Full Name</label>
-        <input class="ip" type="text" id="adminName" name="adminName" required>
-        <label for="email">Email</label>
-        <input class="ip" type="email" id="email" name="email" required>
-        <label for="Password">Password</label>
-        <input class="ip" type="password" id="Password" name="Password" required>
-        <label for="cPassword">Conform Password</label>
-        <input class="ip" type="password" id="cPassword" name="cPassword" required>
-        <label for="mobile_no">Mobile no</label>
-        <input class="ip" type="tel" id="mobile_no" name="mobile_no" pattern="[0-9]{10}" required>
-        <label for="university">University</label>
-        <input class="ip" type="text" id="university" name="university" required>
-        <label for="admin-pic">Admin Photo</label>
-        <input id="admin-img" type="file" name="image" accept="image/*" required>
+        {{!-- We have made two new div --}}
+        {{!-- first divison  --}}
+        <div id="admin_details">
+          <label for="name">Full Name</label>
+          <input class="ip" type="text" name="adminName" maxlength="25" required>
+          <label for="email">Email</label>
+          <input class="ip" type="email" name="email" id="email" required>
+          <span id="emailError" style="color: red; font-size: smaller;"></span>
+          <label for="Password">Password</label>
+          <input class="ip" type="password" name="password" id="Password"
+            pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*?[#!@$%^&*_+-=]).{8,32}$"
+            title="Password must contain at least one uppercase letter, one lowercase letter, one digit, one special character from #!@$%^&*_+-=, and be at least 8 characters long"
+            required>
+          <span id="passwordError" style="color: red; font-size: smaller"></span>
+          <label for="cPassword">Conform Password</label>
+          <input class="ip" type="password" name="cPassword" id="cPassword"
+            pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*?[#!@$%^&*_+-=]).{8,32}$"
+            title="Password must contain at least one uppercase letter, one lowercase letter, one digit, one special character from #!@$%^&*_+-=, and be at least 8 characters long"
+            required>
+          <span id="cPasswordError" style="color: red; font-size: smaller"></span>
+          <label for="mobile_no">Mobile no</label>
+          <input class="ip" type="tel" name="mobile_no" pattern="[0-9]{10}" required>
+          <label for="university">Admin Photo</label>
+          <input type="file" name="admin_img" style="margin-left: 20px;" id="input_file">
+        </div>
+        {{!-- Second div --}}
+        <div id="university_details" style="display: none;">
+          <label for="name">University Name</label>
+          <input class="ip" type="text" name="university" required>
+          <label for="email">Address</label>
+          <textarea class="ip" name="address" style="height: 150px;" id="texta"></textarea>
+          <label for="university">University Logo</label>
+          <input type="file" name="university_img" style="margin: 2px 0px 2px 20px;" required>
+          {{!-- <label for="university">Government Proof</label>
+          <input type="file" name="Government Proof" style="margin: 2px 0px 2px 20px;"> --}}
+        </div>
+        {{!-- This button html is also changed by onclick --}}
         <div class="bt">
-          <button type="submit" value="Submit">Submit</button>
-          <button type="reset" value="reset">Reset</button><br>
+          <button type="button" value="Submit" id="green" onclick="showUniversityDetails()">Next</button>
+          <button type="submit" value="Submit" id="submit" style="display: none;">Submit</button>
+
+          <button type="button" value="reset" id="red" onclick="showAdminDetails()" style="display: none;">Back</button>
         </div>
         <p class="p">
-          Already have an account? <a href="signin">sign in.</a>
+          Already have an account? <a href="/signin">sign in.</a>
         </p>
       </form>
-      <img src="images/sign_up.png" alt="sign_up">
+      <img id="up" src="images/sign_up.png" alt="sign_up">
     </section>
   </main>
-
   {{>footer}}
+
 </body>
 
 </html>

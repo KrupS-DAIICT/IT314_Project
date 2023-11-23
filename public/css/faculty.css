@@ -1,0 +1,513 @@
+ *{
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    font-family: sans-serif;
+}
+
+/* header part*/
+.navbar{
+    background-color: black;
+    color: white;
+    border: 2px solid rgb(0, 0, 0);
+    border-bottom-left-radius: 35px;
+    border-bottom-right-radius: 35px;
+    box-shadow: 0 3px 4px rgb(87, 105, 107);
+}
+
+.navbar-toggler {
+    color: white;
+}
+#navbarSupportedContent a{
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+    margin-right: 5px;
+    padding: 0.4vw 0.6vw;
+    border: 2px solid transparent;
+    border-radius: 2vw;
+  transition-duration: 1s;
+  box-shadow: 0 0px 2px rgb(0, 0, 0);
+}
+#navbarSupportedContent a:hover{
+    color: #000000;
+    background-color: rgb(252, 251, 251);
+    border: 2px solid rgb(248, 230, 230);
+    box-shadow: 0 2px 4px rgb(255, 255, 255);
+
+}
+#navbarSupportedContent a:active{
+    box-shadow: 0 0 2px darkslategray;
+    transform: translateY(2px);
+}
+
+/*Main Part*/
+#main{
+    display: flex;
+    margin-bottom: 100px;
+}
+#img1{
+    float: right;
+    border: 2px solid black;
+    border-radius: 40px;
+    top:20px;
+    cursor: pointer;
+    box-shadow: 8px 8px 4px rgb(87, 105, 107);
+}
+h1{
+    text-align: center;
+    padding-top: 10px;
+}
+
+.content_box{
+    width: 100%;
+    background-color: rgb(255, 255, 255);  
+
+}
+.tab_box{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-around;
+    padding: 10px;
+  
+    
+}
+.tab_box .tab_btn{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    font-size: 2.5vh;
+    font-weight: 500;
+    justify-content: center;
+    text-align: center;
+    border-bottom: 2px solid white;
+    color: #0D1B2A;
+    background: none;
+    border:#bab3b3 1.5px solid;
+    padding: 10px;
+    cursor: pointer;
+    font-family: sans-serif;
+    
+}
+
+.tab_box .tab_btn.active{
+    color: white;
+    background-color: #0D1B2A;
+    border-radius: 1vh;
+    
+    
+}
+
+.tab_box .tab_btn:hover{
+    color: white;
+    background-color: #0D1B2A;
+    box-shadow: 0 1vh 1vh rgba(0, 0, 0, 0.6); 
+    border-radius: 1vh;
+
+
+}
+
+.content_box .content{
+    display: none;
+    animation:  moving .5s ease;
+
+}
+@keyframes moving {
+    from{transform: translateX(50px);opacity:0;}
+    to{transform: translateX(0px);opacity: 1;}
+    
+}
+.content_box .content.active{
+    display:block;
+}
+.content {
+    font-family: sans-serif;
+    font-size: 2vh;
+}
+
+@media (max-width: 600px)
+{.tab_box
+  {
+  display: flex ;
+  flex-direction: column;
+}
+}
+
+.content_box .content{
+    width: 100%;
+}
+
+.butn{
+  text-align: center;
+  margin-top: 3vh;
+  float: left;
+  
+}
+.butn button{
+  margin: 0 auto;
+}
+
+
+
+/* footer part*/
+
+
+footer{
+    display: flex;
+    margin-top: 1vw;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #588414;
+    color: white;
+}
+.left a{
+        display: block;
+        margin-left: 5%;
+        padding: 1vh 4vw 2vh 2vw;
+        text-decoration: none;
+        text-decoration: underline;
+        color: #ffffff; /* Link color */
+        font-size: 20px;
+      }
+.right {
+    position:static;
+    text-align: left;
+    width: 28vw;
+    font-size: 20px;
+}
+
+.right h2{
+    position: static;
+    text-align: left;
+}
+
+.footer_title{
+    margin-left: 5%;
+}
+
+@media (max-width: 800px) {
+/*    contains only footer*/
+  footer{
+    flex-direction: column;
+  }
+  .left {
+    width: 100%;
+    margin: 0px;
+    padding: 2vw;
+  }
+  .footer_title{
+    margin-left: 0px;
+  }
+  .left a {
+    margin-left: 0px;
+    padding: 0px;
+  }
+  .right {
+    width: 100%;
+    padding: 2vw;
+  }
+  
+}
+@media (max-width: 992px){
+/*    main-part*/
+#main{
+    flex-direction:column;
+}
+#main1{
+    width: 50%;
+}
+#img1{
+    float: right;
+    border: 2px solid black;
+    border-radius: 40px;
+    top:20px;
+    cursor: pointer;
+    box-shadow: 8px 8px 4px rgb(87, 105, 107);
+}
+#main2{
+    width: 100%;
+}
+}
+
+.add_button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+
+
+/* available internships */
+.content_box .content{
+  padding: 15px 10% 15px 10%;
+}
+.content_box .imgBx {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-right: 0.5vw;
+    border-color: 1px solid black;
+    transition: .3s linear;
+}
+
+.content_box .imgBx img {
+    border: 1px solid black;
+    border-radius: 1vw;
+
+    width: 5vw;
+    height: 5vw;
+}
+
+.content_box .details {
+   
+    width: 90%;
+    height: 2vw;
+    box-sizing: border-box;
+}
+
+.content_box .details h2{
+    margin: 0;
+    padding: 0;
+    font-size: 1vw;
+    line-height: 1em;
+    color: #444;
+}
+
+.content_box .details h2 span {
+    font-size: 0.8vw;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #999;
+}
+
+
+.content_box .details a img{
+    width: 1.6vw;
+    height: 1.6vw;
+    border-radius: 0.2vw;
+    background-color: white;
+    float: right;
+    border: 1px solid black;
+    margin-left: auto;
+    margin-top: 0;
+    display: flex;
+}
+.content_box .details a img:hover{
+    color: rgb(187, 185, 199);
+    background-color: rgb(253, 251, 251);
+}
+.content_box .content1 .In_card .button .btn{
+    padding-bottom: 1.6vw;
+    
+    margin: 0.6vw;
+    height: 1.7vw;
+    width: 5vw; 
+    font-size: 80%; 
+    background:  #000000;
+    color: #ffffff;
+    cursor: pointer;
+    border-radius: 3px;
+    outline: none;
+    display: inline-flex;
+    justify-content: center; 
+    
+}
+.btn1 {
+    background-color: rgb(255, 255, 255); 
+    color: rgb(0, 0, 0); 
+    font-size: 1.6vw; 
+    cursor: pointer;
+    float: right;
+    border: 0.5px solid black;
+    border-radius: 0.2vw;
+    padding-right: 3px;
+    padding-left: 3px;
+   margin-top: 5px;
+
+  }
+
+
+   .content_box .content1 .In_card{
+    border: 1px solid black;
+    display: inline-flex;
+    margin: 0.5vw;
+    padding: 0.5vw;
+    border-radius: 1vw;
+    width: 48%;
+    justify-content: space-between;
+
+}
+/* POPUP */
+.popup{
+    position: fixed;
+    top: -100vh;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    transition: top 0ms ease-in-out 300ms;
+
+}
+.popup .overlay{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    opacity: 0;
+    transition: opacity 100ms ease-in-out 200ms;
+
+}
+.popup .popup-content{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50% ,-50%) scale(1.15);
+    width: 95%;
+    max-width: 35vw;
+    background: #fff ;
+    opacity: 0;
+    padding: 2.5vw;
+    border-radius: 2vw;
+    box-shadow: 0px 2px 2px 5px rgba(0,0,0,0.05);
+    transition: all 300ms ease-in-out;
+    
+}
+.popup .popup-content h2{
+    margin: 10px 0px;
+    font-size: 2.5vw;
+    color: #111;
+    text-align: center;
+}
+.popup .popup-content p{
+    margin: 15px 0px;
+    font-size: 1.5vw;
+    color: #222;
+    text-align:start;
+}
+.popup .popup-content .controls{
+    display: flex;
+    justify-content: center;
+    margin: 20px 0px 0px;
+    gap: 10vw;
+
+}
+.popup .popup-content .controls button {
+    padding: 5px 20px;
+    border: none;
+    outline: none;
+    font-size: 1.5vw;
+    border-radius: 2vw;
+    cursor: pointer;
+}
+
+.popup .popup-content .controls .close-btn {
+    background: transparent;
+    color: #3284ed; 
+
+}
+
+.popup .popup-content .controls .submit-btn {
+    background: #3284ed;
+    color: #fff; 
+
+}
+
+.popup.active{
+    top: 0px;
+    transition: top 0ms ease-in-out 0ms;
+
+}
+.popup.active .overlay{
+    opacity: 1;
+    transition: all 300ms ease-in-out;
+
+
+}
+.popup.active .popup-content{
+    transform: translate(-50%,-50%) scale(1);
+    opacity: 1;
+}
+
+
+
+
+
+
+
+
+
+
+
+/* responsive for internships */
+@media (max-width:768px){
+    .content_box .content1 .In_card{
+        width: 65vw;
+        height: 15vw;
+        justify-content: center;
+        margin:15px 0px;
+        margin-left: 10%;
+    }
+    .content_box .content1 .In_card .button .btn{
+    padding: 0.1vw ; 
+    float: left;
+    height: 4vw;
+    width: 8vw; 
+    font-size: 2.2vw; 
+    background:  #000000;
+    color: #ffffff;
+    cursor: pointer;
+    border-radius: 3px;
+    
+    
+    }
+    .content_box .details h2{
+
+        padding: 1vw;
+        font-size: 3vw;
+        color: #444;
+    }
+    
+    .content_box .details h2 span {
+        padding-top: 5vw;
+        font-size: 2.5vw;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        color: #999;
+    }
+    .content_box .imgBx img{
+        width: 13vw;
+        height: 13vw;
+        padding: 0;
+    }
+
+   
+
+    .content_box .details a img{
+        width: 4.4vw;
+        height: 4vw;
+    }
+    .btn1 .fa-trash{
+        width: 2.5vw;
+        height: 2.5vw;
+        padding-right: 8vw;
+    }
+    .btn1{
+        margin-top: -1.5vw;  
+        margin-right: 1vw; 
+        padding-left: 4px;
+        width: 4.7vw;
+        height: 4.8vw;
+        font-size: 3.2vw;
+    
+    }
+
+    
+
+}
+
+  
+  

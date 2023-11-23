@@ -1,272 +1,196 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap');
 
-*
-{
-margin:
-    0;
-padding:
-    0;
-    box-sizing : border-box;
-    font-family : sans-serif;
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
 }
-
-header
-{
-    font-family : sans-serif;
-display:
-    flex;
-    justify-content : space-between;
-    background-color : black;
-color:
-    white;
-    align-items : center;
-height:
-    8vh;
-    padding-left : 7vw;
-    padding-right : 5vw;
-border:
-    2px solid rgb(0, 0, 0);
-    border-bottom-left-radius : 35px;
-    border-bottom-right-radius : 35px;
+header{
+    font-family: sans-serif;
+    display: flex;
+    justify-content: space-between;
+    background-color: black;
+    color: white;
+    align-items: center;
+    height: 8vh;
+    padding-left: 7vw;
+    padding-right: 5vw;
+    border: 2px solid rgb(0, 0, 0);
+    border-bottom-left-radius: 35px;
+    border-bottom-right-radius: 35px;
 }
-header a
-{
-color:
-    white;
-    font-size : 20px;
-margin:
-    10px;
+header a{
+    color: white;
+    font-size: 20px;
+    margin: 10px;
 }
 
 /* footer part*/
-footer
-{
-display:
-    flex;
-    margin-top : 1vw;
-    padding-top : 1vw;
-    justify-content : space - around;
-    align-items : center;
-    background-color : #588414;
-color:
-    white;
+footer{
+    display: flex;
+    margin-top: 1vw;
+    padding-top: 1vw;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #588414;
+    color: white;
 }
-.left a
-{
-display:
-    block;
-padding:
-    1vh 4vw 2vh 2vw;
-    text-decoration : none;
-    text-decoration : underline;
-color:
-#ffffff; /* Link color */
-    font-size : 20px;
-}
-.right
-{
-position:
-    static;
-    text-align : left;
-width:
-    28vw;
-    font-size : 20px;
+.left a {
+        display: block;
+        padding: 1vh 4vw 2vh 2vw;
+        text-decoration: none;
+        text-decoration: underline;
+        color: #ffffff; /* Link color */
+        font-size: 20px;
+      }
+.right {
+    position:static;
+    text-align: left;
+    width: 28vw;
+    font-size: 20px;
 }
 
-.right h2
-{
-position:
-    static;
-    text-align : left;
+.right h2{
+    position: static;
+    text-align: left;
 }
-body
-{
-background:
-#ffffff;
-padding:
-    0 10px;
+body{
+  background: #ffffff;
+  padding: 0 10px;
 }
-.wrapper
-{
-    max-width : 400px;
-width:
-    100% ;
-background:
-#ffffff;
-margin:
-    20px auto;
-/* box-shadow: 1px 1px 2px rgba(0,0,0,0.125); */
-padding:
-    30px;
+.wrapper{
+  max-width: 400px;
+  width: 100%;
+  background: #ffffff;
+  margin: 20px auto;
+  /* box-shadow: 1px 1px 2px rgba(0,0,0,0.125); */
+  padding: 30px;
 }
 
-.wrapper.title
-{
-    font-size : 4vh;
-    font-weight : 700;
-    margin-bottom : 5vh;
-    color: #000000;
-    text-transform : uppercase;
-    text-align : center;
+.wrapper .title{
+  font-size: 4vh;
+  font-weight: 700;
+  margin-bottom: 5vh;
+  color: #000000;
+  text-transform: uppercase;
+  text-align: center;
 }
 
-.wrapper.form
-{
-width:
-    100% ;
+.wrapper .form{
+  width: 100%;
 }
 
-.wrapper.form.inputfield
-{
-    margin-bottom : 15px;
-display:
-    flex;
-    /* align-items: center; */
-    flex-direction : column;
-    align-items : flex - start;
+.wrapper .form .inputfield{
+  margin-bottom: 15px;
+  display: flex;
+  /* align-items: center; */
+  flex-direction: column;
+  align-items: flex-start;
 }
 
-.wrapper.form.inputfield label
-{
-width:
-    200px;
-color:#000000;
-    margin-right : 10px;
-    font-size : 14px;
+.wrapper .form .inputfield label{
+   width: 200px;
+   color: #000000;
+   margin-right: 10px;
+  font-size: 14px;
 }
 
-.Profile
-{
-    text-align : left;
-margin:
-    10px 0;
+
+.Profile {
+  text-align: left; 
+  margin: 10px 0;
 }
 
 #actual-btn {
-opacity : 40% ;
-padding-top : 1vh;
+  opacity: 40%;
+  padding-top: 1vh;
 }
 
-.wrapper.form.inputfield.input,
-    .wrapper.form.inputfield.textarea
-{
-width:
-    100% ;
-outline:
-    none;
-border:
-    1px solid #bab4b4;
-    font-size : 15px;
-padding:
-    8px 10px;
-    border-radius : 3px;
-transition:
-    all 0.3s ease;
+.wrapper .form .inputfield .input,
+.wrapper .form .inputfield .textarea{
+  width: 100%;
+  outline: none;
+  border: 1px solid #bab4b4;
+  font-size: 15px;
+  padding: 8px 10px;
+  border-radius: 3px;
+  transition: all 0.3s ease;
 }
 
-.wrapper.form.inputfield.textarea
-{
-width:
-    100% ;
-height:
-    125px;
-resize:
-    none;
+.wrapper .form .inputfield .textarea{
+  width: 100%;
+  height: 125px;
+  resize: none;
 }
 
-.wrapper.form.inputfield.input:focus,
-    .wrapper.form.inputfield.textarea:focus,
-    .wrapper.form.inputfield.custom_select select:focus
-{
-border:
-    1px solid #000000;
+.wrapper .form .inputfield .input:focus,
+.wrapper .form .inputfield .textarea:focus,
+.wrapper .form .inputfield .custom_select select:focus{
+  border: 1px solid #000000;
 }
 
-.wrapper.form.inputfield p
-{
-    font-size : 14px;
-color:
-#757575;
+.wrapper .form .inputfield p{
+   font-size: 14px;
+   color: #757575;
 }
 
-.wrapper.form.button.inputfield.btn
-{
-width:
-    10vw;
-padding:
-    10px 10px;
-    font-size : 15px;
-    border-color : #000000;
-background:
-#ffffff;
-color:
-#000000;
-cursor:
-    pointer;
-    border-radius : 3px;
-outline:
-    none;
-display:
-    block;
-    justify-content : center;
+
+ .wrapper .form .button .inputfield .btn{
+  width: 10vw; 
+  padding: 10px 10px;
+  font-size: 15px; 
+  border-color: #000000;
+  background:  #ffffff;
+  color: #000000;
+  cursor: pointer;
+  border-radius: 3px;
+  outline: none;
+  display: block;
+  justify-content: center;
+  
+} 
+
+.wrapper .form .button .inputfield{
+    flex: 1;
+    display: inline-block;
+    margin-right: 1.5vw;
+}
+ .wrapper .form .button{
+    display: flex;
+    justify-content: space-between; 
+    padding: 10px;
+    
+} 
+
+.wrapper .form .inputfield .btn:hover{
+  background: #000000;
+  color: white;
 }
 
-.wrapper.form.button.inputfield
-{
-flex:
-    1;
-display:
-    inline-block;
-    margin-right : 1.5vw;
-}
-.wrapper.form.button
-{
-display:
-    flex;
-    justify-content : space - between;
-padding:
-    10px;
+.wrapper .form .inputfield:last-child{
+  margin-bottom: 0;
 }
 
-.wrapper.form.inputfield.btn:hover
-{
-background:
-#000000;
-color:
-    white;
-}
-
-.wrapper.form.inputfield:last-child
-{
-    margin-bottom : 0;
-}
-
-@media(max-width : 768px)
-{
-    .wrapper.form.inputfield
-    {
-        flex-direction : column;
-        align-items : flex - start;
+@media (max-width:768px) {
+  .wrapper .form .inputfield{
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .wrapper .form .inputfield label{
+    margin-bottom: 5px;
+  }
+  @media (max-width: 968px) {
+    .wrapper .form .button .inputfield .btn {
+      width: 100%; 
+      margin: 10px 0;
+      margin-right:0; 
     }
-    .wrapper.form.inputfield label
-    {
-        margin-bottom : 5px;
+    
+    .wrapper .form .button .inputfield {
+      margin-right: 4vw;
+      margin-left: 4vw; 
     }
-    @media(max-width : 968px)
-    {
-        .wrapper.form.button.inputfield.btn
-        {
-        width:
-            100% ;
-        margin:
-            10px 0;
-            margin-right : 0;
-        }
-
-        .wrapper.form.button.inputfield
-        {
-            margin-right : 4vw;
-            margin-left : 4vw;
-        }
-    }
+  }
+    
 }

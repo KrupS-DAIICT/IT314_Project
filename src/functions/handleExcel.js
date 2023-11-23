@@ -17,7 +17,7 @@ function generateRandomPassword() {
     const lowercaseLetters = 'abcdefghijklmnopqrstuvwxyz';
     const uppercaseLetters = lowercaseLetters.toUpperCase();
     const numbers = '0123456789';
-    const specialCharacters = '!@#$%^&*()_-+=<>?';
+    const specialCharacters = '#!@$%^&*_+-=';
 
     const getRandomChar = (charSet) => {
         const randomIndex = Math.floor(Math.random() * charSet.length);
@@ -58,12 +58,14 @@ const handleExcel = async (req, res) => {
     const token = req.cookies.accesstoken;
     const data = jwt.verify(token, process.env.SECRET_KEY);
     try {
-        if (!req.file || !req.file.filename) {
+        if (!req.files || !req.files['excelFile']) {
             return res.status(400).send("No file uploaded or invalid file format.");
         }
 
-        const excelPath = path.join(__dirname, "../../public/uploads", req.file.filename);
+        const fileBuffer = req.files['excelFile'][0].buffer;
+        const excelPath = path.join(__dirname, "../../public/uploads", req.files['excelFile'][0].originalname);
         // log(excelPath);
+        fs.writeFileSync(excelPath, fileBuffer);
 
         const workbook = new ExcelJS.Workbook();
         workbook.csv.readFile(excelPath)

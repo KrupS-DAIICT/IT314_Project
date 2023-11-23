@@ -6,6 +6,7 @@ const validator = require("validator");
 const multer = require('multer');
 const { userDelete } = require("../functions/userFunctions");
 const { generateAndStoreOTP } = require("../functions/otpFunctions");
+const { sendEmail } = require("../functions/mails");
 const { log } = require('console');
 
 const storage = multer.memoryStorage();
@@ -18,9 +19,9 @@ router.get("/signup", async (req, res) => {
 });
 
 async function registerUser(data, req, res) {
-    const { adminName, email, Password, cPassword, mobile_no, university, image } = data;
+    const { adminName, email, password, cPassword, mobile_no, university, address } = data;
 
-    if (Password !== cPassword) {
+    if (password !== cPassword) {
         return res.send(`<script>alert("Password and Confirm Password do not match"); window.history.back();</script>`);
     }
 
@@ -45,14 +46,19 @@ async function registerUser(data, req, res) {
         const tempAdmin = new Admin({
             name: adminName,
             email: email,
-            password: Password,
+            password: password,
             OTP: OTP,
             phone: mobile_no,
             university: university,
             image: {
-                data: req.file.buffer.toString('base64'),
-                contentType: req.file.mimetype
-            }
+                data: req.files['admin_img'][0].buffer.toString('base64'),
+                contentType: req.files['admin_img'][0].mimetype
+            },
+            university_img: {
+                data: req.files['university_img'][0].buffer.toString('base64'),
+                contentType: req.files['university_img'][0].mimetype
+            },
+            address: address,
         });
 
         // Save the user
@@ -61,7 +67,7 @@ async function registerUser(data, req, res) {
         }
 
         // Send OTP to the user
-        const emailSent = await sendEmail(email, OTP);
+        // const emailSent = await sendEmail(email, OTP);
 
         // Delete user if time runs out
         setTimeout(userDelete, 5 * 60 * 1000, email);
@@ -77,7 +83,7 @@ async function registerUser(data, req, res) {
 }
 
 // create a new faculty into the database
-router.post("/signup/verifyotp", upload.single('image'), async (req, res) => {
+router.post("/signup/verifyotp", upload.fields([{ name: 'admin_img', maxCount: 1 }, { name: 'university_img', maxCount: 1 }]), async (req, res) => {
     const data = req.body;
     await registerUser(data, req, res);
 });

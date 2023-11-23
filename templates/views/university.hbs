@@ -21,7 +21,8 @@
             <option value="nirma" {{#if (eq serachdata.university2 "nirma")}}selected{{/if}}>nirma</option> --}}
 
                 {{#each universityOption}}
-                    <option value="{{this.university}}" {{#if (eq ../searchData.university this)}}selected{{/if}}>
+                    <option value="{{this.university}}" {{#if (eq ../searchdata.university
+                        this.university)}}selected{{/if}}>
                         {{this.university}}
                     </option>
                 {{/each}}
@@ -31,10 +32,11 @@
 
         <h1>Registered Universities</h1>
         <div id="colleges">
-            {{#each universityOption}}
+            {{#each universityData}}
                 <a href="/search-faculty?university={{this.university}}">
                     <div class="college">
-                        <img src="data:{{this.image.contentType}};base64,{{this.image.data}}" alt="daiict" class="logo">
+                        <img src="data:{{this.university_img.contentType}};base64,{{this.university_img.data}}"
+                            alt="{{this.university}} logo" class="logo">
                         <p class="name">{{this.university}}</p>
                     </div>
                 </a>
@@ -50,7 +52,6 @@
         if (universitySelect.selectedIndex === 0) {
             universitySelect.removeAttribute("name");
         }
-
     }
 </script>
 

@@ -5,126 +5,133 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FacultyHub</title>
-  <link rel="stylesheet" href="../css/faculty_profile.css">
+  <link rel="stylesheet" href="../css/faculty.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
   <script>
-
-
     function showSubmitButton() {
       document.getElementById("submitBtn").style.display = "block";
       document.getElementById("editBtn").style.display = "none";
-      document.getElementById("id1").style.display = "block";
-      document.getElementById("id2").style.display = "block";
       var form = document.getElementById("myForm");
       var elements = form.elements;
       for (var i = 0; i < elements.length; i++) {
-        elements[i].disabled = false;
-      }
-      var upload = document.getElementById("myFile");
-      upload.disabled = false;
-
-      var e1 = document.getElementById("f1");
-      var el1s = e1.elements;
-      for (var i = 0; i < el1s.length; i++) {
-        el1s[i].disabled = false;
-      }
-
-      var e2 = document.getElementById("f2");
-      var el2s = e2.elements;
-      for (var i = 0; i < el2s.length; i++) {
-        el2s[i].disabled = false;
+        if (i != 2) {
+          elements[i].disabled = false;
+        }
       }
     }
 
     function hideSubmitButton() {
       document.getElementById("editBtn").style.display = "block";
       document.getElementById("submitBtn").style.display = "none";
-
-      document.getElementById("id1").style.display = "none";
-      document.getElementById("id2").style.display = "none";
       var form = document.getElementById("myForm");
       var elements = form.elements;
       for (var i = 0; i < elements.length; i++) {
         elements[i].disabled = true;
       }
-      var e1 = document.getElementById("f1");
-      var el1s = e1.elements;
-      for (var i = 0; i < el1s.length; i++) {
-        el1s[i].disabled = true;
-      }
-
-      var e2 = document.getElementById("f2");
-      var el2s = e2.elements;
-      for (var i = 0; i < el2s.length; i++) {
-        el2s[i].disabled = true;
-      }
-
-      var upload = document.getElementById("myFile");
-      upload.disabled = true;
       var edit = document.getElementById("editBtn");
       edit.disabled = false;
     }
+
+    function removeIntership(url) {
+      const confirmation = confirm('Are you sure you want to delete your profile?');
+      if (confirmation) {
+        // Send a request to the backend to delete the profile
+        fetch(url, {
+          method: 'delete',
+        })
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('Failed to remove internship data.');
+            }
+          })
+          .catch(error => {
+            alert(error.message);
+          });
+      }
+    }
+
+    const tabs = document.querySelectorAll('.tab_btn');
+    const all_content = document.querySelectorAll('.content');
+
+    tabs.forEach((tab, index) => {
+      tab.addEventListener('click', (e) => {
+        tabs.forEach(tab => { tab.classList.remove('active') });
+        tab.classList.add('active');
+
+        all_content.forEach(content => { content.classList.remove('active') })
+        all_content[index].classList.add('active');
+
+      })
+    });
   </script>
 </head>
 
 <body>
   {{>header}}
+
   <main>
     <h1>Profile</h1>
     <div class="container-fluid" id="main">
       <div class="col-lg-4 col-md-8 m-auto mt-5" id="main1">
-        <input disabled type="file" id="myFile" name="filename" style="display: none;">
-        <label for='myFile'><img class="img-fluid" id="img1" src="../../images/sign_up.png"></label>
+        <label for='myFile'><img class="img-fluid" id="img1"
+            src="data:{{profile.image.contentType}};base64,{{profile.image.data}}"
+            onerror="this.onerror=null; this.src='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'"></label>
       </div>
       <div class="col-lg-6 m-auto" id="main2">
         <div class="card-body">
-          <form id="myForm" action="/faculty-profile-update/{{profile._id}}" method="post">
+          <form id="myForm" method="post" action="/faculty-profile-update/{{profile._id}}"
+            enctype="multipart/form-data">
+            <input disabled type="file" id="myFile" name="filename" style="display: none;" accept="image/*">
             <div>
-              <label>Faculty Name</label>
-              <input disabled type="text" class="form-control" value="{{profile.name}}">
+              <label>Name: </label>
+              <input disabled type="text" class="form-control" name="name" value="{{profile.name}}">
             </div>
             <div>
-              <label>Institute</label>
-              <input disabled type="text" class="form-control" value="{{profile.institute}}">
+              <label>Institute: </label>
+              <input disabled type="text" class="form-control" name="institute" value="{{profile.institute}}">
+            </div>
+
+            <div>
+              <label>Email: </label>
+              <input disabled type="email" class="form-control" name="email" value="{{profile.email}}">
             </div>
             <div>
-              <label>Department</label>
-              <input disabled type="text" class="form-control" value="{{profile.department}}">
+              <label>Contact No: </label>
+              <input disabled type="text" class="form-control" name="contactNo" value="{{profile.contactNo}}">
             </div>
             <div>
-              <label>Email-Address</label>
-              <input disabled type="email" class="form-control" value="{{profile.email}}">
+              <label>Education: </label>
+              <input disabled type="text" class="form-control" name="education" value="{{profile.education}}">
             </div>
             <div>
-              <label>Contact No</label>
-              <input disabled type="text" class="form-control" value="{{profile.contactNo}}">
-            </div>
-            <div>
-              <label>Education</label>
-              <input disabled type="text" class="form-control" value="{{profile.education}}">
-            </div>
-            <div>
-              <label>Address</label>
-              <input disabled type="text" class="form-control" value="{{profile.address}}">
+              <label>Office: </label>
+              <input disabled type="text" class="form-control" name="address" value="{{profile.address}}">
             </div>
             <div>
               <label>Field of specialization</label>
-              <input disabled type="text" class="form-control" value="{{profile.specialization}}">
+              <input disabled type="text" class="form-control" name="fieldOdfSpecialization"
+                value="{{profile.specialization}}">
             </div>
             <div>
               <label>Courses Taught</label>
-              <input disabled type="text" class="form-control" value="{{profile.coursesTaught}}">
+              <input disabled type="text" class="form-control" name="coursesTaught" value="{{profile.coursesTaught}}">
             </div>
             <div>
               <label>Website</label>
-              <input disabled type="text" class="form-control" value="{{profile.website}}">
+              <input disabled type="text" class="form-control" name="website" value="{{profile.website}}">
             </div>
             <div>
               <label>Publications</label>
-              <input disabled type="text" class="form-control" id="larger-input" value="{{profile.publications}}">
+              <input disabled type="text" class="form-control" id="larger-input" name="publications"
+                value="{{profile.publications}}">
             </div>
-            <div>
+            <div class="form-group mt-2">
+              <button type="button" class="btn btn-outline-secondary" id="editBtn"
+                onclick="showSubmitButton()">Edit</button>
+              <button type="submit" class="btn btn-primary" id="submitBtn" style="display: none ;">Submit</button>
             </div>
           </form>
         </div>
@@ -141,109 +148,78 @@
       <div class="col-lg-9 col-md-9 m-auto content_box">
         <div class="content">
           <div class="card-body">
-            <form id=f1 action="/faculty-profile/:id/add-internship" method="post">
+            <form id='f1' method="post" action="/faculty-profile/add-internship/{{profile._id}}">
               <h2 class="text-center">Add Internships</h2>
               <div>
-                <label>Name</label>
-                <input disabled type="text" class="form-control" , name="title">
+                <label>Title: </label>
+                <input type="text" class="form-control" name="title">
               </div>
               <div>
-                <label>Type</label>
-                <input disabled type="text" class="form-control" name="type">
+                <label>Field: </label>
+                <input type="text" class="form-control" name="type">
               </div>
               <div>
-                <label>Duration</label>
-                <input disabled type="text" class="form-control" name="duration">
+                <label>Position: </label>
+                <input type="text" class="form-control" name="position">
               </div>
               <div>
-                <label>Description</label>
-                <input disabled type="text" class="form-control" name="desc">
+                <label>Duration: </label>
+                <input type="text" class="form-control" name="duration">
+              </div>
+              <div>
+                <label>Description: </label>
+                <input type="text" class="form-control" name="desc">
+
+              </div><br>
+              <div class="add_button">
+                <button type="submit" class="btn btn-outline-secondary" id="editBtn">Add</button>
+
               </div>
             </form>
           </div>
         </div>
+
       </div>
+
       <div class="content_box">
         <div class="content">
           <h2 class="text-center">Available Internships</h2>
-          <div class="content1">
-            <div class="In_card">
-              <div class="imgBx">
-                <img src="OIP.jpeg" alt="">
-              </div>
-              <div class="details">
-                <div class="card">
-                  <h2>Research Intern <a href="mailto:202101108@daiict.ac.in">
+          {{#each profile.internship}}
+            <div class="content1">
+              <div class="In_card">
+                <div class="imgBx">
+                  <img src="OIP.jpeg" alt="">
+                </div>
+                <div class="details">
+
+                  <h2>{{this.name}} <a href="mailto:{{../profile.email}}">
                       <img src="avatar.png" alt=""></a><br>
-                    <span>Dr.Kaushal </span>
+                    <span>{{../profile.name}} </span>
                   </h2>
+                  <h2>Internships Details</h2>
+                  <p><strong>Title:</strong>{{this.name}}</p>
+                  <p><strong>Field:</strong>{{this.field}}</p>
+                  <p><strong>Position:</strong>{{this.position}}</p>
+                  <p><strong>Duration:</strong> {{this.duration}}</p>
+                  <p><strong>Description:</strong>{{this.description}}</p>
                   <div class="button">
-                    <input type="submit" value="Apply" class="btn">
+                    <!-- <input type="submit" value="Apply" class="btn"> -->
+                    <button onclick="removeIntership('/faculty-profile/remove-internship/{{this._id}}')" class="btn1"><i
+                        class="fa fa-trash"></i></button>
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="In_card">
-              <div class="imgBx">
-                <img src="OIP.jpeg" alt="">
+              <div class="popup" id="popup{{@index}}">
+                <div class="overlay"></div>
+
               </div>
-              <div class="details">
-                <div class="card">
-                  <h2>Research Intern <a href="mailto:202101108@daiict.ac.in">
-                      <img src="avatar.png" alt=""></a><br>
-                    <span>Dr.Kaushal </span>
-                  </h2>
-                  <div class="button">
-                    <input type="submit" value="Apply" class="btn">
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="In_card">
-              <div class="imgBx">
-                <img src="OIP.jpeg" alt="">
-              </div>
-              <div class="details">
-                <div class="card">
-                  <h2>Research Intern <a href="mailto:202101108@daiict.ac.in">
-                      <img src="avatar.png" alt=""></a><br>
-                    <span>Dr.Kaushal </span>
-                  </h2>
-                  <div class="button">
-                    <input type="submit" value="Apply" class="btn">
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="butn">
-            <button type="button" class="btn btn-outline-secondary" id="editBtn"
-              onclick="showSubmitButton()">Edit</button>
-            <button type="button" class="btn btn-primary" id="submitBtn" style="display: none ;"
-              onclick="hideSubmitButton()">Submit</button>
-          </div>
+
+          {{/each}}
         </div>
       </div>
+    </div>
+    </div>
 
-
-      <script>
-        const tabs = document.querySelectorAll('.tab_btn');
-        const all_content = document.querySelectorAll('.content');
-        ;
-
-
-        tabs.forEach((tab, index) => {
-          tab.addEventListener('click', (e) => {
-            tabs.forEach(tab => { tab.classList.remove('active') });
-            tab.classList.add('active');
-
-            all_content.forEach(content => { content.classList.remove('active') })
-            all_content[index].classList.add('active');
-
-          })
-        })
-
-      </script>
   </main>
   {{>footer}}
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"

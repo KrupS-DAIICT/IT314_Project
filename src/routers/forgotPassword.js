@@ -11,7 +11,7 @@ const path = require('path');
 
 const saltRounds = 10;
 
-router.get("/resetlink", async (req, res) => {
+router.get("/forgotlink", async (req, res) => {
     const filePath = path.join(__dirname, '../../templates/views', 'reset_email');
     res.render(filePath);
 });
@@ -48,7 +48,7 @@ router.get("/reset-pass", async (req, res) => {
     }
 });
 
-router.post("/reset-password", async (req, res) => {
+router.post("/forgot-password", async (req, res) => {
     try {
         const email = req.body.email;
         const user1 = await forgotPass.findOne({ email: email });
@@ -81,7 +81,7 @@ router.post("/reset-password", async (req, res) => {
         const resetLink = `http://localhost:${port}/reset-pass?email=${email}?&role=${role}?&hash=${otp}`;
         log(resetLink);
 
-        await sendEmailPassReset(email, resetLink);
+        // await sendEmailPassReset(email, resetLink);
 
         // return res.send('<script>alert("Link is shared in your email"); window.location.href = "/redirect-page";</script>');
         return res.send(`<script>alert("link is shared in your email"); window.history.back();</script>`);
