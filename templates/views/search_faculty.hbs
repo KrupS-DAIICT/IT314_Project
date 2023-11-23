@@ -61,22 +61,23 @@
                                     </a>
                                     <p class="card-text"> {{this.institute}} </p>
                                     <ul>
-                                        <li>{{this.email}}</li>
+                                        <li><a href="mailto: {{this.email}}">{{this.email}}</a></li>
                                         {{#if this.contactNo}}
                                             <li>{{this.contactNo}}</li>
                                         {{/if}}
-                                        {{!-- <li>Adress</li>
-                                    <li>Website</li> --}}
+                                        {{#if this.website}}
+                                            <li>{{this.website}}</li>
+                                        {{/if}}
                                     </ul>
+                                    {{#if this.internship}}
+                                        <p>Internship Available !!!</p>
+                                    {{/if}}
 
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div class="btn-group">
-                                            <!-- <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                          <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button> -->
-
                                             {{#if (eq ../user.role 'admin')}}
                                                 {{#if (eq this.institute ../user.university)}}
-                                                    <button
+                                                    <button class="btn btn-sm btn-outline-secondary"
                                                         onclick="removeFaculty('/faculty-remove/{{this._id}}')">Delete</button>
                                                 {{/if}}
                                             {{/if}}

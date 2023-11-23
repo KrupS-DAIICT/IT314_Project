@@ -253,4 +253,88 @@ const sendEmailPassReset = async (mail, resetLink) => {
 
 };
 
-module.exports = { sendEmail, sendEmailLock, sendEmailLoginCredentials, sendEmailPassReset };
+const sendAccountRemovalEmail = async (email) => {
+    try {
+        const transporter = nodemailer.createTransport({
+            host: process.env.EMAIL_HOST,
+            service: process.env.EMAIL_SERVICE,
+            port: 587,
+            secure: true,
+            auth: {
+                user: process.env.SENDER_EMAIL,
+                pass: process.env.SENDER_PASSWORD,
+            },
+        });
+
+        await transporter.sendMail({
+            from: process.env.SENDER_EMAIL,
+            to: email,
+            subject: 'Account Removal Notification',
+            html: `
+            <html lang="en">
+
+            <head>
+                <title>Account Removal Notification</title>
+                <style>
+                    /* Reset some default styles */
+                    body {
+                        margin: 0;
+                        padding: 0;
+                        font-family: Arial, sans-serif;
+                        text-align: center;
+                        background-color: #f4f4f4;
+                    }
+            
+                    /* Main email container */
+                    .container {
+                        max-width: 600px;
+                        margin: 0 auto;
+                        background-color: #ffffff;
+                        padding: 20px;
+                        border-radius: 10px;
+                        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+                    }
+            
+                    /* Header styles */
+                    .header {
+                        font-size: 24px;
+                        font-weight: bold;
+                        color: #ff0000; /* Red color for emphasis */
+                    }
+            
+                    /* Body text */
+                    .body-text {
+                        font-size: 16px;
+                        color: #333;
+                    }
+            
+                    /* Disclaimer text */
+                    .disclaimer {
+                        font-size: 12px;
+                        color: #888;
+                    }
+                </style>
+            </head>
+            
+            <body>
+                <div class="container">
+                    <div class="header">Account Removal Notification</div>
+                    <p class="body-text">Dear Faculty Member,</p>
+                    <p class="body-text">We regret to inform you that your account on FacultyHub has been removed by the admin of your university.</p>
+                    <p class="body-text">If you believe this action is in error or if you have any concerns, please contact the university administration for further assistance.</p>
+                    <p class="body-text">Thank you for your understanding.</p>
+                    <p class="disclaimer">This is an automated email, please do not reply.</p>
+                </div>
+            </body>
+            
+            </html>
+            `
+        });
+
+        console.log("Account removal email sent successfully");
+    } catch (error) {
+        console.log(error, "Account removal email not sent");
+    }
+};
+
+module.exports = { sendEmail, sendEmailLock, sendEmailLoginCredentials, sendEmailPassReset, sendAccountRemovalEmail };

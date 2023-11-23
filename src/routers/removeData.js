@@ -5,6 +5,7 @@ const Admin = require("../models/admin"); // require admin.js
 const Faculty = require("../models/faculty"); // require faculty.js
 const jwt = require('jsonwebtoken');
 const { log } = require('console');
+const { sendAccountRemovalEmail } = require("../functions/mails");
 
 router.delete("/admin-profile-remove/:id", async (req, res) => {
     try {
@@ -78,14 +79,15 @@ router.delete("/faculty-remove/:id", async (req, res) => {
         // console.log(data);
         log(`checking:, ${profileId}, ${data}`);
 
+        const faculty = await Faculty.findById(profileId);
+
         // deleting faculty data
         await Faculty.deleteOne({ _id: profileId });
-        res.sendStatus(200)
-
 
         // send mail
+        sendAccountRemovalEmail(faculty.email);
 
-
+        res.sendStatus(200);
     } catch (err) {
         console.log(err);
         return res.status(500).json({
