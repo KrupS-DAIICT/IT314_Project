@@ -53,7 +53,6 @@ router.delete("/faculty-profile-remove/:id", async (req, res) => {
         const token = req.cookies.accesstoken;
         const data = jwt.verify(token, process.env.SECRET_KEY);
         // console.log(data);
-        log(`checking:, ${profileId}, ${data}`);
         if (profileId === data._id && data.role === "faculty") {
             // deleting faculty data
             await Faculty.deleteOne({ _id: profileId });
@@ -77,7 +76,6 @@ router.delete("/faculty-remove/:id", async (req, res) => {
         const token = req.cookies.accesstoken;
         const data = jwt.verify(token, process.env.SECRET_KEY);
         // console.log(data);
-        log(`checking:, ${profileId}, ${data}`);
 
         const faculty = await Faculty.findById(profileId);
 

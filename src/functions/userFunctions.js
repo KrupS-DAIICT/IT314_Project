@@ -62,7 +62,6 @@ const checkUser = (req, res, next) => {
 
             user.role = decodedToken.role;
             res.locals.user = user;
-            console.log(user);
             next();
         }
         catch (err) {

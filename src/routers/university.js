@@ -18,7 +18,6 @@ router.get("/search-university", setOption, async (req, res) => {
         searchdata.university = university
     }
     const data = await Admin.find(query, 'university university_img');
-    // console.log(searchdata);
     res.locals.universityData = data
     res.render("university", { searchdata: searchdata });
 });

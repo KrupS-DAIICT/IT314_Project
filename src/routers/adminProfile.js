@@ -42,8 +42,7 @@ router.post('/admin-profile-update/:id', upload.fields([{ name: 'admin_img', max
     const profileId = req.params.id;
     const token = req.cookies.accesstoken;
     const data = jwt.verify(token, process.env.SECRET_KEY);
-    // log("reached");
-    log(data);
+    // log(data);
 
     if (data.email !== req.body.email) {
         log("change email");

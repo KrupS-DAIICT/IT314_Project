@@ -16,7 +16,6 @@ router.get('/search-faculty', setOption, async (req, res) => {
     const course = req.query.course;
     const search_query = req.query.search2;
     const university = req.query.university;
-    log(course, search_query, university);
     // Pagination parameters
     // const perPage = 6; // Number of results per page
     // const page = parseInt(req.query.page) || 1; // Current page, default to 1

@@ -25,12 +25,10 @@ router.post("/signin", async (req, res) => {
     // if already signed in
 
     const { role, username, password } = req.body;
-    // log(role, username, password);
 
     try {
         const db = role === 'admin' ? Admin : Faculty;
         const result = await db.findOne({ $and: [{ email: username }, { verified: 1 }] }).exec();
-        log(result);
 
         if (!result) {
             log("Result not found");
@@ -43,7 +41,6 @@ router.post("/signin", async (req, res) => {
         }
 
         const auth = await bcrypt.compare(password, result.password);
-        log(auth);
 
         if (auth) {
             const result2 = await SigninCount.findOne({ $and: [{ ip: req.ip }, { email: username }] }).exec();
@@ -95,7 +92,7 @@ router.post("/signin", async (req, res) => {
 });
 
 async function handleInvalidDetails(user, res) {
-    log("Invalid details 1");
+    log("Invalid details");
     res.send(`<script>alert("Invalid Details, remaining attempts before your account gets locked: ${5 - user.count}"); window.history.back();</script>`);
 }
 
@@ -114,7 +111,6 @@ async function handleAccountLock(username, role, db, req, res) {
         } else {
             const lockedUser = new lockUser({ email: username, link: otp });
             await lockedUser.save();
-            log("saved");
         }
     } catch (error) {
         log(error);

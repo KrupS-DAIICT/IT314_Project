@@ -56,16 +56,9 @@ app.use(signupRouter); // use signup.js
 const universityRouter = require("./routers/university");
 app.use(universityRouter);
 
-const addUniversityRouter = require("./routers/addUniversity"); // require signup.js
-app.use(addUniversityRouter); // use signup.js
-
 // routing - verifyotp
 const verifyotpRouter = require("./routers/verifyotp"); // require verifyotp.js
 app.use(verifyotpRouter); // use verifyotp.js
-
-// // routing - otpverified
-// const otpverifiedRouter = require("./routers/otpverified"); // require otpverified.js
-// app.use(otpverifiedRouter); // use otpverified.js
 
 // routing - unlockAccount
 const unlockAccountRouter = require("./routers/unlockAccount");

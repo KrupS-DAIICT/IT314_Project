@@ -12,7 +12,7 @@ const path = require('path');
 const saltRounds = 10;
 
 router.get("/forgotlink", async (req, res) => {
-    const filePath = path.join(__dirname, '../../templates/views', 'reset_email');
+    const filePath = path.join(__dirname, '../../templates/views', 'forgot_pass');
     res.render(filePath);
 });
 
@@ -28,9 +28,7 @@ router.get("/reset-pass", async (req, res) => {
 
         const emailSlice = email.slice(0, -1);
         const roleSlice = role.slice(0, -1);
-        log(emailSlice);
         const user = await forgotPass.findOne({ $and: [{ email: emailSlice }, { link: hash }] });
-        log(user);
 
         if (user) {
             const data = { email: emailSlice, role: roleSlice };
@@ -74,8 +72,7 @@ router.post("/forgot-password", async (req, res) => {
         try {
             const user = new forgotPass({ email, link: otp });
             const result = await user.save();
-            log(result);
-        } catch (error) { log(error); log("hello"); }
+        } catch (error) { log(error); }
 
         const port = process.env.PORT || 8000;
         const resetLink = `http://localhost:${port}/reset-pass?email=${email}?&role=${role}?&hash=${otp}`;
@@ -112,7 +109,6 @@ router.post("/reset-pass/:id", async (req, res) => {
     }
 
     try {
-        log(email);
         const user_admin = await Admin.findOne({ email });
         const user_faculty = await Faculty.findOne({ email });
         const db = user_admin ? Admin : user_faculty ? Faculty : null;
@@ -124,7 +120,6 @@ router.post("/reset-pass/:id", async (req, res) => {
         }
 
         const temp = await db.findOneAndUpdate({ email }, { password: await bcrypt.hash(password, saltRounds) });
-        log(temp);
         await forgotPass.deleteOne({ email });
 
         return res.send(`<script>alert("Password updated"); window.location.href = "/signin" </script>`);

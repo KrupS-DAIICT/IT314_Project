@@ -1,5 +1,4 @@
 const otpGenerator = require('otp-generator');
-const { log } = require("console");
 const otpCache = {};
 const expTime = 5 * 60 * 1000; // 5 minutes
 
@@ -17,7 +16,6 @@ function generateOTP(num) {
 function generateAndStoreOTP(email, num) {
     const OTP = generateOTP(num);
     otpCache[email] = { otp: OTP, expires: Date.now() + expTime };
-    log(Date.now() + expTime);
     return OTP;
 }
 

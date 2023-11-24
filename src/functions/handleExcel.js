@@ -82,18 +82,19 @@ const handleExcel = async (req, res) => {
                             name: row.getCell(1).value,
                             institute: data.university,
                             email: row.getCell(5).value,
-                            address: row.getCell(4).value,
-                            password: generateRandomPassword(),
-                            education: row.getCell(2).value,
+                            address: row.getCell(7).value,
+                            password: password,
+                            education: row.getCell(4).value,
                             website: row.getCell(6).value,
                             publications: row.getCell(8).value,
-                            contactNo: row.getCell(3).value,
-                            specialization: row.getCell(7).value,
-                            coursesTaught: row.getCell(9).value,
+                            // contactNo: row.getCell(3).value,
+                            // specialization: row.getCell(7).value,
+                            // coursesTaught: row.getCell(9).value,
+                            department: row.getCell(3).value,
                             // department: row.getCell(3).value,
                         };
 
-                        const imageUrl = row.getCell(10).value;
+                        const imageUrl = row.getCell(9).value;
                         if (imageUrl) {
                             const imageName = `image_${rowNumber}_${Date.now()}.jpeg`;
                             const imagePath = await downloadAndStoreImage(imageUrl, imageName);
@@ -148,7 +149,7 @@ const handleExcel = async (req, res) => {
                     });
             })
             .catch((err) => {
-                console.log(err, "hello");
+                console.log(err);
                 res.status(500).send("Error reading Excel file");
             });
     } catch (e) {

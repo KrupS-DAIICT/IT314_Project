@@ -73,9 +73,9 @@ router.get("/faculty-profile/:id", requireAuth, async (req, res) => {
 //         cb(null, file.originalname);
 //     },
 // });
+
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
-// const upload = multer({ storage: storage }); // multer configuration
 
 // create a new faculty into the database
 router.post("/addfaculty", upload.fields([{ name: 'faculty_img', maxCount: 1 }, { name: 'excelFile', maxCount: 1 }]), async (req, res) => {
@@ -202,8 +202,6 @@ router.post('/faculty-profile/add-internship/:id', async (req, res) => {
     const token = req.cookies.accesstoken;
     const data = jwt.verify(token, process.env.SECRET_KEY);
 
-    console.log(profileId);
-
     try {
         const result = await Faculty.updateOne({ _id: profileId }, {
             $push: {
@@ -231,8 +229,6 @@ router.delete('/faculty-profile/remove-internship/:id', async (req, res) => {
     const intershipId = req.params.id;
     const token = req.cookies.accesstoken;
     const data = jwt.verify(token, process.env.SECRET_KEY);
-
-    console.log(intershipId);
 
     try {
         const result = await Faculty.updateOne({ _id: data._id }, {

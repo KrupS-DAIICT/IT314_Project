@@ -10,7 +10,7 @@
     <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/faculty_seach_profile.css">
+    <link rel="stylesheet" href="../css/faculty_search_profile.css">
     <!--  <script defer src="active.js"></script> -->
 </head>
 
@@ -32,8 +32,8 @@
                     <h2>Faculty Name: {{faculty.name}} </h2>
                     <p><span>Institute: {{faculty.institute}}</span></p>
                     <p><span>Email-address: {{faculty.email}}</span> </p>
-                    <p><span>Contact No* : {{faculty.contactNo}} </span></p>
-                    <p><span>Address*: {{faculty.address}} </span></p>
+                    <p><span>Contact No: {{faculty.contactNo}} </span></p>
+                    <p><span>Address: {{faculty.address}} </span></p>
                     <p><span>Website: <a href="{{faculty.website}}">{{faculty.website}}</a></span></p>
                 </div>
             </div>
@@ -43,15 +43,17 @@
             <div class="tab_box">
                 <button class="tab_btn">Details</button>
                 <button class="tab_btn">Publication</button>
-                <button class="tab_btn">Internships</button>
+                {{#if faculty.internship}}
+                    <button class="tab_btn">Internships</button>
+                {{/if}}
 
             </div>
             <div class="content_box">
                 <div class="content">
                     <h2>Details</h2>
-                    <p>Education: {{faculty.education}}</p>
-                    <p>Field of specialalization: {{faculty.specialization}}</p>
-                    <p>Courses Taught: {{faculty.coursesTaught}}</p>
+                    <p><b>Education:</b> {{faculty.education}}</p>
+                    <p><b>Field of specialalization:</b> {{faculty.specialization}}</p>
+                    <p><b>Courses Taught:</b> {{faculty.coursesTaught}}</p>
                 </div>
                 <div class="content">
                     <h2>Publication</h2>

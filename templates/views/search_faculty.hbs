@@ -61,12 +61,12 @@
                                     </a>
                                     <p class="card-text"> {{this.institute}} </p>
                                     <ul>
-                                        <li><a href="mailto: {{this.email}}">{{this.email}}</a></li>
+                                        <li><b>Email: </b><a href="mailto: {{this.email}}">{{this.email}}</a></li>
                                         {{#if this.contactNo}}
-                                            <li>{{this.contactNo}}</li>
+                                            <li><b>Contact No.: </b>{{this.contactNo}}</li>
                                         {{/if}}
                                         {{#if this.website}}
-                                            <li>{{this.website}}</li>
+                                            <li><b>Website: </b><a href="{{this.website}}">{{this.website}}</a></li>
                                         {{/if}}
                                     </ul>
                                     {{#if this.internship}}
